@@ -1,11 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Data.Entity.Spatial;
-
 namespace KonnectNow.Entity.Entities
-{  
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
 
     [Table("User")]
     public partial class User
@@ -14,33 +13,51 @@ namespace KonnectNow.Entity.Entities
         public User()
         {
             Messages = new HashSet<Message>();
+            Messages1 = new HashSet<Message>();
+            Queries = new HashSet<Query>();
         }
 
+        [Key]
         [Column(TypeName = "numeric")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public decimal UserId { get; set; }
+        public decimal User_Id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string UserName { get; set; }
+        public string First_Name { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Last_Name { get; set; }
 
         [Required]
         [StringLength(20)]
-        public string Password { get; set; }
+        public string Mobile_No { get; set; }
 
         [Required]
-        [StringLength(50)]
-        public string FirstName { get; set; }
+        [StringLength(100)]
+        public string Device_Id { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string LastName { get; set; }
+        [Column(TypeName = "numeric")]
+        public decimal Country_Id { get; set; }
 
-        public DateTime? CreatedDate { get; set; }
+        public string Map_Details { get; set; }
 
-        public DateTime? ModifiedDate { get; set; }
+        public byte[] Profile_Pic { get; set; }
+
+        public DateTime Created_On { get; set; }
+
+        public DateTime Updated_On { get; set; }
+
+        public virtual Country Country { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Message> Messages { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Message> Messages1 { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Query> Queries { get; set; }
     }
 }

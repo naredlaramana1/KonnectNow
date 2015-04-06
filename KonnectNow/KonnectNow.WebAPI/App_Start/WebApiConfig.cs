@@ -17,7 +17,7 @@ namespace KonnectNow.WebAPI
             config.Filters.Add(new HandleApiExceptionFilter());
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
 

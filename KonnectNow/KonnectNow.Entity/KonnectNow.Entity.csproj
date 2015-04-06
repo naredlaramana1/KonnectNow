@@ -55,6 +55,8 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -63,13 +65,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\City.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\Message.cs" />
+    <Compile Include="Entities\Query.cs" />
+    <Compile Include="Mappings\State.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\Validation_Code.cs" />
+    <Compile Include="Mappings\CategoryMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mappings\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>

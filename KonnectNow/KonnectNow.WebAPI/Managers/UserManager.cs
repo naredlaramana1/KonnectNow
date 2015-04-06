@@ -41,7 +41,7 @@ namespace KonnectNow.WebAPI.Managers
         public ModelManagerResult<CreateUserViewModel> CreateUser(UserCommandModel userCommandModel)
         {
             var user = Mapper.Map<UserCommandModel, User>(userCommandModel);
-            user.Messages = new List<Message> { new Message { MessageText = "abcd", CreatedOn = DateTime.Now }, new Message { MessageText = "abcd", CreatedOn = DateTime.Now } };
+           // user.Messages = new List<Message> { new Message { MessageText = "abcd", CreatedOn = DateTime.Now }, new Message { MessageText = "abcd", CreatedOn = DateTime.Now } };
             var a = _userRepository.Insert(user);
             return GetManagerResult(ResponseCodes.OK, new CreateUserViewModel { UserId = a.UserId });
 

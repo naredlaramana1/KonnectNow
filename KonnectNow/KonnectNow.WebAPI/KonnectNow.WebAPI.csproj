@@ -202,6 +202,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\KNBaseController.cs" />
+    <Compile Include="Controllers\LookUpsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Filters\HandleApiExceptionFilter.cs" />
     <Compile Include="Filters\ValidationActionFilter.cs" />
@@ -213,11 +214,14 @@
     <Compile Include="IOC\UnityConfig.cs" />
     <Compile Include="IOC\UnityResolver.cs" />
     <Compile Include="Managers\BaseModelManager.cs" />
+    <Compile Include="Managers\Interfaces\ILookUpManager.cs" />
     <Compile Include="Managers\IUserManager.cs" />
+    <Compile Include="Managers\LookUpManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
     <Compile Include="Models\Common\KNErrorModel.cs" />
     <Compile Include="Models\Common\ModelManagerResult.cs" />
     <Compile Include="Models\CreateUserViewModel.cs" />
+    <Compile Include="Models\Lookup\CategoryViewModel.cs" />
     <Compile Include="Models\UserCommandModel.cs" />
     <Compile Include="Models\UserListViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
