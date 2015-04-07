@@ -19,17 +19,17 @@ namespace KonnectNow.Entity.Entities
         [Key]
         [Column(TypeName = "numeric")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public decimal Country_Id { get; set; }
+        public decimal CountryId { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Country_Name { get; set; }
+        public string CountryName { get; set; }
 
-        public bool Is_Active { get; set; }
+        public bool IsActive { get; set; }
 
-        public DateTime Created_On { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-        public DateTime Modified_On { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<State> States { get; set; }

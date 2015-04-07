@@ -71,6 +71,7 @@
     <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Query.cs" />
+    <Compile Include="Mappings\CountryMap.cs" />
     <Compile Include="Mappings\State.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Validation_Code.cs" />

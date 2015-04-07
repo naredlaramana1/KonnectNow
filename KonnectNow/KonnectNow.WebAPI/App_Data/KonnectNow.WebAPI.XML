@@ -513,7 +513,7 @@
         </member>
         <member name="T:KonnectNow.WebAPI.Controllers.LookUpsController">
             <summary>
-            Contains services related lookup like  country,state,city etc.
+            Manages  lookups(country,state,city etc.) operations
             </summary>
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.#ctor(KonnectNow.WebAPI.Managers.Interfaces.ILookUpManager)">
@@ -527,6 +527,12 @@
             Returns all active categories
             </summary>
             <returns> HTTP Status = 200 {CategoryViewModel}</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.GetCountries">
+            <summary>
+            Returns allCountries
+            </summary>
+            <returns> HTTP Status = 200 {CountryViewModel}</returns>
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.ValuesController.#ctor(KonnectNow.WebAPI.Managers.IUserManager)">
             <summary>
@@ -739,17 +745,35 @@
             </summary>
             <returns>ModelManagerResult(IEnumerable(CategoryViewModel))</returns>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.ICategoryRepository)">
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.ILookUpManager.GetCountries">
+            <summary>
+            Returns list of  Countries
+            </summary>
+            <returns>ModelManagerResult(IEnumerable(CountryViewModel))</returns>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Managers.LookUpManager">
+            <summary>
+            Manages  lookups(country,state,city etc.) operations
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.ICategoryRepository,KonnectNow.Repository.Repositories.Interfaces.ICountryRepository)">
             <summary>
             Constructor for LookUpManager.
             </summary>
-            <param name="categoryRepository">ICategoryRepository object</param>          
+            <param name="categoryRepository">ICategoryRepository object</param>  
+            <param name="countryRepository">ICountryRepository object</param>          
         </member>
         <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.GetCategories">
             <summary>
             Returns list of  categories
             </summary>
             <returns>ModelManagerResult(IEnumerable(CategoryViewModel))</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.GetCountries">
+            <summary>
+            Returns list of  Countries
+            </summary>
+            <returns>ModelManagerResult(IEnumerable(CountryViewModel))</returns>
         </member>
         <member name="M:KonnectNow.WebAPI.Managers.UserManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IUserRepository)">
             <summary>
@@ -796,6 +820,21 @@
         <member name="P:KonnectNow.WebAPI.Models.Lookup.CategoryViewModel.CatName">
             <summary>
             Category Name
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Lookup.CountryViewModel">
+            <summary>
+            Country View Model
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CountryViewModel.CountryId">
+            <summary>
+            Country Id
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CountryViewModel.CountryName">
+            <summary>
+            Country Name
             </summary>
         </member>
     </members>

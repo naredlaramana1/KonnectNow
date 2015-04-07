@@ -27,7 +27,7 @@ namespace KonnectNow.Repository.EF
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new CategoryMap());
-
+            modelBuilder.Configurations.Add(new CountryMap());
             modelBuilder.Entity<City>()
                 .Property(e => e.City_Id)
                 .HasPrecision(18, 0);
@@ -45,23 +45,7 @@ namespace KonnectNow.Repository.EF
                 .WithRequired(e => e.City)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Country>()
-                .Property(e => e.Country_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Country>()
-                .Property(e => e.Country_Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Country>()
-                .HasMany(e => e.States)
-                .WithRequired(e => e.Country)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Country>()
-                .HasMany(e => e.Users)
-                .WithRequired(e => e.Country)
-                .WillCascadeOnDelete(false);
+          
 
             modelBuilder.Entity<Location>()
                 .Property(e => e.Location_Id)

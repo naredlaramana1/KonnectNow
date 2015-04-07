@@ -222,12 +222,14 @@
     <Compile Include="Models\Common\ModelManagerResult.cs" />
     <Compile Include="Models\CreateUserViewModel.cs" />
     <Compile Include="Models\Lookup\CategoryViewModel.cs" />
+    <Compile Include="Models\Lookup\CountryViewModel.cs" />
     <Compile Include="Models\UserCommandModel.cs" />
     <Compile Include="Models\UserListViewModel.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\KonnectNow.WebAPI.XML" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -351,9 +353,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="unity.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

@@ -4,10 +4,10 @@ using KonnectNow.Repository.Repositories.Interfaces;
 
 namespace KonnectNow.Repository.Repositories
 {
-   public class UserRepository : DomainRepository<User>, IUserRepository
+    public class LocationRepository : DomainRepository<Location>, ILocationRepository
     {
 
-        public UserRepository(KonnectNowContext session)
+        public LocationRepository(KonnectNowContext session)
             : base(session)
         {
 

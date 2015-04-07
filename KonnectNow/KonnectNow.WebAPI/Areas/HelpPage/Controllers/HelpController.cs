@@ -27,7 +27,14 @@ namespace KonnectNow.WebAPI.Areas.HelpPage.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.DocumentationProvider = Configuration.Services.GetDocumentationProvider();
+            try
+            {
+                ViewBag.DocumentationProvider = Configuration.Services.GetDocumentationProvider();
+                return View(Configuration.Services.GetApiExplorer().ApiDescriptions);
+            }
+            catch (Exception ex)
+            { 
+            }
             return View(Configuration.Services.GetApiExplorer().ApiDescriptions);
         }
 

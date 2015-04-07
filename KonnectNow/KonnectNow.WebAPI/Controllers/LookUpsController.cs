@@ -12,7 +12,7 @@ using System.Web.Http.Description;
 namespace KonnectNow.WebAPI.Controllers
 {
     /// <summary>
-    /// Contains services related lookup like  country,state,city etc.
+    /// Manages  lookups(country,state,city etc.) operations
     /// </summary>
     public class LookUpsController : KNBaseController
     {
@@ -33,10 +33,29 @@ namespace KonnectNow.WebAPI.Controllers
         /// <returns> HTTP Status = 200 {CategoryViewModel}</returns>
         [HttpGet]
         [Route("LookUps/Categories")]
-        [ResponseType(typeof(CategoryViewModel))]
+        [ResponseType(typeof(IEnumerable<CategoryViewModel>))]
         public HttpResponseMessage GetCategories()
         {
             var result = _lookUpManager.GetCategories();
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
+        /// <summary>
+        /// Returns allCountries
+        /// </summary>
+        /// <returns> HTTP Status = 200 {CountryViewModel}</returns>
+        [HttpGet]
+        [Route("LookUps/Countries")]
+        [ResponseType(typeof(IEnumerable<CountryViewModel>))]
+        public HttpResponseMessage GetCountries()
+        {
+            var result = _lookUpManager.GetCountries();
 
             if (result.Status == ResponseCodes.OK)
             {

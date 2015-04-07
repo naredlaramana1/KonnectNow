@@ -12,17 +12,22 @@ using System.Web;
 
 namespace KonnectNow.WebAPI.Managers
 {
+    /// <summary>
+    /// Manages  lookups(country,state,city etc.) operations
+    /// </summary>
     public class LookUpManager : BaseModelManager, ILookUpManager
     {
          private readonly ICategoryRepository _categoryRepository;
-       
+         private readonly ICountryRepository _countryRepository;
         /// <summary>
         /// Constructor for LookUpManager.
         /// </summary>
-         /// <param name="categoryRepository">ICategoryRepository object</param>          
-         public LookUpManager(ICategoryRepository categoryRepository)
+         /// <param name="categoryRepository">ICategoryRepository object</param>  
+         /// <param name="countryRepository">ICountryRepository object</param>          
+         public LookUpManager(ICategoryRepository categoryRepository, ICountryRepository countryRepository)
         {
             _categoryRepository = categoryRepository;
+            _countryRepository = countryRepository;
             
         }
 
@@ -37,6 +42,17 @@ namespace KonnectNow.WebAPI.Managers
             var categories = _categoryRepository.Get();
             return GetManagerResult<IEnumerable<CategoryViewModel>>(ResponseCodes.OK,
                                                                           Mapper.Map<IEnumerable<Category>, IEnumerable<CategoryViewModel>>(categories));
+        }
+
+        /// <summary>
+        /// Returns list of  Countries
+        /// </summary>
+        /// <returns>ModelManagerResult(IEnumerable(CountryViewModel))</returns>
+        public ModelManagerResult<IEnumerable<CountryViewModel>> GetCountries()
+        {
+            var categories = _countryRepository.Get();
+            return GetManagerResult<IEnumerable<CountryViewModel>>(ResponseCodes.OK,
+                                                                          Mapper.Map<IEnumerable<Country>, IEnumerable<CountryViewModel>>(categories));
         }
     }
 }

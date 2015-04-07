@@ -20,7 +20,8 @@ namespace KonnectNow.WebAPI
         {
             AreaRegistration.RegisterAllAreas();
             UnityConfig.RegisterComponents();
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            GlobalConfiguration.Configure(WebApiConfig.Register);   
+            //WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);

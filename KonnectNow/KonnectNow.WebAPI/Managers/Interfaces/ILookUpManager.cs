@@ -15,5 +15,11 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// </summary>
         /// <returns>ModelManagerResult(IEnumerable(CategoryViewModel))</returns>
         ModelManagerResult<IEnumerable<CategoryViewModel>> GetCategories();
+
+        /// <summary>
+        /// Returns list of  Countries
+        /// </summary>
+        /// <returns>ModelManagerResult(IEnumerable(CountryViewModel))</returns>
+        ModelManagerResult<IEnumerable<CountryViewModel>> GetCountries();
     }
 }
