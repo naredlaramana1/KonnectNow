@@ -10,6 +10,7 @@ namespace KonnectNow.WebAPI
     {
         public static void Register(HttpConfiguration config)
         {
+            config.MapHttpAttributeRoutes();
             config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
 
 
