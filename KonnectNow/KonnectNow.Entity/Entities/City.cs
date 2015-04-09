@@ -18,20 +18,20 @@ namespace KonnectNow.Entity.Entities
         [Key]
         [Column(TypeName = "numeric")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public decimal City_Id { get; set; }
+        public decimal CityId { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string City_Name { get; set; }
+        public string CityName { get; set; }
 
         [Column(TypeName = "numeric")]
-        public decimal State_Id { get; set; }
+        public decimal StateId { get; set; }
 
-        public bool Is_Active { get; set; }
+        public bool IsActive { get; set; }
 
-        public DateTime Created_On { get; set; }
+        public DateTime CreatedOn { get; set; }
 
-        public DateTime Modified_On { get; set; }
+        public DateTime ModifiedOn { get; set; }
 
         public virtual State State { get; set; }
 

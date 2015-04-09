@@ -28,37 +28,10 @@ namespace KonnectNow.Repository.EF
         {
             modelBuilder.Configurations.Add(new CategoryMap());
             modelBuilder.Configurations.Add(new CountryMap());
-            modelBuilder.Entity<City>()
-                .Property(e => e.City_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<City>()
-                .Property(e => e.City_Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<City>()
-                .Property(e => e.State_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<City>()
-                .HasMany(e => e.Locations)
-                .WithRequired(e => e.City)
-                .WillCascadeOnDelete(false);
-
-          
-
-            modelBuilder.Entity<Location>()
-                .Property(e => e.Location_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Location>()
-                .Property(e => e.Location_Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Location>()
-                .Property(e => e.City_Id)
-                .HasPrecision(18, 0);
-
+            modelBuilder.Configurations.Add(new CityMap());
+            modelBuilder.Configurations.Add(new LocationMap());
+            modelBuilder.Configurations.Add(new StateMap());
+           
             modelBuilder.Entity<Message>()
                 .Property(e => e.Message_Id)
                 .HasPrecision(18, 0);
@@ -91,24 +64,6 @@ namespace KonnectNow.Repository.EF
                 .HasMany(e => e.Messages)
                 .WithRequired(e => e.Query)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<State>()
-                .Property(e => e.State_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<State>()
-                .Property(e => e.State_Name)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<State>()
-                .Property(e => e.Country_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<State>()
-                .HasMany(e => e.Cities)
-                .WithRequired(e => e.State)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<User>()
                 .Property(e => e.User_Id)
                 .HasPrecision(18, 0);

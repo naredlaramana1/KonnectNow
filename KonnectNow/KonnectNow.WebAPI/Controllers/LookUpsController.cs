@@ -27,6 +27,7 @@ namespace KonnectNow.WebAPI.Controllers
         {
             _lookUpManager = lookUpManager;
         }
+
         /// <summary>
         /// Returns all active categories
         /// </summary>
@@ -41,6 +42,76 @@ namespace KonnectNow.WebAPI.Controllers
             if (result.Status == ResponseCodes.OK)
             {
                 return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
+        /// <summary>
+        /// Creates a category
+        /// </summary>
+        /// <returns> 
+        /// HTTP Status = 201 - {CategoryId},
+        /// HTTP Status = 400 - {Code = 4002, Message = Category already exist}
+        /// </returns>
+        [HttpPost]
+        [Route("LookUps/Categories")]
+        [ResponseType(typeof(CreateCategoryViewModel))]
+        public HttpResponseMessage CreateCategory(CategoryCommandModel categoryCommandModel)
+        {
+            var result = _lookUpManager.CreateCategory(categoryCommandModel);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
+        /// <summary>
+        /// updates the category
+        /// </summary>
+        /// <param name="categoryId">Category Id</param>
+        /// <param name="updateCategoryCommandModel">UpdateCategoryCommandModel Object</param>
+        /// <returns>
+        /// HTTP Status = 204,
+        /// HTTP Status = 404 - {Code = 4003, Message = Category not found}
+        /// HTTP Status = 400 - {Code = 4002, Message = Category already exist}
+        /// </returns>
+        [HttpPut]
+        [Route("LookUps/Categories/{categoryId}")]
+        [ResponseType(typeof(bool))]
+        public HttpResponseMessage UpdateCategory(int categoryId, UpdateCategoryCommandModel updateCategoryCommandModel)
+        {
+            var result = _lookUpManager.UpdateCategory(categoryId, updateCategoryCommandModel);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.NoContent);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
+        /// <summary>
+        /// updates the category
+        /// </summary>
+        /// <param name="categoryId">Category Id</param>
+        /// <returns>
+        /// HTTP Status = 204,
+        /// HTTP Status = 404 - {Code = 4003, Message = Category not found}
+        /// </returns>
+        [HttpDelete]
+        [Route("LookUps/Categories/{categoryId}")]
+        [ResponseType(typeof(bool))]
+        public HttpResponseMessage DeleteCategory(int categoryId)
+        {
+            var result = _lookUpManager.DeleteCategory(categoryId);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.NoContent);
             }
             return BuildErrorResponse(result.Status);
 

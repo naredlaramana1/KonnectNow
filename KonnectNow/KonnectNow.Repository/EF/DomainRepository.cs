@@ -76,12 +76,14 @@ namespace KonnectNow.Repository.EF
                     dbSet.Attach(entityToDelete);
                 }
                 dbSet.Remove(entityToDelete);
+                context.SaveChanges();
             }
 
             public void Update(T entityToUpdate)
             {
                 dbSet.Attach(entityToUpdate);
                 context.Entry(entityToUpdate).State = EntityState.Modified;
+                context.SaveChanges();
             }
         }
     

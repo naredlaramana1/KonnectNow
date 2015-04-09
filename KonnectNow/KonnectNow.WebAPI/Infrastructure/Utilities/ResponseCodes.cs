@@ -48,6 +48,20 @@ namespace KonnectNow.WebAPI.Infrastructure.Utilities
         [Description("Unauthorized access")]
         UNAUTHORIZED = 4001,
 
+        /// <summary>
+        /// Category already exist.
+        /// </summary>
+        [HttpStatus(HttpStatusCode.BadRequest)]
+        [Description("Category already exist")]
+        CATEGORY_ALREADY_EXIST = 4002,
+
+
+        /// <summary>
+        /// Category already exist.
+        /// </summary>
+        [HttpStatus(HttpStatusCode.NotFound)]
+        [Description("Category not found")]
+        CATEGORY_NOT_FOUND = 4003,
     }
 
 

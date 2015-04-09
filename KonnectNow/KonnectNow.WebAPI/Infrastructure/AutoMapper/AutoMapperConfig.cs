@@ -9,6 +9,9 @@ using KonnectNow.WebAPI.Models.Lookup;
 
 namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
 {
+    /// <summary>
+    /// Manages all entity mapping configurations
+    /// </summary>
     public class AutoMapperConfig
     {
           /// <summary>
@@ -18,6 +21,7 @@ namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
         {
 
             Mapper.CreateMap<Category, CategoryViewModel>();
+            Mapper.CreateMap<CategoryCommandModel, Category>();
             Mapper.CreateMap<Country, CountryViewModel>();
             Mapper.CreateMap<User, UserViewModel>();
             Mapper.CreateMap<UserViewModel, User>();

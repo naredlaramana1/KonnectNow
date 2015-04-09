@@ -20,8 +20,10 @@ namespace KonnectNow.Entity.Entities
 
         public bool IsActive { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? CreatedOn { get; set; }
 
+           [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? ModifiedOn { get; set; }
     }
 }

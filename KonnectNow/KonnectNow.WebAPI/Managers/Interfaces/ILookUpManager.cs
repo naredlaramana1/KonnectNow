@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace KonnectNow.WebAPI.Managers.Interfaces
 {
+    /// <summary>
+    ///  This interface must be implemented by all lookups related business operations.
+    /// </summary>
     public interface ILookUpManager
     {
         /// <summary>
@@ -15,6 +18,28 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// </summary>
         /// <returns>ModelManagerResult(IEnumerable(CategoryViewModel))</returns>
         ModelManagerResult<IEnumerable<CategoryViewModel>> GetCategories();
+
+        /// <summary>
+        /// Creates a category
+        /// </summary>    
+        /// <param name="categoryCommandModel">CategoryCommandModel object</param>
+        /// <returns>CategoryId</returns>
+        ModelManagerResult<CreateCategoryViewModel> CreateCategory(CategoryCommandModel categoryCommandModel);
+
+        /// <summary>
+        /// updates the category
+        /// </summary>
+        /// <param name="categoryId">Category Id</param>
+        /// <param name="updateCategoryCommandModel">UpdateCategoryCommandModel Object</param>
+        /// <returns>true or false</returns>
+        ModelManagerResult<bool> UpdateCategory(int categoryId, UpdateCategoryCommandModel updateCategoryCommandModel);
+
+        /// <summary>
+        /// Deletes category
+        /// </summary>
+        /// <param name="categoryId">Category Id</param>              
+        /// <returns>ModelManagerResult(Boolean)</returns>
+        ModelManagerResult<bool> DeleteCategory(int categoryId);
 
         /// <summary>
         /// Returns list of  Countries
