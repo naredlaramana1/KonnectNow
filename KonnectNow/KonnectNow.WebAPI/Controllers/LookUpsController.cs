@@ -48,7 +48,7 @@ namespace KonnectNow.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Returns category based categoryId
+        /// Returns category details
         /// </summary>
         /// <returns> 
         ///  HTTP Status = 200 {CategoryViewModel}
@@ -92,7 +92,7 @@ namespace KonnectNow.WebAPI.Controllers
         }
 
         /// <summary>
-        /// updates the category
+        /// Updates the category
         /// </summary>
         /// <param name="categoryId">Category Id</param>
         /// <param name="updateCategoryCommandModel">UpdateCategoryCommandModel Object</param>
@@ -161,7 +161,7 @@ namespace KonnectNow.WebAPI.Controllers
 
 
         /// <summary>
-        /// Returns category based categoryId
+        /// Returns country details.
         /// </summary>
         /// <param name="countryId">Country Id</param>
         /// <returns> 
@@ -184,7 +184,7 @@ namespace KonnectNow.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Creates a category
+        /// Creates a country
         /// </summary>
         /// <returns> 
         /// HTTP Status = 201 - {CountryId},
@@ -206,7 +206,7 @@ namespace KonnectNow.WebAPI.Controllers
         }
 
         /// <summary>
-        /// updates the country
+        /// Updates the country
         /// </summary>
         /// <param name="countryId">Country Id</param>
         /// <param name="updateCountryCommandModel">UpdateCountryCommandModel Object</param>

@@ -530,7 +530,7 @@
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.GetCategory(System.Int32)">
             <summary>
-            Returns category based categoryId
+            Returns category details
             </summary>
             <returns> 
              HTTP Status = 200 {CategoryViewModel}
@@ -548,7 +548,7 @@
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.UpdateCategory(System.Int32,KonnectNow.WebAPI.Models.Lookup.UpdateCategoryCommandModel)">
             <summary>
-            updates the category
+            Updates the category
             </summary>
             <param name="categoryId">Category Id</param>
             <param name="updateCategoryCommandModel">UpdateCategoryCommandModel Object</param>
@@ -577,7 +577,7 @@
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.GetCountry(System.Int32)">
             <summary>
-            Returns category based categoryId
+            Returns country details.
             </summary>
             <param name="countryId">Country Id</param>
             <returns> 
@@ -587,7 +587,7 @@
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.CreateCountry(KonnectNow.WebAPI.Models.Lookup.CreateCountryCommandModel)">
             <summary>
-            Creates a category
+            Creates a country
             </summary>
             <returns> 
             HTTP Status = 201 - {CountryId},
