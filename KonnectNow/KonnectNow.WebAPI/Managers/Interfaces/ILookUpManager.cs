@@ -16,8 +16,15 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <summary>
         /// Returns list of  categories
         /// </summary>
-        /// <returns>ModelManagerResult(IEnumerable(CategoryViewModel))</returns>
-        ModelManagerResult<IEnumerable<CategoryViewModel>> GetCategories();
+        /// <returns>ModelManagerResult(IEnumerable(CategoriesViewModel))</returns>
+        ModelManagerResult<IEnumerable<CategoriesViewModel>> GetCategories();
+
+         /// <summary>
+        /// Returns category details
+        /// </summary>
+        /// <param name="categoryId">CategoryId</param>
+        /// <returns>ModelManagerResult(CategoryViewModel)</returns>
+        ModelManagerResult<CategoryViewModel> GetCategory(int categoryId);
 
         /// <summary>
         /// Creates a category
@@ -44,7 +51,36 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <summary>
         /// Returns list of  Countries
         /// </summary>
-        /// <returns>ModelManagerResult(IEnumerable(CountryViewModel))</returns>
-        ModelManagerResult<IEnumerable<CountryViewModel>> GetCountries();
+        /// <returns>ModelManagerResult(IEnumerable(CountriesViewModel))</returns>
+        ModelManagerResult<IEnumerable<CountriesViewModel>> GetCountries();
+
+        /// <summary>
+        /// Returns country details
+        /// </summary>
+        /// <param name="countryId">CountryId</param>
+        /// <returns>ModelManagerResult(CountryViewModel)</returns>
+        ModelManagerResult<CountryViewModel> GetCountry(int countryId);
+        
+        /// <summary>
+        /// Creates a country
+        /// </summary>    
+        /// <param name="createCountryCommandModel">CreateCountryCommandModel object</param>
+        /// <returns>CountryId</returns>
+        ModelManagerResult<CreateCountryViewModel> CreateCountry(CreateCountryCommandModel createCountryCommandModel);
+
+        /// <summary>
+        /// Updates the country
+        /// </summary>
+        /// <param name="countryId">Country Id</param>
+        /// <param name="updateCountryCommandModel">UpdateCountryCommandModel Object</param>
+        /// <returns>true or false</returns>
+        ModelManagerResult<bool> UpdateCountry(int countryId, UpdateCountryCommandModel updateCountryCommandModel);
+
+          /// <summary>
+        /// Removes country
+        /// </summary>
+        /// <param name="countryId">Country Id</param>              
+        /// <returns>ModelManagerResult(Boolean)</returns>
+        ModelManagerResult<bool> DeleteCountry(int countryId);
     }
 }

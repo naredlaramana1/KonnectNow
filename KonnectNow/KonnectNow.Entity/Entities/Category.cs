@@ -25,5 +25,8 @@ namespace KonnectNow.Entity.Entities
 
            [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? ModifiedOn { get; set; }
+
+           [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+           public virtual ICollection<Query> Queries { get; set; }
     }
 }

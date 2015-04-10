@@ -45,9 +45,11 @@ namespace KonnectNow.Entity.Entities
 
         public byte[] Profile_Pic { get; set; }
 
-        public DateTime Created_On { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime? CreatedOn { get; set; }
 
-        public DateTime Updated_On { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime? ModifiedOn { get; set; }
 
         public virtual Country Country { get; set; }
 

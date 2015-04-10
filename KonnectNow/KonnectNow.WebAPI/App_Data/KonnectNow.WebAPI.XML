@@ -526,7 +526,16 @@
             <summary>
             Returns all active categories
             </summary>
-            <returns> HTTP Status = 200 {CategoryViewModel}</returns>
+            <returns> HTTP Status = 200 {CategoriesViewModel}</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.GetCategory(System.Int32)">
+            <summary>
+            Returns category based categoryId
+            </summary>
+            <returns> 
+             HTTP Status = 200 {CategoryViewModel}
+             HTTP Status = 404 - {Code = 4003, Message = Category not found}
+            </returns>
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.CreateCategory(KonnectNow.WebAPI.Models.Lookup.CategoryCommandModel)">
             <summary>
@@ -551,19 +560,62 @@
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.DeleteCategory(System.Int32)">
             <summary>
-            updates the category
+            Removes a category
             </summary>
             <param name="categoryId">Category Id</param>
             <returns>
             HTTP Status = 204,
             HTTP Status = 404 - {Code = 4003, Message = Category not found}
+            HTTP Status = 403 - {Code = 4004, Message = Queries associated with this category cannot be deleted}
             </returns>
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.GetCountries">
             <summary>
-            Returns allCountries
+            Returns all countries
             </summary>
-            <returns> HTTP Status = 200 {CountryViewModel}</returns>
+            <returns> HTTP Status = 200 {CountriesViewModel}</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.GetCountry(System.Int32)">
+            <summary>
+            Returns category based categoryId
+            </summary>
+            <param name="countryId">Country Id</param>
+            <returns> 
+             HTTP Status = 200 {CountryViewModel}
+             HTTP Status = 404 - {Code = 4006, Message = Country not found}
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.CreateCountry(KonnectNow.WebAPI.Models.Lookup.CreateCountryCommandModel)">
+            <summary>
+            Creates a category
+            </summary>
+            <returns> 
+            HTTP Status = 201 - {CountryId},
+            HTTP Status = 400 - {Code = 4005, Message = Country already exist}
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.UpdateCountryy(System.Int32,KonnectNow.WebAPI.Models.Lookup.UpdateCountryCommandModel)">
+            <summary>
+            updates the country
+            </summary>
+            <param name="countryId">Country Id</param>
+            <param name="updateCountryCommandModel">UpdateCountryCommandModel Object</param>
+            <returns>
+            HTTP Status = 204,
+            HTTP Status = 404 - {Code = 4006, Message = Country not found}
+            HTTP Status = 400 - {Code = 4005, Message = Country already exists}
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.DeleteCountry(System.Int32)">
+            <summary>
+            Removes a country
+            </summary>
+            <param name="countryId">Country Id</param>
+            <returns>
+            HTTP Status = 204,
+            HTTP Status = 404 - {Code = 4006, Message = Country not found}
+            HTTP Status = 403 - {Code = 4007, Message = Country Dependency Exist.Cannot be deleted}
+            </returns>
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.ValuesController.#ctor(KonnectNow.WebAPI.Managers.IUserManager)">
             <summary>
@@ -643,6 +695,26 @@
         <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.CATEGORY_NOT_FOUND">
             <summary>
             Category already exist.
+            </summary>
+        </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.QUERY_CATEGORY_CANNOT_BE_DELETED">
+            <summary>
+            Queries associated with this category cannot be deleted
+            </summary>
+        </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.COUNTRY_ALREADY_EXIST">
+            <summary>
+            Category already exist
+            </summary>
+        </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.COUNTRY_NOT_FOUND">
+            <summary>
+            Country not found
+            </summary>
+        </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.USER_COUNTRY_CANNOT_BE_DELETED">
+            <summary>
+            Country Dependency Exist.Cannot be deleted
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Infrastructure.Utilities.SingletonBase`1">
@@ -794,7 +866,14 @@
             <summary>
             Returns list of  categories
             </summary>
-            <returns>ModelManagerResult(IEnumerable(CategoryViewModel))</returns>
+            <returns>ModelManagerResult(IEnumerable(CategoriesViewModel))</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.ILookUpManager.GetCategory(System.Int32)">
+            <summary>
+            Returns category details
+            </summary>
+            <param name="categoryId">CategoryId</param>
+            <returns>ModelManagerResult(CategoryViewModel)</returns>
         </member>
         <member name="M:KonnectNow.WebAPI.Managers.Interfaces.ILookUpManager.CreateCategory(KonnectNow.WebAPI.Models.Lookup.CategoryCommandModel)">
             <summary>
@@ -822,14 +901,43 @@
             <summary>
             Returns list of  Countries
             </summary>
-            <returns>ModelManagerResult(IEnumerable(CountryViewModel))</returns>
+            <returns>ModelManagerResult(IEnumerable(CountriesViewModel))</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.ILookUpManager.GetCountry(System.Int32)">
+            <summary>
+            Returns country details
+            </summary>
+            <param name="countryId">CountryId</param>
+            <returns>ModelManagerResult(CountryViewModel)</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.ILookUpManager.CreateCountry(KonnectNow.WebAPI.Models.Lookup.CreateCountryCommandModel)">
+            <summary>
+            Creates a country
+            </summary>    
+            <param name="createCountryCommandModel">CreateCountryCommandModel object</param>
+            <returns>CountryId</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.ILookUpManager.UpdateCountry(System.Int32,KonnectNow.WebAPI.Models.Lookup.UpdateCountryCommandModel)">
+            <summary>
+            Updates the country
+            </summary>
+            <param name="countryId">Country Id</param>
+            <param name="updateCountryCommandModel">UpdateCountryCommandModel Object</param>
+            <returns>true or false</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.ILookUpManager.DeleteCountry(System.Int32)">
+            <summary>
+            Removes country
+            </summary>
+            <param name="countryId">Country Id</param>              
+            <returns>ModelManagerResult(Boolean)</returns>
         </member>
         <member name="T:KonnectNow.WebAPI.Managers.LookUpManager">
             <summary>
             Manages  lookups(country,state,city etc.) operations
             </summary>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.ICategoryRepository,KonnectNow.Repository.Repositories.Interfaces.ICountryRepository,KonnectNow.Repository.Repositories.Interfaces.IStateRepository,KonnectNow.Repository.Repositories.Interfaces.ICityRepository,KonnectNow.Repository.Repositories.Interfaces.ILocationRepository)">
+        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.ICategoryRepository,KonnectNow.Repository.Repositories.Interfaces.ICountryRepository,KonnectNow.Repository.Repositories.Interfaces.IStateRepository,KonnectNow.Repository.Repositories.Interfaces.ICityRepository,KonnectNow.Repository.Repositories.Interfaces.ILocationRepository,KonnectNow.Repository.Repositories.Interfaces.IQueryRepository,KonnectNow.Repository.Repositories.Interfaces.IUserRepository)">
             <summary>
             Constructor for LookUpManager.
             </summary>
@@ -838,12 +946,21 @@
             <param name="stateRepository">IStateRepository object</param>  
             <param name="cityRepository">ICityRepository object</param>  
             <param name="locationRepository">ILocationRepository object</param>  
+            <param name="queryRepository">IQueryRepository object</param> 
+            <param name="userRepository">IUserRepository object</param>
         </member>
         <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.GetCategories">
             <summary>
             Returns list of  active categories
             </summary>
-            <returns>ModelManagerResult(IEnumerable(CategoryViewModel))</returns>
+            <returns>ModelManagerResult(IEnumerable(CategoriesViewModel))</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.GetCategory(System.Int32)">
+            <summary>
+            Returns category details
+            </summary>
+            <param name="categoryId">CategoryId</param>
+            <returns>ModelManagerResult(CategoryViewModel)</returns>
         </member>
         <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.CreateCategory(KonnectNow.WebAPI.Models.Lookup.CategoryCommandModel)">
             <summary>
@@ -871,7 +988,36 @@
             <summary>
             Returns list of  Countries
             </summary>
-            <returns>ModelManagerResult(IEnumerable(CountryViewModel))</returns>
+            <returns>ModelManagerResult(IEnumerable(CountriesViewModel))</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.GetCountry(System.Int32)">
+            <summary>
+            Returns country details
+            </summary>
+            <param name="countryId">CountryId</param>
+            <returns>ModelManagerResult(CountryViewModel)</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.CreateCountry(KonnectNow.WebAPI.Models.Lookup.CreateCountryCommandModel)">
+            <summary>
+            Creates a country
+            </summary>    
+            <param name="createCountryCommandModel">CreateCountryCommandModel object</param>
+            <returns>CountryId</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.UpdateCountry(System.Int32,KonnectNow.WebAPI.Models.Lookup.UpdateCountryCommandModel)">
+            <summary>
+            Updates the country
+            </summary>
+            <param name="countryId">Country Id</param>
+            <param name="updateCountryCommandModel">UpdateCountryCommandModel Object</param>
+            <returns>true or false</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.DeleteCountry(System.Int32)">
+            <summary>
+            Removes country
+            </summary>
+            <param name="countryId">Country Id</param>              
+            <returns>ModelManagerResult(Boolean)</returns>
         </member>
         <member name="M:KonnectNow.WebAPI.Managers.UserManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IUserRepository)">
             <summary>
@@ -915,9 +1061,24 @@
             Category Name
             </summary>
         </member>
+        <member name="T:KonnectNow.WebAPI.Models.Lookup.CategoriesViewModel">
+            <summary>
+            Categories View Model
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CategoriesViewModel.CatId">
+            <summary>
+            Category Id
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CategoriesViewModel.CatName">
+            <summary>
+            Category Name
+            </summary>
+        </member>
         <member name="T:KonnectNow.WebAPI.Models.Lookup.CategoryViewModel">
             <summary>
-            Category View Model
+            CategoryViewModel object
             </summary>
         </member>
         <member name="P:KonnectNow.WebAPI.Models.Lookup.CategoryViewModel.CatId">
@@ -930,19 +1091,59 @@
             Category Name
             </summary>
         </member>
-        <member name="T:KonnectNow.WebAPI.Models.Lookup.CountryViewModel">
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CategoryViewModel.IsActive">
             <summary>
-            Country View Model
+            is active or not
             </summary>
         </member>
-        <member name="P:KonnectNow.WebAPI.Models.Lookup.CountryViewModel.CountryId">
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CategoryViewModel.CreatedOn">
+            <summary>
+            Created Date
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CategoryViewModel.ModifiedOn">
+            <summary>
+            Updated date
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Lookup.CountriesViewModel">
+            <summary>
+            Countries View Model Object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CountriesViewModel.CountryId">
             <summary>
             Country Id
             </summary>
         </member>
-        <member name="P:KonnectNow.WebAPI.Models.Lookup.CountryViewModel.CountryName">
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CountriesViewModel.CountryName">
             <summary>
             Country Name
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Lookup.CountryViewModel">
+            <summary>
+            Country View Model object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CountryViewModel.CountryName">
+            <summary>
+            Country Id
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CountryViewModel.IsActive">
+            <summary>
+            Is Active or Not
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CountryViewModel.CreatedOn">
+            <summary>
+            Created On
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CountryViewModel.ModifiedOn">
+            <summary>
+            Modified On
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.Lookup.CreateCategoryViewModel">
@@ -955,6 +1156,21 @@
             Category Id
             </summary>
         </member>
+        <member name="T:KonnectNow.WebAPI.Models.Lookup.CreateCountryCommandModel">
+            <summary>
+            CreateCountryCommandModel Object
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Lookup.CreateCountryViewModel">
+            <summary>
+            CreateCountryViewModel object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CreateCountryViewModel.CountryId">
+            <summary>
+            Country Id
+            </summary>
+        </member>
         <member name="T:KonnectNow.WebAPI.Models.Lookup.UpdateCategoryCommandModel">
             <summary>
             UpdateCategoryCommandModel obejct
@@ -963,6 +1179,16 @@
         <member name="P:KonnectNow.WebAPI.Models.Lookup.UpdateCategoryCommandModel.CatName">
             <summary>
             Category Name
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Lookup.UpdateCountryCommandModel">
+            <summary>
+            UpdateCountryCommandModel object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.UpdateCountryCommandModel.CountryName">
+            <summary>
+            Country Name
             </summary>
         </member>
     </members>

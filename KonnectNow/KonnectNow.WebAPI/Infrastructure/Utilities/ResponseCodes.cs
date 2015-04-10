@@ -52,7 +52,7 @@ namespace KonnectNow.WebAPI.Infrastructure.Utilities
         /// Category already exist.
         /// </summary>
         [HttpStatus(HttpStatusCode.BadRequest)]
-        [Description("Category already exist")]
+        [Description("Category already exists")]
         CATEGORY_ALREADY_EXIST = 4002,
 
 
@@ -62,6 +62,35 @@ namespace KonnectNow.WebAPI.Infrastructure.Utilities
         [HttpStatus(HttpStatusCode.NotFound)]
         [Description("Category not found")]
         CATEGORY_NOT_FOUND = 4003,
+
+        /// <summary>
+        /// Queries associated with this category cannot be deleted
+        /// </summary>
+        [HttpStatus(HttpStatusCode.Forbidden)]
+        [Description("Queries associated with this category cannot be deleted")]
+        QUERY_CATEGORY_CANNOT_BE_DELETED = 4004,
+
+        /// <summary>
+        /// Category already exist
+        /// </summary>
+        [HttpStatus(HttpStatusCode.BadRequest)]
+        [Description("Country alredy exists")]
+        COUNTRY_ALREADY_EXIST = 4005,
+
+        /// <summary>
+        /// Country not found
+        /// </summary>
+        [HttpStatus(HttpStatusCode.NotFound)]
+        [Description("Country not found")]
+        COUNTRY_NOT_FOUND = 4006,
+
+
+        /// <summary>
+        /// Country Dependency Exist.Cannot be deleted
+        /// </summary>
+        [HttpStatus(HttpStatusCode.Forbidden)]
+        [Description("Country Dependency Exist.Cannot be deleted")]
+        USER_COUNTRY_CANNOT_BE_DELETED = 4007,
     }
 
 

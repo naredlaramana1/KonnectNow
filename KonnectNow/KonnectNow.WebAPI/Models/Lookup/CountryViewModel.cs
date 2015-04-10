@@ -6,19 +6,30 @@ using System.Web;
 namespace KonnectNow.WebAPI.Models.Lookup
 {
     /// <summary>
-    /// Country View Model
+    /// Country View Model object
     /// </summary>
     public class CountryViewModel
     {
-        /// <summary>
+         /// <summary>
         /// Country Id
         /// </summary>
-        public decimal CountryId { get; set; }
+        public string CountryName { get; set; }
 
         /// <summary>
-        /// Country Name
+        /// Is Active or Not
         /// </summary>
-        public string CountryName { get; set; }
-       
+        public bool IsActive { get; set; }
+
+        /// <summary>
+        /// Created On
+        /// </summary>
+        public DateTime CreatedOn { get; set; }
+
+        /// <summary>
+        /// Modified On
+        /// </summary>
+        public DateTime ModifiedOn { get; set; }
+
+
     }
 }

@@ -57,6 +57,10 @@ namespace KonnectNow.Repository.EF
                 .HasPrecision(18, 0);
 
             modelBuilder.Entity<Query>()
+              .Property(e => e.Cat_Id)
+              .HasPrecision(18, 0);
+
+            modelBuilder.Entity<Query>()
                 .Property(e => e.Location_Id)
                 .HasPrecision(18, 0);
 
@@ -64,6 +68,7 @@ namespace KonnectNow.Repository.EF
                 .HasMany(e => e.Messages)
                 .WithRequired(e => e.Query)
                 .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<User>()
                 .Property(e => e.User_Id)
                 .HasPrecision(18, 0);

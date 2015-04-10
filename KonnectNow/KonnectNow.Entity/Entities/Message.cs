@@ -29,6 +29,7 @@ namespace KonnectNow.Entity.Entities
 
         public bool Is_Read { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime Sent_On { get; set; }
 
         public virtual Query Query { get; set; }

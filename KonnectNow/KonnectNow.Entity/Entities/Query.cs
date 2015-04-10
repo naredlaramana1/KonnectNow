@@ -23,6 +23,9 @@ namespace KonnectNow.Entity.Entities
         [Column(TypeName = "numeric")]
         public decimal User_Id { get; set; }
 
+        [Column(TypeName = "numeric")]
+        public decimal Cat_Id { get; set; }
+
         [Column(TypeName = "ntext")]
         [Required]
         public string Query_Text { get; set; }
@@ -30,13 +33,21 @@ namespace KonnectNow.Entity.Entities
         [Column(TypeName = "numeric")]
         public decimal Location_Id { get; set; }
 
-        public DateTime Created_On { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime? CreatedOn { get; set; }
 
-        public DateTime Updated_On { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
+        public DateTime? ModifiedOn { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Message> Messages { get; set; }
 
         public virtual User User { get; set; }
+       
+
+
+        public virtual Category Category { get; set; }
+
+        public virtual Location Location { get; set; }
     }
 }
