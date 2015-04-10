@@ -617,12 +617,6 @@
             HTTP Status = 403 - {Code = 4007, Message = Country Dependency Exist.Cannot be deleted}
             </returns>
         </member>
-        <member name="M:KonnectNow.WebAPI.Controllers.ValuesController.#ctor(KonnectNow.WebAPI.Managers.IUserManager)">
-            <summary>
-            Constructor for AccountResetController.
-            </summary>
-            <param name="accountResetManager">IAccountResetManager object</param>
-        </member>
         <member name="T:KonnectNow.WebAPI.Filters.HandleApiExceptionFilter">
             <summary>
              Handles all exceptions

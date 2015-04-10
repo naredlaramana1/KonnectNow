@@ -203,7 +203,6 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\KNBaseController.cs" />
     <Compile Include="Controllers\LookUpsController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Filters\HandleApiExceptionFilter.cs" />
     <Compile Include="Filters\ValidationActionFilter.cs" />
     <Compile Include="Global.asax.cs">
