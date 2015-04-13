@@ -76,9 +76,10 @@
     <Compile Include="Mappings\LocationMap.cs" />
     <Compile Include="Entities\State.cs" />
     <Compile Include="Entities\User.cs" />
-    <Compile Include="Entities\Validation_Code.cs" />
+    <Compile Include="Entities\Validation.cs" />
     <Compile Include="Mappings\CategoryMap.cs" />
     <Compile Include="Mappings\StateMap.cs" />
+    <Compile Include="Mappings\ValidationMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

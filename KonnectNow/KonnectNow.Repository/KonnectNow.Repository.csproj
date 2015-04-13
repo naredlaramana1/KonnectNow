@@ -74,6 +74,7 @@
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\Interfaces\IQueryRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStateRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IValidationRepository.cs" />
     <Compile Include="Repositories\LocationRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICategoryRepository.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Repositories\QueryRepository.cs" />
     <Compile Include="Repositories\StateRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\ValidationRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\KonnectNow.Entity\KonnectNow.Entity.csproj">

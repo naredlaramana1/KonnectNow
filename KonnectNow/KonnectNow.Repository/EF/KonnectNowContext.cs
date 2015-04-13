@@ -22,7 +22,7 @@ namespace KonnectNow.Repository.EF
         public virtual DbSet<Query> Queries { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Validation_Code> Validation_Code { get; set; }
+        public virtual DbSet<Validation> Validation_Code { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -31,7 +31,8 @@ namespace KonnectNow.Repository.EF
             modelBuilder.Configurations.Add(new CityMap());
             modelBuilder.Configurations.Add(new LocationMap());
             modelBuilder.Configurations.Add(new StateMap());
-           
+            modelBuilder.Configurations.Add(new ValidationMap());
+
             modelBuilder.Entity<Message>()
                 .Property(e => e.Message_Id)
                 .HasPrecision(18, 0);
@@ -106,9 +107,7 @@ namespace KonnectNow.Repository.EF
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Validation_Code>()
-                .Property(e => e.Mobile_No)
-                .IsUnicode(false);
+           
         }
     }
 }

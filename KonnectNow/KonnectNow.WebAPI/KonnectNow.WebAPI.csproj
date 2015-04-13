@@ -209,17 +209,20 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AutoMapper\AutoMapperConfig.cs" />
+    <Compile Include="Infrastructure\Utilities\RandomCodeGenerator.cs" />
     <Compile Include="Infrastructure\Utilities\ResponseCodes.cs" />
     <Compile Include="IOC\UnityConfig.cs" />
     <Compile Include="IOC\UnityResolver.cs" />
     <Compile Include="Managers\BaseModelManager.cs" />
     <Compile Include="Managers\Interfaces\ILookUpManager.cs" />
-    <Compile Include="Managers\IUserManager.cs" />
+    <Compile Include="Managers\Interfaces\IUserManager.cs" />
+    <Compile Include="Managers\Interfaces\IValidationManager.cs" />
     <Compile Include="Managers\LookUpManager.cs" />
     <Compile Include="Managers\UserManager.cs" />
+    <Compile Include="Managers\ValidationManager.cs" />
     <Compile Include="Models\Common\KNErrorModel.cs" />
     <Compile Include="Models\Common\ModelManagerResult.cs" />
-    <Compile Include="Models\CreateUserViewModel.cs" />
+    <Compile Include="Models\User\CreateUserViewModel.cs" />
     <Compile Include="Models\Lookup\CategoryCommandModel.cs" />
     <Compile Include="Models\Lookup\CategoriesViewModel.cs" />
     <Compile Include="Models\Lookup\CategoryViewModel.cs" />
@@ -230,9 +233,7 @@
     <Compile Include="Models\Lookup\CreateCountryViewModel.cs" />
     <Compile Include="Models\Lookup\UpdateCategoryCommandModel.cs" />
     <Compile Include="Models\Lookup\UpdateCountryCommandModel.cs" />
-    <Compile Include="Models\UserCommandModel.cs" />
-    <Compile Include="Models\UserListViewModel.cs" />
-    <Compile Include="Models\UserViewModel.cs" />
+    <Compile Include="Models\User\UserCommandModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

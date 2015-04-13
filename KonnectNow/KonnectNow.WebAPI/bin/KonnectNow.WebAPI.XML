@@ -596,7 +596,7 @@
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.UpdateCountryy(System.Int32,KonnectNow.WebAPI.Models.Lookup.UpdateCountryCommandModel)">
             <summary>
-            updates the country
+            Updates the country
             </summary>
             <param name="countryId">Country Id</param>
             <param name="updateCountryCommandModel">UpdateCountryCommandModel Object</param>
@@ -648,6 +648,40 @@
             <summary>
             initializes mapping  classes
             </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Infrastructure.Utilities.RandomCodeGenerator">
+            <summary>
+            Contains logic to generate unique code
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Infrastructure.Utilities.SingletonBase`1">
+            <summary>
+            A base class for the singleton design pattern.
+            </summary>
+            <typeparam name="T">Class type of the singleton</typeparam>
+        </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.SingletonBase`1.SInstance">
+            <summary>
+            Static instance. Needs to use lambda expression
+            to construct an instance (since constructor is private).
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Infrastructure.Utilities.SingletonBase`1.CreateInstanceOfT">
+            <summary>
+            Creates an instance of T via reflection since T's constructor is expected to be private.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Infrastructure.Utilities.SingletonBase`1.Instance">
+            <summary>
+            Gets the instance of this singleton.
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Infrastructure.Utilities.RandomCodeGenerator.Generate">
+            <summary>
+            Generates unique code
+            </summary>
+            <returns>Unique code</returns>
         </member>
         <member name="T:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes">
             <summary>
@@ -709,29 +743,6 @@
         <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.USER_COUNTRY_CANNOT_BE_DELETED">
             <summary>
             Country Dependency Exist.Cannot be deleted
-            </summary>
-        </member>
-        <member name="T:KonnectNow.WebAPI.Infrastructure.Utilities.SingletonBase`1">
-            <summary>
-            A base class for the singleton design pattern.
-            </summary>
-            <typeparam name="T">Class type of the singleton</typeparam>
-        </member>
-        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.SingletonBase`1.SInstance">
-            <summary>
-            Static instance. Needs to use lambda expression
-            to construct an instance (since constructor is private).
-            </summary>
-        </member>
-        <member name="M:KonnectNow.WebAPI.Infrastructure.Utilities.SingletonBase`1.CreateInstanceOfT">
-            <summary>
-            Creates an instance of T via reflection since T's constructor is expected to be private.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="P:KonnectNow.WebAPI.Infrastructure.Utilities.SingletonBase`1.Instance">
-            <summary>
-            Gets the instance of this singleton.
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Infrastructure.Utilities.EnumManager">
@@ -926,6 +937,34 @@
             <param name="countryId">Country Id</param>              
             <returns>ModelManagerResult(Boolean)</returns>
         </member>
+        <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager">
+            <summary>
+            Provides account validation related operations
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.GetValidationCode(System.String)">
+            <summary>
+            Gets validation code based on the passed email
+            </summary>
+            <param name="email">Email address</param>
+            <returns>Validation code</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.VerifyValidationCode(System.String,System.String)">
+            <summary>
+            Verifies the validation code
+            </summary>
+            <param name="email">Email</param>
+            <param name="validationCode">Validation Code</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.CheckValidationCode(System.String,System.String)">
+            <summary>
+            Verifies the validation code
+            </summary>
+            <param name="email">Email</param>
+            <param name="validationCode">Validation Code</param>
+            <returns>Boolean</returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.LookUpManager">
             <summary>
             Manages  lookups(country,state,city etc.) operations
@@ -1013,11 +1052,50 @@
             <param name="countryId">Country Id</param>              
             <returns>ModelManagerResult(Boolean)</returns>
         </member>
+        <member name="T:KonnectNow.WebAPI.Managers.UserManager">
+            <summary>
+            Manages user account related operations
+            </summary>
+        </member>
         <member name="M:KonnectNow.WebAPI.Managers.UserManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IUserRepository)">
             <summary>
             Constructor for UserManager.
             </summary>
             <param name="patientRepo">IUserRepository object</param>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Managers.ValidationManager">
+            <summary>
+             Provides account validation related operations
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IValidationRepository)">
+            <summary>
+            Constructor
+            </summary>
+            <param name="validationRepository">IValidationRepository object</param>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.GetValidationCode(System.String)">
+            <summary>
+            Gets validation code based on the passed email
+            </summary>
+            <param name="mobileNo">Mobile No</param>
+            <returns>Validation code</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.VerifyValidationCode(System.String,System.String)">
+            <summary>
+            Verifies the validation code
+            </summary>
+            <param name="email">Email</param>
+            <param name="validationCode">validation code</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.CheckValidationCode(System.String,System.String)">
+            <summary>
+            Verifies the validation code
+            </summary>
+            <param name="mobileNo">MobileNo</param>
+            <param name="validationCode">validation code</param>
+            <returns>Boolean</returns>
         </member>
         <member name="P:KonnectNow.WebAPI.Models.Common.KNErrorModel.Code">
             <summary>
@@ -1043,6 +1121,16 @@
         <member name="P:KonnectNow.WebAPI.Models.Common.ModelManagerResult`1.Value">
             <summary>
             Result value
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.User.CreateUserViewModel">
+            <summary>
+            Create  User View Model Obejct
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.CreateUserViewModel.UserId">
+            <summary>
+            User Id
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.Lookup.CategoryCommandModel">
@@ -1183,6 +1271,36 @@
         <member name="P:KonnectNow.WebAPI.Models.Lookup.UpdateCountryCommandModel.CountryName">
             <summary>
             Country Name
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.User.UserCommandModel">
+            <summary>
+            User Command Model Object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UserCommandModel.FirstName">
+            <summary>
+            User First Name
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UserCommandModel.LastName">
+            <summary>
+            User Last Name
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UserCommandModel.CountryId">
+            <summary>
+            CountryId
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UserCommandModel.MobileNo">
+            <summary>
+            Mobile No
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UserCommandModel.DeviceId">
+            <summary>
+            Device ID
             </summary>
         </member>
     </members>

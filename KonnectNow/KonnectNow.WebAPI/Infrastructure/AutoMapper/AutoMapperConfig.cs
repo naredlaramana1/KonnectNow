@@ -25,11 +25,7 @@ namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
             Mapper.CreateMap<CategoryCommandModel, Category>();
             Mapper.CreateMap<Country, CountriesViewModel>();
             Mapper.CreateMap<CreateCountryCommandModel, Country>();
-            Mapper.CreateMap<User, UserViewModel>();
-            Mapper.CreateMap<UserViewModel, User>();
-            Mapper.CreateMap<UserCommandModel, User>();
-            Mapper.CreateMap<User, UserCommandModel>();
-
+            
 
         }
     }
