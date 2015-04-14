@@ -32,6 +32,7 @@ namespace KonnectNow.Repository.EF
             modelBuilder.Configurations.Add(new LocationMap());
             modelBuilder.Configurations.Add(new StateMap());
             modelBuilder.Configurations.Add(new ValidationMap());
+            modelBuilder.Configurations.Add(new UserMap());
 
             modelBuilder.Entity<Message>()
                 .Property(e => e.Message_Id)
@@ -69,44 +70,6 @@ namespace KonnectNow.Repository.EF
                 .HasMany(e => e.Messages)
                 .WithRequired(e => e.Query)
                 .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<User>()
-                .Property(e => e.User_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<User>()
-                .Property(e => e.Mobile_No)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<User>()
-                .Property(e => e.Device_Id)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<User>()
-                .Property(e => e.Country_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<User>()
-                .Property(e => e.Map_Details)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Messages)
-                .WithRequired(e => e.User)
-                .HasForeignKey(e => e.To_User_Id)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Messages1)
-                .WithRequired(e => e.User1)
-                .HasForeignKey(e => e.From_User_Id)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Queries)
-                .WithRequired(e => e.User)
-                .WillCascadeOnDelete(false);
-
            
         }
     }

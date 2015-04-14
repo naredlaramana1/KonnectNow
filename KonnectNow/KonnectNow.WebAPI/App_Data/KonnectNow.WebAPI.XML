@@ -617,6 +617,39 @@
             HTTP Status = 403 - {Code = 4007, Message = Country Dependency Exist.Cannot be deleted}
             </returns>
         </member>
+        <member name="T:KonnectNow.WebAPI.Controllers.UsersController">
+            <summary>
+            Manages  user retaled operations
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.UsersController.#ctor(KonnectNow.WebAPI.Managers.Interfaces.IUserManager,KonnectNow.WebAPI.Managers.Interfaces.IValidationManager)">
+            <summary>
+            Constructor for UsersController.
+            </summary>
+            <param name="userManager">IUserManager object</param>
+            <param name="validationManager">IValidationManager object</param>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.UsersController.Register(KonnectNow.WebAPI.Models.User.UserCommandModel)">
+            <summary>
+            
+            </summary>
+            <param name="userCommandModel"></param>
+            <returns>
+            HTTP Status = 201 - {UserId},
+            HTTP Status = 400 - {Code = 4009, Message = Mobile already registered},
+            HTTP Status = 400 - {Code = 4008, Message = Verification already issued, please check message}
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.UsersController.Validate(KonnectNow.WebAPI.Models.User.VerificationCommandModel)">
+            <summary>
+            Verifies the verification code being sent to user mobile
+            </summary>
+            <param name="verificationCommandModel">VerificationCommandModel object</param>
+            <returns>
+             HTTP Status = 200 - {Ok},
+             HTTP Status = 404 - {Code = 40q0, Message = Verification code is either invalid or expired.},
+            </returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Filters.HandleApiExceptionFilter">
             <summary>
              Handles all exceptions
@@ -743,6 +776,21 @@
         <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.USER_COUNTRY_CANNOT_BE_DELETED">
             <summary>
             Country Dependency Exist.Cannot be deleted
+            </summary>
+        </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.VERIFICATIONCODE_ALREADY_ACTIVE">
+            <summary>
+            Verification already issued, please check message
+            </summary>
+        </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.MOBILE_ALREADY_REGISTERED">
+            <summary>
+            Mobile already registered
+            </summary>
+        </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.VERIFICATION_CODE_NOTFOUND">
+            <summary>
+            Verification code is either invalid or expired.
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Infrastructure.Utilities.EnumManager">
@@ -937,23 +985,39 @@
             <param name="countryId">Country Id</param>              
             <returns>ModelManagerResult(Boolean)</returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IUserManager.RegisterUser(KonnectNow.WebAPI.Models.User.UserCommandModel,System.String@)">
+            <summary>
+            Registers user in the konnect now system
+            </summary>
+            <param name="userCommandModel">UserCommandModel Object</param>
+            <param name="validationCode">ValidationCode Object</param>
+            <returns></returns>        
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IUserManager.SendVerificationCode(System.String,System.String)">
+            <summary>
+            sends verification code to mobile
+            </summary>
+            <param name="mobileNo">Mobile No</param>
+             <param name="message">Message</param>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager">
             <summary>
             Provides account validation related operations
             </summary>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.GetValidationCode(System.String)">
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.GetValidationCode(System.String,System.Boolean@)">
             <summary>
-            Gets validation code based on the passed email
+            Gets validation code based on the passed Mobile No
             </summary>
-            <param name="email">Email address</param>
+            <param name="mobileNo">Mobile No</param>
+            <param name="isDuplicate">Is Duplicate</param>
             <returns>Validation code</returns>
         </member>
         <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.VerifyValidationCode(System.String,System.String)">
             <summary>
             Verifies the validation code
             </summary>
-            <param name="email">Email</param>
+            <param name="mobileNo">Mobile No</param>
             <param name="validationCode">Validation Code</param>
             <returns>Boolean</returns>
         </member>
@@ -961,7 +1025,7 @@
             <summary>
             Verifies the validation code
             </summary>
-            <param name="email">Email</param>
+            <param name="mobileNo">Mobile No</param>
             <param name="validationCode">Validation Code</param>
             <returns>Boolean</returns>
         </member>
@@ -1057,11 +1121,26 @@
             Manages user account related operations
             </summary>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.UserManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IUserRepository)">
+        <member name="M:KonnectNow.WebAPI.Managers.UserManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IUserRepository,KonnectNow.WebAPI.Managers.Interfaces.IValidationManager)">
             <summary>
             Constructor for UserManager.
             </summary>
             <param name="patientRepo">IUserRepository object</param>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.UserManager.RegisterUser(KonnectNow.WebAPI.Models.User.UserCommandModel,System.String@)">
+            <summary>
+            Registers user in the konnect now system
+            </summary>
+            <param name="userCommandModel">UserCommandModel Object</param>
+            <param name="validationCode">ValidationCode Object</param>
+            <returns></returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.UserManager.SendVerificationCode(System.String,System.String)">
+            <summary>
+            sends verification code to mobile
+            </summary>
+            <param name="mobileNo">Mobile No</param>
+             <param name="message">Message</param>
         </member>
         <member name="T:KonnectNow.WebAPI.Managers.ValidationManager">
             <summary>
@@ -1074,18 +1153,19 @@
             </summary>
             <param name="validationRepository">IValidationRepository object</param>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.GetValidationCode(System.String)">
+        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.GetValidationCode(System.String,System.Boolean@)">
             <summary>
-            Gets validation code based on the passed email
+            Gets validation code based on the passed Mobile No
             </summary>
             <param name="mobileNo">Mobile No</param>
+            <param name="isDuplicate">Is Duplicate</param>
             <returns>Validation code</returns>
         </member>
         <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.VerifyValidationCode(System.String,System.String)">
             <summary>
             Verifies the validation code
             </summary>
-            <param name="email">Email</param>
+            <param name="mobileNo">MobileNo</param>
             <param name="validationCode">validation code</param>
             <returns>Boolean</returns>
         </member>
@@ -1301,6 +1381,21 @@
         <member name="P:KonnectNow.WebAPI.Models.User.UserCommandModel.DeviceId">
             <summary>
             Device ID
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.User.VerificationCommandModel">
+            <summary>
+            VerificationCommandModel object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.VerificationCommandModel.MobileNo">
+            <summary>
+            User's Mobile Number
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.VerificationCommandModel.VerificationCode">
+            <summary>
+            Verification
             </summary>
         </member>
     </members>

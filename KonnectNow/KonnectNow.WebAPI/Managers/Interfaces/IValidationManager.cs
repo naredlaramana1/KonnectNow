@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KonnectNow.WebAPI.Models.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,27 +13,28 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
     /// </summary>
     public interface IValidationManager
     {
-        /// <summary>
-        /// Gets validation code based on the passed email
+       /// <summary>
+        /// Gets validation code based on the passed Mobile No
         /// </summary>
-        /// <param name="email">Email address</param>
+        /// <param name="mobileNo">Mobile No</param>
+        /// <param name="isDuplicate">Is Duplicate</param>
         /// <returns>Validation code</returns>
-        string GetValidationCode(string email);
+        string GetValidationCode(string mobileNo, out bool isDuplicate);
 
         /// <summary>
         /// Verifies the validation code
         /// </summary>
-        /// <param name="email">Email</param>
+        /// <param name="mobileNo">Mobile No</param>
         /// <param name="validationCode">Validation Code</param>
         /// <returns>Boolean</returns>
-        bool VerifyValidationCode(string email, string validationCode);
+        ModelManagerResult<bool> VerifyValidationCode(string mobileNo, string validationCode);
 
         /// <summary>
         /// Verifies the validation code
         /// </summary>
-        /// <param name="email">Email</param>
+        /// <param name="mobileNo">Mobile No</param>
         /// <param name="validationCode">Validation Code</param>
         /// <returns>Boolean</returns>
-        bool CheckValidationCode(string email, string validationCode);
+        ModelManagerResult<bool> CheckValidationCode(string mobileNo, string validationCode);
     }
 }

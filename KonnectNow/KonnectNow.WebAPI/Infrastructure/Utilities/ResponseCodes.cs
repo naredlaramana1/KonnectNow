@@ -91,6 +91,29 @@ namespace KonnectNow.WebAPI.Infrastructure.Utilities
         [HttpStatus(HttpStatusCode.Forbidden)]
         [Description("Country Dependency Exist.Cannot be deleted")]
         USER_COUNTRY_CANNOT_BE_DELETED = 4007,
+
+        /// <summary>
+        /// Verification already issued, please check message
+        /// </summary>
+        [HttpStatus(HttpStatusCode.BadRequest)]
+        [Description("Verification already issued, please check message")]
+        VERIFICATIONCODE_ALREADY_ACTIVE = 4008,
+
+
+        /// <summary>
+        /// Mobile already registered
+        /// </summary>
+        [HttpStatus(HttpStatusCode.BadRequest)]
+        [Description("Mobile already registered")]
+        MOBILE_ALREADY_REGISTERED = 4009,
+
+        /// <summary>
+        /// Verification code is either invalid or expired.
+        /// </summary>
+        [HttpStatus(HttpStatusCode.NotFound)]
+        [Description("Verification code is either invalid or expired.")]
+        VERIFICATION_CODE_NOTFOUND = 4010,
+
     }
 
 

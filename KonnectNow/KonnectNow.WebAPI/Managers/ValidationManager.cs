@@ -3,6 +3,7 @@ using KonnectNow.Repository.EF;
 using KonnectNow.Repository.Repositories.Interfaces;
 using KonnectNow.WebAPI.Infrastructure.Utilities;
 using KonnectNow.WebAPI.Managers.Interfaces;
+using KonnectNow.WebAPI.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,17 +29,20 @@ namespace KonnectNow.WebAPI.Managers
         }
 
         /// <summary>
-        /// Gets validation code based on the passed email
+        /// Gets validation code based on the passed Mobile No
         /// </summary>
         /// <param name="mobileNo">Mobile No</param>
+        /// <param name="isDuplicate">Is Duplicate</param>
         /// <returns>Validation code</returns>
-        public string GetValidationCode(string mobileNo)
+        public string GetValidationCode(string mobileNo,out bool isDuplicate)
         {
+            isDuplicate = false;
             //if active validation code exist throw an exception
             var item = _validationRepository.Get(e => e.MobileNo == mobileNo && e.StartDate >= DateTime.Now);
             if (item != null)
             {
-                //throw new ActiveValidationCodeExistException();
+                isDuplicate = true;
+                
             }
             string validationCode = RandomCodeGenerator.Instance.Generate();
 
@@ -52,13 +56,13 @@ namespace KonnectNow.WebAPI.Managers
         /// <summary>
         /// Verifies the validation code
         /// </summary>
-        /// <param name="email">Email</param>
+        /// <param name="mobileNo">MobileNo</param>
         /// <param name="validationCode">validation code</param>
         /// <returns>Boolean</returns>
         [UnitOfWork]
-        public bool VerifyValidationCode(string email, string validationCode)
+        public ModelManagerResult<bool> VerifyValidationCode(string mobileNo, string validationCode)
         {
-            return CheckValidationCode(email, validationCode);
+            return CheckValidationCode(mobileNo, validationCode);
         }
 
         /// <summary>
@@ -67,7 +71,7 @@ namespace KonnectNow.WebAPI.Managers
         /// <param name="mobileNo">MobileNo</param>
         /// <param name="validationCode">validation code</param>
         /// <returns>Boolean</returns>
-        public bool CheckValidationCode(string mobileNo, string validationCode)
+        public ModelManagerResult<bool> CheckValidationCode(string mobileNo, string validationCode)
         {
             Validation validation = _validationRepository.Get(e => e.ValidationCode == validationCode &&
                                                                  e.MobileNo== mobileNo &&
@@ -76,9 +80,9 @@ namespace KonnectNow.WebAPI.Managers
             {
                 validation.EndDate = DateTime.Now;
                 _validationRepository.Update(validation);
-                return true;
+                return GetManagerResult<bool>(ResponseCodes.OK);
             }
-            return false;
+            return GetManagerResult<bool>(ResponseCodes.VERIFICATION_CODE_NOTFOUND);
         }
     }
 

@@ -203,6 +203,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\KNBaseController.cs" />
     <Compile Include="Controllers\LookUpsController.cs" />
+    <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Filters\HandleApiExceptionFilter.cs" />
     <Compile Include="Filters\ValidationActionFilter.cs" />
     <Compile Include="Global.asax.cs">
@@ -234,6 +235,7 @@
     <Compile Include="Models\Lookup\UpdateCategoryCommandModel.cs" />
     <Compile Include="Models\Lookup\UpdateCountryCommandModel.cs" />
     <Compile Include="Models\User\UserCommandModel.cs" />
+    <Compile Include="Models\User\VerificationCommandModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
