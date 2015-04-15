@@ -371,6 +371,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\KonnectNow.Common\KonnectNow.Common.csproj">
+      <Project>{599361c1-ed46-4cf4-9e61-97aff9142e3a}</Project>
+      <Name>KonnectNow.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\KonnectNow.Entity\KonnectNow.Entity.csproj">
       <Project>{44888384-b4e2-4dd1-9f5e-76a024e9de58}</Project>
       <Name>KonnectNow.Entity</Name>

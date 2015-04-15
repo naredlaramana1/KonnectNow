@@ -271,3 +271,5 @@ D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\obj\Debug\Konn
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\obj\Debug\KonnectNow.WebAPI.pdb
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\log4net.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\log4net.xml
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\KonnectNow.Common.dll
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\KonnectNow.Common.pdb
