@@ -640,6 +640,16 @@
             HTTP Status = 400 - {Code = 4008, Message = Verification already issued, please check message}
             </returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.UsersController.UpdateUser(System.Int32,KonnectNow.WebAPI.Models.User.UpdateUserCommandModel)">
+            <summary>
+            Updates the user profile
+            </summary>
+            <param name="updateUserCommandModel">UpdateUserCommandModel Object</param>
+            <returns>
+            HTTP Status = 204,
+            HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
+            </returns>
+        </member>
         <member name="M:KonnectNow.WebAPI.Controllers.UsersController.Validate(KonnectNow.WebAPI.Models.User.VerificationCommandModel)">
             <summary>
             Verifies the verification code being sent to user mobile
@@ -647,7 +657,17 @@
             <param name="verificationCommandModel">VerificationCommandModel object</param>
             <returns>
              HTTP Status = 200 - {Ok},
-             HTTP Status = 404 - {Code = 40q0, Message = Verification code is either invalid or expired.},
+             HTTP Status = 404 - {Code = 4010, Message = Verification code is either invalid or expired.},
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.UsersController.ResendVerification(System.String)">
+            <summary>
+            Resends verification code being sent to user mobile
+            </summary>
+            <param name="mobileNo">Mobile No</param>
+            <returns>
+            HTTP Status = 200 - {Ok},
+            HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
             </returns>
         </member>
         <member name="T:KonnectNow.WebAPI.Filters.HandleApiExceptionFilter">
@@ -791,6 +811,16 @@
         <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.VERIFICATION_CODE_NOTFOUND">
             <summary>
             Verification code is either invalid or expired.
+            </summary>
+        </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.MOBILENO_NOT_FOUND">
+            <summary>
+            Mobile Not registered
+            </summary>
+        </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.INTERNAL_SEREVR_ERROR">
+            <summary>
+            An unexpected error occurred. Please contact administrator
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Infrastructure.Utilities.EnumManager">
@@ -985,6 +1015,11 @@
             <param name="countryId">Country Id</param>              
             <returns>ModelManagerResult(Boolean)</returns>
         </member>
+        <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IUserManager">
+            <summary>
+            This interface must be implemented by all user related business operations.
+            </summary>
+        </member>
         <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IUserManager.RegisterUser(KonnectNow.WebAPI.Models.User.UserCommandModel,System.String@)">
             <summary>
             Registers user in the konnect now system
@@ -1000,34 +1035,49 @@
             <param name="mobileNo">Mobile No</param>
              <param name="message">Message</param>
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IUserManager.UpdateUser(System.Int32,KonnectNow.WebAPI.Models.User.UpdateUserCommandModel)">
+            <summary>
+            updates user profile
+            </summary>
+            <param name="userId">UserId Object</param>
+            <param name="updateUserCommandModel">UpdateUserCommandModel Object</param>
+            <returns></returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager">
             <summary>
             Provides account validation related operations
             </summary>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.GetValidationCode(System.String,System.Boolean@)">
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.GetVerificationCode(System.String,System.Boolean@)">
             <summary>
-            Gets validation code based on the passed Mobile No
+            Gets verification code based on the passed Mobile No
             </summary>
             <param name="mobileNo">Mobile No</param>
             <param name="isDuplicate">Is Duplicate</param>
-            <returns>Validation code</returns>
+            <returns>VerificationCode</returns>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.VerifyValidationCode(System.String,System.String)">
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.VerifyVerificationCode(System.String,System.String)">
             <summary>
-            Verifies the validation code
+            Verifies the verification code
             </summary>
             <param name="mobileNo">Mobile No</param>
-            <param name="validationCode">Validation Code</param>
+            <param name="verificationCode">Verification Code</param>
             <returns>Boolean</returns>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.CheckValidationCode(System.String,System.String)">
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.CheckVerificationCode(System.String,System.String)">
             <summary>
-            Verifies the validation code
+            Verifies the verification code
             </summary>
             <param name="mobileNo">Mobile No</param>
-            <param name="validationCode">Validation Code</param>
+            <param name="verificationCode">Verification Code</param>
             <returns>Boolean</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.ResendVerificationCode(System.String)">
+            <summary>
+            Resends verification code to the passed Mobile No
+            </summary>
+            <param name="mobileNo">Mobile No</param>      
+            <returns>VerificationCode</returns>
         </member>
         <member name="T:KonnectNow.WebAPI.Managers.LookUpManager">
             <summary>
@@ -1125,7 +1175,16 @@
             <summary>
             Constructor for UserManager.
             </summary>
-            <param name="patientRepo">IUserRepository object</param>
+            <param name="userRepository">IUserRepository object</param>
+            <param name="validationManager">IValidationManager object</param>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.UserManager.UpdateUser(System.Int32,KonnectNow.WebAPI.Models.User.UpdateUserCommandModel)">
+            <summary>
+            updates user profile
+            </summary>
+            <param name="userId">UserId Object</param>
+            <param name="updateUserCommandModel">UpdateUserCommandModel Object</param>
+            <returns></returns>
         </member>
         <member name="M:KonnectNow.WebAPI.Managers.UserManager.RegisterUser(KonnectNow.WebAPI.Models.User.UserCommandModel,System.String@)">
             <summary>
@@ -1147,35 +1206,43 @@
              Provides account validation related operations
             </summary>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IValidationRepository)">
+        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IValidationRepository,KonnectNow.Repository.Repositories.Interfaces.IUserRepository)">
             <summary>
             Constructor
             </summary>
             <param name="validationRepository">IValidationRepository object</param>
+            <param name="userRepository">IUserRepository object</param>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.GetValidationCode(System.String,System.Boolean@)">
+        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.GetVerificationCode(System.String,System.Boolean@)">
             <summary>
-            Gets validation code based on the passed Mobile No
+            Gets verification code based on the passed Mobile No
             </summary>
             <param name="mobileNo">Mobile No</param>
             <param name="isDuplicate">Is Duplicate</param>
-            <returns>Validation code</returns>
+            <returns>VerificationCode</returns>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.VerifyValidationCode(System.String,System.String)">
+        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.VerifyVerificationCode(System.String,System.String)">
             <summary>
             Verifies the validation code
             </summary>
             <param name="mobileNo">MobileNo</param>
-            <param name="validationCode">validation code</param>
+            <param name="verificationCode">Verification Code</param>
             <returns>Boolean</returns>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.CheckValidationCode(System.String,System.String)">
+        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.CheckVerificationCode(System.String,System.String)">
             <summary>
-            Verifies the validation code
+            Verifies the verification code
             </summary>
             <param name="mobileNo">MobileNo</param>
-            <param name="validationCode">validation code</param>
+            <param name="verificationCode">Verification Code</param>
             <returns>Boolean</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.ResendVerificationCode(System.String)">
+            <summary>
+            Gets verification code based on the passed Mobile No
+            </summary>
+            <param name="mobileNo">Mobile No</param>      
+            <returns>VerificationCode</returns>
         </member>
         <member name="P:KonnectNow.WebAPI.Models.Common.KNErrorModel.Code">
             <summary>
@@ -1351,6 +1418,26 @@
         <member name="P:KonnectNow.WebAPI.Models.Lookup.UpdateCountryCommandModel.CountryName">
             <summary>
             Country Name
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.User.UpdateUserCommandModel">
+            <summary>
+            UpdateUserCommandModel Object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UpdateUserCommandModel.FirstName">
+            <summary>
+            User First Name
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UpdateUserCommandModel.LastName">
+            <summary>
+            User Last Name
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UpdateUserCommandModel.ProfilePic">
+            <summary>
+            Profile Pic
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.User.UserCommandModel">

@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KonnectNow.Repository", "Ko
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KonnectNow.WebAPI", "KonnectNow.WebAPI\KonnectNow.WebAPI.csproj", "{B12DF3EC-9524-4CCD-A419-8BF4E7587A4F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KonnectNow.Common", "KonnectNow.Common\KonnectNow.Common.csproj", "{599361C1-ED46-4CF4-9E61-97AFF9142E3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{B12DF3EC-9524-4CCD-A419-8BF4E7587A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B12DF3EC-9524-4CCD-A419-8BF4E7587A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B12DF3EC-9524-4CCD-A419-8BF4E7587A4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{599361C1-ED46-4CF4-9E61-97AFF9142E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{599361C1-ED46-4CF4-9E61-97AFF9142E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{599361C1-ED46-4CF4-9E61-97AFF9142E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{599361C1-ED46-4CF4-9E61-97AFF9142E3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

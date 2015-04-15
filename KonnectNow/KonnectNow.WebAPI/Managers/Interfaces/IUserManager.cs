@@ -8,9 +8,12 @@ using System.Threading.Tasks;
 
 namespace KonnectNow.WebAPI.Managers.Interfaces
 {
-    public  interface IUserManager
+    /// <summary>
+    /// This interface must be implemented by all user related business operations.
+    /// </summary>
+    public interface IUserManager
     {
-         /// <summary>
+        /// <summary>
         /// Registers user in the konnect now system
         /// </summary>
         /// <param name="userCommandModel">UserCommandModel Object</param>
@@ -24,5 +27,13 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <param name="mobileNo">Mobile No</param>
         ///  <param name="message">Message</param>
         void SendVerificationCode(string mobileNo, string message);
+
+        /// <summary>
+        /// updates user profile
+        /// </summary>
+        /// <param name="userId">UserId Object</param>
+        /// <param name="updateUserCommandModel">UpdateUserCommandModel Object</param>
+        /// <returns></returns>
+        ModelManagerResult<bool> UpdateUser(int userId, UpdateUserCommandModel updateUserCommandModel);
     }
 }

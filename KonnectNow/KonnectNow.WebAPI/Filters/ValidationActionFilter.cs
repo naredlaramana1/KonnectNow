@@ -3,6 +3,8 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using System.Net.Http;
 using System.Text;
+using KonnectNow.WebAPI.Infrastructure.Utilities;
+using KonnectNow.WebAPI.Models.Common;
 
 
 namespace KonnectNow.WebAPI.Filters
@@ -38,10 +40,16 @@ namespace KonnectNow.WebAPI.Filters
 
                 string errors = errorParameters.ToString().Substring(0, errorParameters.Length - 1);
 
-                //var serviceResponse = ServiceResponse.Instance.BuildResponse(ResponseCodes.INVALID_MISSING_INPUTS);
-                //serviceResponse.Message = ResponseCodes.INVALID_MISSING_INPUTS + " " + errors;
+                var peErrorResponse = new KNErrorModel
+                {
+                    Code = (int)ResponseCodes.INVALID_MISSING_INPUTS,
+                    Message = EnumManager.Instance.GetDescription<ResponseCodes>(ResponseCodes.INVALID_MISSING_INPUTS)
+                };
 
-                actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.BadRequest);
+                var serviceResponse = peErrorResponse;
+                serviceResponse.Message = serviceResponse.Message + " " + errors;
+
+                actionContext.Response = actionContext.Request.CreateResponse(HttpStatusCode.BadRequest, serviceResponse);
             }
         }
     } 

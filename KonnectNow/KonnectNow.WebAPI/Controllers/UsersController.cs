@@ -53,22 +53,65 @@ namespace KonnectNow.WebAPI.Controllers
             return BuildErrorResponse(result.Status);
 
         }
+
+        /// <summary>
+        /// Updates the user profile
+        /// </summary>
+        /// <param name="updateUserCommandModel">UpdateUserCommandModel Object</param>
+        /// <returns>
+        /// HTTP Status = 204,
+        /// HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
+        /// </returns>
+        [HttpPut]
+        [Route("Users/Register/{userId}")]
+        [ResponseType(typeof(bool))]
+        public HttpResponseMessage UpdateUser(int userId, UpdateUserCommandModel updateUserCommandModel)
+        {
+            var result = _userManager.UpdateUser(userId, updateUserCommandModel);
+            if (result.Status == ResponseCodes.OK)
+                return BuildSuccessResponse(HttpStatusCode.NoContent);
+            return BuildErrorResponse(result.Status);
+
+        }
+
         /// <summary>
         /// Verifies the verification code being sent to user mobile
         /// </summary>
         /// <param name="verificationCommandModel">VerificationCommandModel object</param>
         /// <returns>
         ///  HTTP Status = 200 - {Ok},
-        ///  HTTP Status = 404 - {Code = 40q0, Message = Verification code is either invalid or expired.},
+        ///  HTTP Status = 404 - {Code = 4010, Message = Verification code is either invalid or expired.},
         /// </returns>
         [HttpPost]
-        [Route("Users/Validate")]
+        [Route("Users/Verification")]
         public HttpResponseMessage Validate(VerificationCommandModel verificationCommandModel)
         {
-            var result = _validationManager.VerifyValidationCode(verificationCommandModel.MobileNo, verificationCommandModel.VerificationCode);
+            var result = _validationManager.VerifyVerificationCode(verificationCommandModel.MobileNo, verificationCommandModel.VerificationCode);
             if (result.Status == ResponseCodes.OK)
             {
                 
+                return BuildSuccessResponse(HttpStatusCode.OK);
+            }
+            return BuildErrorResponse(result.Status);
+        }
+
+        /// <summary>
+        /// Resends verification code being sent to user mobile
+        /// </summary>
+        /// <param name="mobileNo">Mobile No</param>
+        /// <returns>
+        /// HTTP Status = 200 - {Ok},
+        /// HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
+        /// </returns>
+        [HttpPost]
+        [Route("Users/Verification/{mobileNo}")]
+        public HttpResponseMessage ResendVerification(string mobileNo)
+        {
+            var result = _validationManager.ResendVerificationCode(mobileNo);
+            if (result.Status == ResponseCodes.OK)
+            {
+
+                _userManager.SendVerificationCode(mobileNo, result.Value);
                 return BuildSuccessResponse(HttpStatusCode.OK);
             }
             return BuildErrorResponse(result.Status);

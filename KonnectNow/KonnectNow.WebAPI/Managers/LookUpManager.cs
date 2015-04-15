@@ -216,7 +216,7 @@ namespace KonnectNow.WebAPI.Managers
             var country = _countryRepository.Get(x => x.CountryId == countryId).FirstOrDefault();
             if (country == null)
                 return GetManagerResult<bool>(ResponseCodes.COUNTRY_NOT_FOUND);
-            var query = _userRepository.Get(x => x.Country_Id == countryId).FirstOrDefault();
+            var query = _userRepository.Get(x => x.CountryId == countryId).FirstOrDefault();
             if (query == null)
                 return GetManagerResult<bool>(ResponseCodes.USER_COUNTRY_CANNOT_BE_DELETED);
 

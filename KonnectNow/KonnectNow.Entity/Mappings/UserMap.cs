@@ -13,19 +13,19 @@ namespace KonnectNow.Entity.Mappings
        public UserMap()
         {
 
-            this.Property(e => e.User_Id)
+            this.Property(e => e.UserId)
                 .HasPrecision(18, 0);
 
-            this.Property(e => e.Mobile_No)
+            this.Property(e => e.MobileNo)
                 .IsUnicode(false);
 
-           this.Property(e => e.Device_Id)
+           this.Property(e => e.DeviceId)
                 .IsUnicode(false);
 
-            this.Property(e => e.Country_Id)
+            this.Property(e => e.CountryId)
                 .HasPrecision(18, 0);
 
-            this.Property(e => e.Map_Details)
+            this.Property(e => e.MapDetails)
                 .IsUnicode(false);
 
            this.HasMany(e => e.Messages)
@@ -41,6 +41,18 @@ namespace KonnectNow.Entity.Mappings
             this.HasMany(e => e.Queries)
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
+            this.Property(t => t.UserId).HasColumnName("UserId");
+            this.Property(t => t.FirstName).HasColumnName("First_Name ");
+            this.Property(t => t.LastName).HasColumnName("Last_Name");
+            this.Property(t => t.MobileNo).HasColumnName("Mobile_No");
+            this.Property(t => t.DeviceId).HasColumnName("Device_Id");
+            this.Property(t => t.CountryId).HasColumnName("Country_Id");
+            this.Property(t => t.MapDetails).HasColumnName("Map_Details");
+            this.Property(t => t.ProfilePic).HasColumnName("Profile_Pic");
+            this.Property(t => t.CreatedOn).HasColumnName("Created_On");
+            this.Property(t => t.ModifiedOn).HasColumnName("Modified_On");
+           
+
         }
     }
 }

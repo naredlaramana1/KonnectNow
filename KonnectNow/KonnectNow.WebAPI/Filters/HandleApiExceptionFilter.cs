@@ -1,9 +1,13 @@
-﻿using System;
+﻿using KonnectNow.WebAPI.Infrastructure.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http.Filters;
-
+using System.Web.Http.Filters;
+using System.Net.Http;
+using System.Net;
+using KonnectNow.WebAPI.Models.Common;
 namespace KonnectNow.WebAPI.Filters
 {
     /// <summary>
@@ -18,10 +22,15 @@ namespace KonnectNow.WebAPI.Filters
         public override void OnException(HttpActionExecutedContext context)
         {
 
+             var peErrorResponse = new KNErrorModel
+            {
+                Code = (int)ResponseCodes.INTERNAL_SEREVR_ERROR,
+                Message = EnumManager.Instance.GetDescription<ResponseCodes>(ResponseCodes.INTERNAL_SEREVR_ERROR)
+            };
 
-            //context.Response = context.ActionContext.Request.CreateResponse(HttpStatusCode.InternalServerError
-            //                                                               , ServiceResponse.Instance.BuildResponse(ResponseCodes.INTERNAL_SEREVR_ERROR)
-            //                                                               );
+             context.Response = context.ActionContext.Request.CreateResponse(HttpStatusCode.InternalServerError
+                                                                           , peErrorResponse
+                                                                           );                                                   
         }
     }
 }

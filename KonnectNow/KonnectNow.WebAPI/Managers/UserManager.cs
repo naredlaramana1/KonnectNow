@@ -25,8 +25,8 @@ namespace KonnectNow.WebAPI.Managers
         /// <summary>
         /// Constructor for UserManager.
         /// </summary>
-        /// <param name="patientRepo">IUserRepository object</param>
-
+        /// <param name="userRepository">IUserRepository object</param>
+        /// <param name="validationManager">IValidationManager object</param>
         public UserManager(IUserRepository userRepository, IValidationManager validationManager)
         {
             _userRepository = userRepository;
@@ -34,17 +34,27 @@ namespace KonnectNow.WebAPI.Managers
 
         }
 
-        //public ModelManagerResult<UserListViewModel> GetUsers()
-        //{
-        //    var objUser = _userRepository.Get();
-        //    var userListViewModel = new UserListViewModel
-        //    {
-        //        Users = Mapper.Map<IEnumerable<User>, IList<UserViewModel>>(objUser)
-        //    };
-        //    return GetManagerResult(ResponseCodes.OK, userListViewModel);
+        /// <summary>
+        /// updates user profile
+        /// </summary>
+        /// <param name="userId">UserId Object</param>
+        /// <param name="updateUserCommandModel">UpdateUserCommandModel Object</param>
+       /// <returns></returns>
+        [UnitOfWork]
+        public ModelManagerResult<bool> UpdateUser(int userId,UpdateUserCommandModel updateUserCommandModel)
+        {
+            var user=_userRepository.GetByID(userId);
+            if(user==null)
+                return GetManagerResult<bool>(ResponseCodes.MOBILENO_NOT_FOUND);
 
+            user.FirstName = updateUserCommandModel.FirstName;
+            user.LastName = updateUserCommandModel.LastName;
+            user.ProfilePic = updateUserCommandModel.ProfilePic;
+           _userRepository.Update(user);
+            return GetManagerResult(ResponseCodes.OK, true);
+        }
 
-        //}
+       
         /// <summary>
         /// Registers user in the konnect now system
         /// </summary>
@@ -55,7 +65,7 @@ namespace KonnectNow.WebAPI.Managers
         public ModelManagerResult<CreateUserViewModel> RegisterUser(UserCommandModel userCommandModel,out string validationCode)
         {
             validationCode = string.Empty;
-            var useMobile = _userRepository.Get(x => x.Mobile_No == userCommandModel.MobileNo).FirstOrDefault();
+            var useMobile = _userRepository.Get(x => x.MobileNo == userCommandModel.MobileNo).FirstOrDefault();
             if (useMobile!=null)
                 return GetManagerResult<CreateUserViewModel>(ResponseCodes.MOBILE_ALREADY_REGISTERED);
             
@@ -65,7 +75,7 @@ namespace KonnectNow.WebAPI.Managers
             if (a.UserId > 0)
             {
                 bool isDuplicate = false;
-                validationCode = _validationManager.GetValidationCode(userCommandModel.MobileNo, out isDuplicate);
+                validationCode = _validationManager.GetVerificationCode(userCommandModel.MobileNo, out isDuplicate);
                 if (isDuplicate)
                 {
                     return GetManagerResult<CreateUserViewModel>(ResponseCodes.VERIFICATIONCODE_ALREADY_ACTIVE);

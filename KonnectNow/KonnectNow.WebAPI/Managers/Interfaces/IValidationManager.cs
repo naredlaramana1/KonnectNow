@@ -14,27 +14,34 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
     public interface IValidationManager
     {
        /// <summary>
-        /// Gets validation code based on the passed Mobile No
+        /// Gets verification code based on the passed Mobile No
         /// </summary>
         /// <param name="mobileNo">Mobile No</param>
         /// <param name="isDuplicate">Is Duplicate</param>
-        /// <returns>Validation code</returns>
-        string GetValidationCode(string mobileNo, out bool isDuplicate);
+        /// <returns>VerificationCode</returns>
+        string GetVerificationCode(string mobileNo, out bool isDuplicate);
 
         /// <summary>
-        /// Verifies the validation code
+        /// Verifies the verification code
         /// </summary>
         /// <param name="mobileNo">Mobile No</param>
-        /// <param name="validationCode">Validation Code</param>
+        /// <param name="verificationCode">Verification Code</param>
         /// <returns>Boolean</returns>
-        ModelManagerResult<bool> VerifyValidationCode(string mobileNo, string validationCode);
+        ModelManagerResult<bool> VerifyVerificationCode(string mobileNo, string verificationCode);
 
         /// <summary>
-        /// Verifies the validation code
+        /// Verifies the verification code
         /// </summary>
         /// <param name="mobileNo">Mobile No</param>
-        /// <param name="validationCode">Validation Code</param>
+        /// <param name="verificationCode">Verification Code</param>
         /// <returns>Boolean</returns>
-        ModelManagerResult<bool> CheckValidationCode(string mobileNo, string validationCode);
+        ModelManagerResult<bool> CheckVerificationCode(string mobileNo, string verificationCode);
+
+        /// <summary>
+        /// Resends verification code to the passed Mobile No
+        /// </summary>
+        /// <param name="mobileNo">Mobile No</param>      
+        /// <returns>VerificationCode</returns>
+        ModelManagerResult<string> ResendVerificationCode(string mobileNo);
     }
 }

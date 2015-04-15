@@ -20,30 +20,30 @@ namespace KonnectNow.Entity.Entities
         [Key]
         [Column(TypeName = "numeric")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public decimal User_Id { get; set; }
+        public decimal UserId { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string First_Name { get; set; }
+        public string FirstName { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string Last_Name { get; set; }
+        public string LastName { get; set; }
 
         [Required]
         [StringLength(20)]
-        public string Mobile_No { get; set; }
+        public string MobileNo { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string Device_Id { get; set; }
+        public string DeviceId { get; set; }
 
         [Column(TypeName = "numeric")]
-        public decimal Country_Id { get; set; }
+        public decimal CountryId { get; set; }
 
-        public string Map_Details { get; set; }
+        public string MapDetails { get; set; }
 
-        public byte[] Profile_Pic { get; set; }
+        public byte[] ProfilePic { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? CreatedOn { get; set; }

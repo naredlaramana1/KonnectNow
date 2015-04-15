@@ -114,6 +114,19 @@ namespace KonnectNow.WebAPI.Infrastructure.Utilities
         [Description("Verification code is either invalid or expired.")]
         VERIFICATION_CODE_NOTFOUND = 4010,
 
+        /// <summary>
+        /// Mobile Not registered
+        /// </summary>
+        [HttpStatus(HttpStatusCode.NotFound)]
+        [Description("Mobile Not registered")]
+        MOBILENO_NOT_FOUND = 4011,
+
+        /// <summary>
+        /// An unexpected error occurred. Please contact administrator
+        /// </summary>
+        [HttpStatus(HttpStatusCode.InternalServerError)]
+        [Description("An unexpected error occurred. Please contact administrator")]
+        INTERNAL_SEREVR_ERROR = 5000
     }
 
 
