@@ -41,7 +41,7 @@ namespace KonnectNow.Entity.Mappings
             this.HasMany(e => e.Queries)
                 .WithRequired(e => e.User)
                 .WillCascadeOnDelete(false);
-            this.Property(t => t.UserId).HasColumnName("UserId");
+            this.Property(t => t.UserId).HasColumnName("User_Id");
             this.Property(t => t.FirstName).HasColumnName("First_Name ");
             this.Property(t => t.LastName).HasColumnName("Last_Name");
             this.Property(t => t.MobileNo).HasColumnName("Mobile_No");

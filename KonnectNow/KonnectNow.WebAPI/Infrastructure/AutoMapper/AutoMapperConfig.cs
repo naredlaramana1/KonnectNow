@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using KonnectNow.Entity.Entities;
 using KonnectNow.WebAPI.Models.Lookup;
+using KonnectNow.WebAPI.Models.User;
 
 namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
 {
@@ -25,6 +26,9 @@ namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
             Mapper.CreateMap<CategoryCommandModel, Category>();
             Mapper.CreateMap<Country, CountriesViewModel>();
             Mapper.CreateMap<CreateCountryCommandModel, Country>();
+            Mapper.CreateMap<Country, CountryViewModel>();
+            Mapper.CreateMap<UserCommandModel, User>();
+            Mapper.CreateMap<User, UserViewModel>();
             
 
         }

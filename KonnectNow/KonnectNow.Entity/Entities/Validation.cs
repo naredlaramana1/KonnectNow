@@ -6,29 +6,26 @@ namespace KonnectNow.Entity.Entities
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Validation_Code")]
+    [Table("Validation")]
     public partial class Validation
     {
+
         [Key]
-        [Column(Order = 0)]
+        [Column(TypeName = "numeric")]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public decimal ValidationId { get; set; }
+
+        [Required]
         [StringLength(20)]
         public string MobileNo { get; set; }
 
-        public string DeviceId { get; set; }
-
-        [Key]
-        [Column("Validation_Code", Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Required]
         public string ValidationCode { get; set; }
 
-
-
-        [Key]
-        [Column(Order = 2)]
+        [Required]
         public DateTime StartDate { get; set; }
 
-        [Key]
-        [Column(Order = 3)]
+        [Required]
         public DateTime EndDate { get; set; }
     }
 }

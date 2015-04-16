@@ -12,9 +12,11 @@ namespace KonnectNow.Entity.Mappings
     {
         public ValidationMap()
         {
+            this.Property(e => e.ValidationId)
+               .HasPrecision(18, 0);
             this.Property(e => e.MobileNo)
                        .IsUnicode(false);
-
+            this.Property(t => t.ValidationId).HasColumnName("Validation_Id");
             this.Property(t => t.MobileNo).HasColumnName("Mobile_No");
             this.Property(t => t.StartDate).HasColumnName("Start_Date");
             this.Property(t => t.EndDate).HasColumnName("End_Date");

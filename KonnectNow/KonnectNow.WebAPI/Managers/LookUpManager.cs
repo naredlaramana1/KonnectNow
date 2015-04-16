@@ -213,11 +213,11 @@ namespace KonnectNow.WebAPI.Managers
         [UnitOfWork]
         public ModelManagerResult<bool> DeleteCountry(int countryId)
         {
-            var country = _countryRepository.Get(x => x.CountryId == countryId).FirstOrDefault();
+            var country = _countryRepository.GetByID(countryId);
             if (country == null)
                 return GetManagerResult<bool>(ResponseCodes.COUNTRY_NOT_FOUND);
             var query = _userRepository.Get(x => x.CountryId == countryId).FirstOrDefault();
-            if (query == null)
+            if (query != null)
                 return GetManagerResult<bool>(ResponseCodes.USER_COUNTRY_CANNOT_BE_DELETED);
 
             //Delete record from country

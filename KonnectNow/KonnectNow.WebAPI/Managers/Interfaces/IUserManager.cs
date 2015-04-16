@@ -35,5 +35,12 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <param name="updateUserCommandModel">UpdateUserCommandModel Object</param>
         /// <returns></returns>
         ModelManagerResult<bool> UpdateUser(int userId, UpdateUserCommandModel updateUserCommandModel);
+
+           /// <summary>
+        /// Returns user profile based on mobile number
+        /// </summary>
+        /// <param name="mobileNo"Mobile No></param>
+        /// <returns></returns>
+        ModelManagerResult<UserViewModel> GetUserByMobileNo(string mobileNo);
     }
 }

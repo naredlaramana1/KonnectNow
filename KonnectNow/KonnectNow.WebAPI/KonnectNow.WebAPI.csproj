@@ -239,6 +239,7 @@
     <Compile Include="Models\Lookup\UpdateCountryCommandModel.cs" />
     <Compile Include="Models\User\UpdateUserCommandModel.cs" />
     <Compile Include="Models\User\UserCommandModel.cs" />
+    <Compile Include="Models\User\UserViewModel.cs" />
     <Compile Include="Models\User\VerificationCommandModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

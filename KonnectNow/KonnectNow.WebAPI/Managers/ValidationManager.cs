@@ -40,17 +40,18 @@ namespace KonnectNow.WebAPI.Managers
         {
             isDuplicate = false;
             //if active validation code exist throw an exception
-            var item = _validationRepository.Get(e => e.MobileNo == mobileNo && e.StartDate >= DateTime.Now);
+            var item = _validationRepository.Get(e => e.MobileNo == mobileNo && e.StartDate >= DateTime.Now).FirstOrDefault();
             if (item != null)
             {
                 isDuplicate = true;
+                return string.Empty;
                 
             }
             string verificationCode = RandomCodeGenerator.Instance.Generate();
 
             var validation = new Validation { ValidationCode = verificationCode, MobileNo = mobileNo, StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(Convert.ToDouble(1)) };
-            if (_validationRepository.Insert(validation) <= 0)
-                verificationCode = string.Empty;
+             if(_validationRepository.Insert(validation)==null)         
+             verificationCode = string.Empty;
 
             return verificationCode;
         }
@@ -75,7 +76,7 @@ namespace KonnectNow.WebAPI.Managers
         /// <returns>Boolean</returns>
         public ModelManagerResult<bool> CheckVerificationCode(string mobileNo, string verificationCode)
         {
-            Validation validation = _validationRepository.Get(e => e.ValidationCode == verificationCode &&
+            var validation = _validationRepository.Get(e => e.ValidationCode == verificationCode &&
                                                                  e.MobileNo== mobileNo &&
                                                                  e.EndDate >= DateTime.Now).FirstOrDefault();
             if (validation != null)
@@ -104,20 +105,17 @@ namespace KonnectNow.WebAPI.Managers
             string verificationCode = RandomCodeGenerator.Instance.Generate();
             if (validation != null)
             {
-                validation.ValidationCode = verificationCode;
+               validation.ValidationCode = verificationCode;
                validation.StartDate = DateTime.Now;
                validation.EndDate = DateTime.Now.AddDays(Convert.ToDouble(1));
+               _validationRepository.Update(validation);
 
             }
             else
             {
                 validation = new Validation { ValidationCode = verificationCode, MobileNo = mobileNo, StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(Convert.ToDouble(1)) };
+                _validationRepository.Insert(validation);
             }
-           
-
-            
-            if (_validationRepository.Insert(validation) <= 0)
-                verificationCode = string.Empty;
 
             return GetManagerResult<string>(ResponseCodes.OK, verificationCode);
         }

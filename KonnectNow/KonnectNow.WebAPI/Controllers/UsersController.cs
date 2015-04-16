@@ -30,12 +30,13 @@ namespace KonnectNow.WebAPI.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Register's a new user
         /// </summary>
         /// <param name="userCommandModel"></param>
         /// <returns>
-        /// HTTP Status = 201 - {UserId},
+        /// HTTP Status = 201,
         /// HTTP Status = 400 - {Code = 4009, Message = Mobile already registered},
+        /// HTTP Status = 404 - {Code = 4006, Message = Country not found}
         /// HTTP Status = 400 - {Code = 4008, Message = Verification already issued, please check message}
         /// </returns>
         [HttpPost]
@@ -47,8 +48,8 @@ namespace KonnectNow.WebAPI.Controllers
             var result = _userManager.RegisterUser(userCommandModel, out validationCode);
             if (result.Status == ResponseCodes.OK)
             {
-                _userManager.SendVerificationCode(userCommandModel.MobileNo, validationCode);
-                return BuildSuccessResponse(HttpStatusCode.NoContent);
+                //_userManager.SendVerificationCode(userCommandModel.MobileNo, validationCode);
+                return BuildSuccessResponse(HttpStatusCode.Created);
             }
             return BuildErrorResponse(result.Status);
 
@@ -75,7 +76,30 @@ namespace KonnectNow.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Verifies the verification code being sent to user mobile
+        /// Returns user profile details for given mobile no.
+        /// </summary>
+        /// <param name="mobileNo">Mobile No</param>
+        /// <returns> 
+        ///  HTTP Status = 200 {UserViewModel}
+        /// HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
+        /// </returns>
+        [HttpGet]
+        [Route("User/Register/{mobileNo}/Profile")]
+        [ResponseType(typeof(UserViewModel))]
+        public HttpResponseMessage GetUserByMobileNo(string mobileNo)
+        {
+            var result = _userManager.GetUserByMobileNo(mobileNo);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
+        /// <summary>
+        /// Verifies the verification code for user
         /// </summary>
         /// <param name="verificationCommandModel">VerificationCommandModel object</param>
         /// <returns>

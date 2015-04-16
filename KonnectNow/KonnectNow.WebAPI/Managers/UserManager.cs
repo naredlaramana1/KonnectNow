@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Linq;
+using System;
 
 namespace KonnectNow.WebAPI.Managers
 {
@@ -21,16 +22,18 @@ namespace KonnectNow.WebAPI.Managers
     {
         private readonly IUserRepository _userRepository;
         private readonly IValidationManager _validationManager;
-
+        private readonly ICountryRepository _countryRepository;
         /// <summary>
         /// Constructor for UserManager.
         /// </summary>
         /// <param name="userRepository">IUserRepository object</param>
         /// <param name="validationManager">IValidationManager object</param>
-        public UserManager(IUserRepository userRepository, IValidationManager validationManager)
+        /// <param name="countryRepository">ICountryRepository object</param>
+        public UserManager(IUserRepository userRepository, IValidationManager validationManager, ICountryRepository countryRepository)
         {
             _userRepository = userRepository;
             _validationManager = validationManager;
+            _countryRepository = countryRepository;
 
         }
 
@@ -68,7 +71,8 @@ namespace KonnectNow.WebAPI.Managers
             var useMobile = _userRepository.Get(x => x.MobileNo == userCommandModel.MobileNo).FirstOrDefault();
             if (useMobile!=null)
                 return GetManagerResult<CreateUserViewModel>(ResponseCodes.MOBILE_ALREADY_REGISTERED);
-            
+            if(_countryRepository.GetByID(userCommandModel.CountryId)==null)
+                return GetManagerResult<CreateUserViewModel>(ResponseCodes.COUNTRY_NOT_FOUND);
             var user = Mapper.Map<UserCommandModel, User>(userCommandModel);           
             var a = _userRepository.Insert(user);
 
@@ -80,9 +84,25 @@ namespace KonnectNow.WebAPI.Managers
                 {
                     return GetManagerResult<CreateUserViewModel>(ResponseCodes.VERIFICATIONCODE_ALREADY_ACTIVE);
                 }
+                
             }
-            return GetManagerResult(ResponseCodes.OK, new CreateUserViewModel { UserId = a.UserId });
+            return GetManagerResult(ResponseCodes.OK, new CreateUserViewModel { UserId =Convert.ToInt64(a.UserId) });
             
+        }
+
+        /// <summary>
+        /// Returns user profile based on mobile number
+        /// </summary>
+        /// <param name="mobileNo"Mobile No></param>
+        /// <returns></returns>
+        public ModelManagerResult<UserViewModel> GetUserByMobileNo(string mobileNo)
+        {
+             var useMobile = _userRepository.Get(x => x.MobileNo == mobileNo).FirstOrDefault();
+             if (useMobile == null)
+                 return GetManagerResult<UserViewModel>(ResponseCodes.MOBILENO_NOT_FOUND);
+             else
+                 return GetManagerResult<UserViewModel>(ResponseCodes.OK, Mapper.Map<User, UserViewModel>(useMobile));
+
         }
 
         /// <summary>
