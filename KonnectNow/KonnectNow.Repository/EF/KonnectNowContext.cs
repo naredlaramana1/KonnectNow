@@ -22,8 +22,8 @@ namespace KonnectNow.Repository.EF
         public virtual DbSet<Query> Queries { get; set; }
         public virtual DbSet<State> States { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Validation> Validation_Code { get; set; }
-
+        public virtual DbSet<Validation> Validations { get; set; }
+        public virtual DbSet<Seller> Sellers { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new CategoryMap());
@@ -33,7 +33,8 @@ namespace KonnectNow.Repository.EF
             modelBuilder.Configurations.Add(new StateMap());
             modelBuilder.Configurations.Add(new ValidationMap());
             modelBuilder.Configurations.Add(new UserMap());
-
+            modelBuilder.Configurations.Add(new SellerMap());
+            
             modelBuilder.Entity<Message>()
                 .Property(e => e.Message_Id)
                 .HasPrecision(18, 0);

@@ -73,6 +73,7 @@
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\CityRepository.cs" />
     <Compile Include="Repositories\Interfaces\IQueryRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ISellerRepository.cs" />
     <Compile Include="Repositories\Interfaces\IStateRepository.cs" />
     <Compile Include="Repositories\Interfaces\IValidationRepository.cs" />
     <Compile Include="Repositories\LocationRepository.cs" />
@@ -83,6 +84,7 @@
     <Compile Include="Repositories\Interfaces\ILocationRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
     <Compile Include="Repositories\QueryRepository.cs" />
+    <Compile Include="Repositories\SellerRepository.cs" />
     <Compile Include="Repositories\StateRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\ValidationRepository.cs" />

@@ -58,13 +58,14 @@ namespace KonnectNow.WebAPI.Controllers
         /// <summary>
         /// Updates the user profile
         /// </summary>
+        /// <param name="userId">User Id</param>
         /// <param name="updateUserCommandModel">UpdateUserCommandModel Object</param>
         /// <returns>
         /// HTTP Status = 204,
         /// HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
         /// </returns>
         [HttpPut]
-        [Route("Users/Register/{userId}")]
+        [Route("Users/{userId}/Register")]
         [ResponseType(typeof(bool))]
         public HttpResponseMessage UpdateUser(int userId, UpdateUserCommandModel updateUserCommandModel)
         {
@@ -128,7 +129,7 @@ namespace KonnectNow.WebAPI.Controllers
         /// HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
         /// </returns>
         [HttpPost]
-        [Route("Users/Verification/{mobileNo}")]
+        [Route("Users/{mobileNo}/Verification")]
         public HttpResponseMessage ResendVerification(string mobileNo)
         {
             var result = _validationManager.ResendVerificationCode(mobileNo);
@@ -139,6 +140,51 @@ namespace KonnectNow.WebAPI.Controllers
                 return BuildSuccessResponse(HttpStatusCode.OK);
             }
             return BuildErrorResponse(result.Status);
+        }
+
+        /// <summary>
+        /// Updates the user profile
+        /// </summary>
+        /// <param name="userId">User Id</param>
+        /// <param name="sellerProfileCommandModel">SellerProfileCommandModel Object</param>
+        /// <returns>
+        /// HTTP Status = 200,
+        /// HTTP Status = 404 - {Code = 4012, Message = User not avialable},
+        /// </returns>
+        [HttpPost]
+        [Route("Users/{userId}/Seller")]
+        [ResponseType(typeof(bool))]
+        public HttpResponseMessage SellerProfile(long userId, SellerProfileCommandModel sellerProfileCommandModel)
+        {
+            var result = _userManager.SellerProfile(userId, sellerProfileCommandModel);
+            if (result.Status == ResponseCodes.OK)
+                return BuildSuccessResponse(HttpStatusCode.OK);
+            return BuildErrorResponse(result.Status);
+
+        }
+
+
+        /// <summary>
+        /// Returns seller profile details for given userId
+        /// </summary>
+        /// <param name="userId">userId</param>
+        /// <returns> 
+        ///  HTTP Status = 200 {SellerViewModel}
+        /// HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
+        /// </returns>
+        [HttpGet]
+        [Route("Users/{userId}/Seller")]
+        [ResponseType(typeof(SellerViewModel))]
+        public HttpResponseMessage GetSellerInfo(long userId)
+        {
+            var result = _userManager.GetSellerProfile(userId);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+            }
+            return BuildErrorResponse(result.Status);
+
         }
     }
 }

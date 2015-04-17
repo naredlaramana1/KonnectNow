@@ -42,5 +42,20 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <param name="mobileNo"Mobile No></param>
         /// <returns></returns>
         ModelManagerResult<UserViewModel> GetUserByMobileNo(string mobileNo);
+
+         /// <summary>
+        /// Modifies the seller profile 
+        /// </summary>
+        /// <param name="userId">User Id</param>
+        /// <param name="sellerProfileCommandModel">SellerProfileCommandModel Object</param>        
+        /// <returns></returns>        
+        ModelManagerResult<bool> SellerProfile(long userId, SellerProfileCommandModel sellerProfileCommandModel);
+
+                /// <summary>
+        /// Returns seller profile details for given userId
+        /// </summary>
+        /// <param name="userId">Usr Id</param>
+        /// <returns></returns>
+        ModelManagerResult<SellerViewModel> GetSellerProfile(long userId);
     }
 }

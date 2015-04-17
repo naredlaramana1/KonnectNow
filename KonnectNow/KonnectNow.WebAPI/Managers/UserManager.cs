@@ -12,6 +12,7 @@ using System.Net;
 using System.Net.Http;
 using System.Linq;
 using System;
+using KonnectNow.Common.Logging;
 
 namespace KonnectNow.WebAPI.Managers
 {
@@ -23,17 +24,22 @@ namespace KonnectNow.WebAPI.Managers
         private readonly IUserRepository _userRepository;
         private readonly IValidationManager _validationManager;
         private readonly ICountryRepository _countryRepository;
+        private readonly ISellerRepository _sellerRepository;
         /// <summary>
         /// Constructor for UserManager.
         /// </summary>
         /// <param name="userRepository">IUserRepository object</param>
         /// <param name="validationManager">IValidationManager object</param>
         /// <param name="countryRepository">ICountryRepository object</param>
-        public UserManager(IUserRepository userRepository, IValidationManager validationManager, ICountryRepository countryRepository)
+        public UserManager(IUserRepository userRepository,
+                           IValidationManager validationManager, 
+                           ICountryRepository countryRepository, 
+                           ISellerRepository sellerRepository)
         {
             _userRepository = userRepository;
             _validationManager = validationManager;
             _countryRepository = countryRepository;
+            _sellerRepository = sellerRepository;
 
         }
 
@@ -115,6 +121,69 @@ namespace KonnectNow.WebAPI.Managers
             string url = string.Format("http://www.jst.smsmobile.co.in/index.php/api/get-balance?username=Skathuroju&password=Weblabs@123&from=9912064674&to={0}&message={1}&sms_type=2", mobileNo, message);
             var request = (HttpWebRequest)WebRequest.Create(url);
             var response = request.GetResponse();
+        }
+
+
+        /// <summary>
+        /// Modifies the seller profile 
+        /// </summary>
+        /// <param name="userId">User Id</param>
+        /// <param name="sellerProfileCommandModel">SellerProfileCommandModel Object</param>        
+        /// <returns></returns>
+        [UnitOfWork]
+        public ModelManagerResult<bool> SellerProfile(long userId, SellerProfileCommandModel sellerProfileCommandModel)
+        {
+            if (_userRepository.GetByID(userId) == null)
+                return GetManagerResult<bool>(ResponseCodes.USER_NOT_FOUND);
+            var seller = _sellerRepository.Get(x => x.UserId == userId).FirstOrDefault();
+            if (seller != null)
+            {
+                seller = Mapper.Map<SellerProfileCommandModel, Seller>(sellerProfileCommandModel);
+                seller.EmailId= sellerProfileCommandModel.AutoReponse;
+                seller.AutoReponse=sellerProfileCommandModel.CompanyName;
+                seller.Description=sellerProfileCommandModel.Description;
+                seller.EmailId = sellerProfileCommandModel.EmailId;
+                seller.UserId = userId;
+                seller.KeyWords = sellerProfileCommandModel.KeyWords;
+                seller.LocationPoint = sellerProfileCommandModel.LocationPoint;
+                seller.PanCardNo = sellerProfileCommandModel.PanCardNo;
+                seller.PhoneNumber = sellerProfileCommandModel.PhoneNumber;
+                seller.ResponseStatus = sellerProfileCommandModel.ResponseStatus;
+                seller.WebsiteUrl = sellerProfileCommandModel.WebsiteUrl;
+                seller.ModifiedOn = null;
+                _sellerRepository.Update(seller);
+            }
+            else
+            {
+                seller= Mapper.Map<SellerProfileCommandModel, Seller>(sellerProfileCommandModel);
+                seller.UserId = userId;
+                _sellerRepository.Insert(seller);
+            }
+            return GetManagerResult<bool>(ResponseCodes.OK, true);
+           
+
+        }
+
+        /// <summary>
+        /// Returns seller profile details for given userId
+        /// </summary>
+        /// <param name="userId">Usr Id</param>
+        /// <returns></returns>
+        public ModelManagerResult<SellerViewModel> GetSellerProfile(long userId)
+        {
+
+           
+            if (_userRepository.GetByID(userId) == null)
+                return GetManagerResult<SellerViewModel>(ResponseCodes.USER_NOT_FOUND);
+            var seller = _sellerRepository.Get(x => x.UserId == userId).FirstOrDefault();
+            if (seller != null)
+            {
+                return GetManagerResult<SellerViewModel>(ResponseCodes.OK, Mapper.Map<Seller, SellerViewModel>(seller));                
+            }
+else
+                return GetManagerResult<SellerViewModel>(ResponseCodes.OK, new SellerViewModel());
+
+
         }
     }
 }

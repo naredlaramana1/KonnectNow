@@ -122,6 +122,13 @@ namespace KonnectNow.WebAPI.Infrastructure.Utilities
         MOBILENO_NOT_FOUND = 4011,
 
         /// <summary>
+        /// User not avialable
+        /// </summary>
+        [HttpStatus(HttpStatusCode.NotFound)]
+        [Description("User not avialable")]
+        USER_NOT_FOUND = 4012,
+
+        /// <summary>
         /// An unexpected error occurred. Please contact administrator
         /// </summary>
         [HttpStatus(HttpStatusCode.InternalServerError)]

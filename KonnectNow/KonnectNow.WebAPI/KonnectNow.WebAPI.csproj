@@ -212,6 +212,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\LoggingHandler.cs" />
     <Compile Include="Infrastructure\AutoMapper\AutoMapperConfig.cs" />
     <Compile Include="Infrastructure\Utilities\RandomCodeGenerator.cs" />
     <Compile Include="Infrastructure\Utilities\ResponseCodes.cs" />
@@ -237,6 +238,8 @@
     <Compile Include="Models\Lookup\CreateCountryViewModel.cs" />
     <Compile Include="Models\Lookup\UpdateCategoryCommandModel.cs" />
     <Compile Include="Models\Lookup\UpdateCountryCommandModel.cs" />
+    <Compile Include="Models\User\SellerProfileCommandModel.cs" />
+    <Compile Include="Models\User\SellerViewModel.cs" />
     <Compile Include="Models\User\UpdateUserCommandModel.cs" />
     <Compile Include="Models\User\UserCommandModel.cs" />
     <Compile Include="Models\User\UserViewModel.cs" />

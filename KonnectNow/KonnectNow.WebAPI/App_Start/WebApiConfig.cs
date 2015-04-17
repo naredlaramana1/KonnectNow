@@ -1,4 +1,5 @@
 ﻿using KonnectNow.WebAPI.Filters;
+using KonnectNow.WebAPI.Handlers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,10 @@ namespace KonnectNow.WebAPI
             config.MapHttpAttributeRoutes();
             config.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
 
-
+            GlobalConfiguration.Configuration.MessageHandlers.Add(new LoggingHandler());
             config.Filters.Add(new ValidationActionFilter());
             config.Filters.Add(new HandleApiExceptionFilter());
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "{controller}/{id}",

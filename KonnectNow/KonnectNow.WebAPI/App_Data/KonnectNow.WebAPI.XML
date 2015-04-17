@@ -645,6 +645,7 @@
             <summary>
             Updates the user profile
             </summary>
+            <param name="userId">User Id</param>
             <param name="updateUserCommandModel">UpdateUserCommandModel Object</param>
             <returns>
             HTTP Status = 204,
@@ -681,6 +682,27 @@
             HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
             </returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.UsersController.SellerProfile(System.Int64,KonnectNow.WebAPI.Models.User.SellerProfileCommandModel)">
+            <summary>
+            Updates the user profile
+            </summary>
+            <param name="userId">User Id</param>
+            <param name="sellerProfileCommandModel">SellerProfileCommandModel Object</param>
+            <returns>
+            HTTP Status = 200,
+            HTTP Status = 404 - {Code = 4012, Message = User not avialable},
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.UsersController.GetSellerInfo(System.Int64)">
+            <summary>
+            Returns seller profile details for given userId
+            </summary>
+            <param name="userId">userId</param>
+            <returns> 
+             HTTP Status = 200 {SellerViewModel}
+            HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
+            </returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Filters.HandleApiExceptionFilter">
             <summary>
              Handles all exceptions
@@ -702,6 +724,31 @@
             Process all request validation in current context
             </summary>
             <param name="actionContext">HttpActionContext object</param>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Handlers.LoggingHandler">
+            <summary>
+            Handles  all exceptions and trace logging.
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Handlers.LoggingHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Logs the request persist information
+            </summary>
+            <param name="request">request object</param>
+            <param name="cancellationToken">cancel token object</param>
+            <returns>HttpResponseMessag object</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Handlers.LoggingHandler.LogRequestLoggingInfo(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Logs the request  information.
+            </summary>
+            <param name="request">HttpRequestMessage object</param>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Handlers.LoggingHandler.LogResponseLoggingInfo(System.Net.Http.HttpResponseMessage)">
+            <summary>
+            Logs the response  information
+            </summary>
+            <param name="response">HttpRequestMessage object</param>
         </member>
         <member name="T:KonnectNow.WebAPI.Infrastructure.AutoMapper.AutoMapperConfig">
             <summary>
@@ -827,6 +874,11 @@
         <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.MOBILENO_NOT_FOUND">
             <summary>
             Mobile Not registered
+            </summary>
+        </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.USER_NOT_FOUND">
+            <summary>
+            User not avialable
             </summary>
         </member>
         <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.INTERNAL_SEREVR_ERROR">
@@ -1055,6 +1107,21 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:KonnectNow.WebAPI.Managers.Interfaces.IUserManager.GetUserByMobileNo(System.String)" -->
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IUserManager.SellerProfile(System.Int64,KonnectNow.WebAPI.Models.User.SellerProfileCommandModel)">
+            <summary>
+            Modifies the seller profile 
+            </summary>
+            <param name="userId">User Id</param>
+            <param name="sellerProfileCommandModel">SellerProfileCommandModel Object</param>        
+            <returns></returns>        
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IUserManager.GetSellerProfile(System.Int64)">
+            <summary>
+            Returns seller profile details for given userId
+            </summary>
+            <param name="userId">Usr Id</param>
+            <returns></returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager">
             <summary>
             Provides account validation related operations
@@ -1183,7 +1250,7 @@
             Manages user account related operations
             </summary>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.UserManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IUserRepository,KonnectNow.WebAPI.Managers.Interfaces.IValidationManager,KonnectNow.Repository.Repositories.Interfaces.ICountryRepository)">
+        <member name="M:KonnectNow.WebAPI.Managers.UserManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IUserRepository,KonnectNow.WebAPI.Managers.Interfaces.IValidationManager,KonnectNow.Repository.Repositories.Interfaces.ICountryRepository,KonnectNow.Repository.Repositories.Interfaces.ISellerRepository)">
             <summary>
             Constructor for UserManager.
             </summary>
@@ -1214,6 +1281,21 @@
             </summary>
             <param name="mobileNo">Mobile No</param>
              <param name="message">Message</param>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.UserManager.SellerProfile(System.Int64,KonnectNow.WebAPI.Models.User.SellerProfileCommandModel)">
+            <summary>
+            Modifies the seller profile 
+            </summary>
+            <param name="userId">User Id</param>
+            <param name="sellerProfileCommandModel">SellerProfileCommandModel Object</param>        
+            <returns></returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.UserManager.GetSellerProfile(System.Int64)">
+            <summary>
+            Returns seller profile details for given userId
+            </summary>
+            <param name="userId">Usr Id</param>
+            <returns></returns>
         </member>
         <member name="T:KonnectNow.WebAPI.Managers.ValidationManager">
             <summary>
@@ -1432,6 +1514,116 @@
         <member name="P:KonnectNow.WebAPI.Models.Lookup.UpdateCountryCommandModel.CountryName">
             <summary>
             Country Name
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel">
+            <summary>
+            SellerProfileCommandModel 
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.CompanyName">
+            <summary>
+            Name of the company
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.PhoneNumber">
+            <summary>
+            Phone number of the company
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.EmailId">
+            <summary>
+            EmailId of the company
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.WebsiteUrl">
+            <summary>
+            Company Website URL 
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.LocationPoint">
+            <summary>
+            Location point of the company
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.PanCardNo">
+             <summary>
+            Company  Pancard Number
+             </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.Description">
+             <summary>
+            Company Description
+             </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.AutoReponse">
+            <summary>
+            Auro Response
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.ResponseStatus">
+            <summary>
+            Response Status
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.KeyWords">
+            <summary>
+            Keywords
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.User.SellerViewModel">
+            <summary>
+            SellerViewModel Obejct 
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.CompanyName">
+            <summary>
+            Name of the company
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.PhoneNumber">
+            <summary>
+            Phone number of the company
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.EmailId">
+            <summary>
+            EmailId of the company
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.WebsiteUrl">
+            <summary>
+            Company Website URL 
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.LocationPoint">
+            <summary>
+            Location point of the company
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.PanCardNo">
+             <summary>
+            Company  Pancard Number
+             </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.Description">
+             <summary>
+            Company Description
+             </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.AutoReponse">
+            <summary>
+            Auro Response
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.ResponseStatus">
+            <summary>
+            Response Status
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.KeyWords">
+            <summary>
+            Keywords
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.User.UpdateUserCommandModel">
