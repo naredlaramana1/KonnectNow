@@ -41,7 +41,9 @@ namespace KonnectNow.Entity.Entities
         [Column(TypeName = "numeric")]
         public decimal CountryId { get; set; }
 
-        public string MapDetails { get; set; }
+        public double Longitude { get; set; }
+
+        public double Latitude { get; set; }
 
         public byte[] ProfilePic { get; set; }
 

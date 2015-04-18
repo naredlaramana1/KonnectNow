@@ -25,10 +25,7 @@ namespace KonnectNow.Entity.Mappings
             this.Property(e => e.CountryId)
                 .HasPrecision(18, 0);
 
-            this.Property(e => e.MapDetails)
-                .IsUnicode(false);
-
-           this.HasMany(e => e.Messages)
+                     this.HasMany(e => e.Messages)
                 .WithRequired(e => e.User)
                 .HasForeignKey(e => e.To_User_Id)
                 .WillCascadeOnDelete(false);
@@ -46,12 +43,12 @@ namespace KonnectNow.Entity.Mappings
             this.Property(t => t.LastName).HasColumnName("Last_Name");
             this.Property(t => t.MobileNo).HasColumnName("Mobile_No");
             this.Property(t => t.DeviceId).HasColumnName("Device_Id");
-            this.Property(t => t.CountryId).HasColumnName("Country_Id");
-            this.Property(t => t.MapDetails).HasColumnName("Map_Details");
+            this.Property(t => t.CountryId).HasColumnName("Country_Id");            
             this.Property(t => t.ProfilePic).HasColumnName("Profile_Pic");
             this.Property(t => t.CreatedOn).HasColumnName("Created_On");
             this.Property(t => t.ModifiedOn).HasColumnName("Modified_On");
-           
+            this.Property(t => t.Longitude).HasColumnName("Longitude");
+            this.Property(t => t.Latitude).HasColumnName("Latitude");
 
         }
     }
