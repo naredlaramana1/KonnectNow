@@ -13,6 +13,7 @@ using System.Net.Http;
 using System.Linq;
 using System;
 using KonnectNow.Common.Logging;
+using System.Configuration;
 
 namespace KonnectNow.WebAPI.Managers
 {
@@ -118,9 +119,10 @@ namespace KonnectNow.WebAPI.Managers
         ///  <param name="message">Message</param>
         public void SendVerificationCode(string mobileNo,string message)
         {
-            string url = string.Format("http://www.jst.smsmobile.co.in/index.php/api/get-balance?username=Skathuroju&password=Weblabs@123&from=9912064674&to={0}&message={1}&sms_type=2", mobileNo, message);
+           string smsUrl=ConfigurationManager.AppSettings["SMSURL"].ToString();
+           string url = string.Format(smsUrl, mobileNo, "Please use the code "+message+" to verify your account.");
             var request = (HttpWebRequest)WebRequest.Create(url);
-            var response = request.GetResponse();
+             request.GetResponse();
         }
 
 

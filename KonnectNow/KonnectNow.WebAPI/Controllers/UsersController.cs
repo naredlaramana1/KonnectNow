@@ -48,7 +48,7 @@ namespace KonnectNow.WebAPI.Controllers
             var result = _userManager.RegisterUser(userCommandModel, out validationCode);
             if (result.Status == ResponseCodes.OK)
             {
-                //_userManager.SendVerificationCode(userCommandModel.MobileNo, validationCode);
+                _userManager.SendVerificationCode(userCommandModel.MobileNo, validationCode);
                 return BuildSuccessResponse(HttpStatusCode.Created);
             }
             return BuildErrorResponse(result.Status);
