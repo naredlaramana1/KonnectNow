@@ -127,7 +127,7 @@ namespace KonnectNow.WebAPI.Managers
         [UnitOfWork]
         public ModelManagerResult<bool> DeleteCategory(int categoryId)
         {
-            //Find patient with patient id
+         
             var category = _categoryRepository.Get(x => x.CatId == categoryId).FirstOrDefault();
             if (category == null)
                 return GetManagerResult<bool>(ResponseCodes.CATEGORY_NOT_FOUND);

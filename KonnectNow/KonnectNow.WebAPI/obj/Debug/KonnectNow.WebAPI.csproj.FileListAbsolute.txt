@@ -186,8 +186,10 @@ D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\Antlr3.Run
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\AutoMapper.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\EntityFramework.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\EntityFramework.SqlServer.dll
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\KonnectNow.Common.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\KonnectNow.Entity.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\KonnectNow.Repository.dll
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\log4net.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\Microsoft.Data.Edm.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\Microsoft.Data.OData.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\Microsoft.Practices.Unity.Configuration.dll
@@ -212,6 +214,7 @@ D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\System.Web
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\System.Web.WebPages.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\System.Web.WebPages.Razor.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\WebGrease.dll
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\KonnectNow.Common.pdb
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\KonnectNow.Entity.pdb
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\KonnectNow.Repository.pdb
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\AutoMapper.pdb
@@ -219,6 +222,7 @@ D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\AutoMapper
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\AutoMapper.Net4.pdb
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\EntityFramework.xml
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\EntityFramework.SqlServer.xml
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\log4net.xml
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\Microsoft.Practices.Unity.xml
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\Microsoft.Practices.Unity.Configuration.xml
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\Microsoft.Practices.Unity.Interception.xml
@@ -269,7 +273,3 @@ D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\zh-Hant\Sy
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\obj\Debug\KonnectNow.WebAPI.csprojResolveAssemblyReference.cache
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\obj\Debug\KonnectNow.WebAPI.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\obj\Debug\KonnectNow.WebAPI.pdb
-D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\log4net.dll
-D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\log4net.xml
-D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\KonnectNow.Common.dll
-D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\KonnectNow.Common.pdb

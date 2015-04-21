@@ -37,13 +37,16 @@ namespace KonnectNow.WebAPI.Controllers
         [ResponseType(typeof(IEnumerable<CategoriesViewModel>))]
         public HttpResponseMessage GetCategories()
         {
-            var result = _lookUpManager.GetCategories();
+           
+                var result = _lookUpManager.GetCategories();               
+                if (result.Status == ResponseCodes.OK)
+                {
+                    return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+                }
+                return BuildErrorResponse(result.Status);
+           
+          
 
-            if (result.Status == ResponseCodes.OK)
-            {
-                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
-            }
-            return BuildErrorResponse(result.Status);
 
         }
 
