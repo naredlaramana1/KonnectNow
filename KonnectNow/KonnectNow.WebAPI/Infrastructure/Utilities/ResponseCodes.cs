@@ -129,6 +129,13 @@ namespace KonnectNow.WebAPI.Infrastructure.Utilities
         USER_NOT_FOUND = 4012,
 
         /// <summary>
+        /// City not found
+        /// </summary>
+        [HttpStatus(HttpStatusCode.NotFound)]
+        [Description("City not found")]
+        CITY_NOT_FOUND = 4013,
+
+        /// <summary>
         /// An unexpected error occurred. Please contact administrator
         /// </summary>
         [HttpStatus(HttpStatusCode.InternalServerError)]

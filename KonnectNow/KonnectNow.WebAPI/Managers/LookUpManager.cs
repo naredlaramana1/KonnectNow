@@ -227,5 +227,56 @@ namespace KonnectNow.WebAPI.Managers
         }
 
 
+        /// <summary>
+        /// Returns list of  Cities
+        /// </summary>
+        /// <returns>ModelManagerResult(IEnumerable(CitiesViewModel))</returns>
+        public ModelManagerResult<IEnumerable<CitiesViewModel>> GetCities()
+        {
+            var cities = _cityRepository.Get();
+            return GetManagerResult<IEnumerable<CitiesViewModel>>(ResponseCodes.OK,
+                                                                          Mapper.Map<IEnumerable<City>, IEnumerable<CitiesViewModel>>(cities));
+        }
+
+        /// <summary>
+        /// Returns list of  locations
+        /// </summary>
+        /// <returns>ModelManagerResult(IEnumerable(LocationsViewModel))</returns>
+        public ModelManagerResult<IEnumerable<LocationsViewModel>> GetLocations()
+        {
+            var locations = _locationRepository.Get();
+            return GetManagerResult<IEnumerable<LocationsViewModel>>(ResponseCodes.OK,
+                                                                          Mapper.Map<IEnumerable<Location>, IEnumerable<LocationsViewModel>>(locations));
+        }
+
+        /// <summary>
+        ///  Returns all Locations for a given city
+        /// </summary>
+        /// <param name="cityId">City Id</param>
+        /// <returns>ModelManagerResult(IEnumerable(LocationsViewModel))</returns>
+        public ModelManagerResult<IEnumerable<LocationsViewModel>> GetLocationsByCity(int cityId)
+        {
+
+            if (_cityRepository.GetByID(cityId) == null)
+                return GetManagerResult<IEnumerable<LocationsViewModel>>(ResponseCodes.CITY_NOT_FOUND);
+            var locations = _locationRepository.Get(x => x.CityId == cityId);
+            return GetManagerResult<IEnumerable<LocationsViewModel>>(ResponseCodes.OK,
+                                                                          Mapper.Map<IEnumerable<Location>, IEnumerable<LocationsViewModel>>(locations));
+        }
+
+
+        /// <summary>
+        ///  Returns  Location for a given longitude,latitude
+        /// </summary>
+        /// <param name="latitude">Latitude</param>
+        /// <param name="longitude">Longitude</param>
+        /// <returns>ModelManagerResult(LocationViewModel)</returns>
+        public ModelManagerResult<LocationViewModel> GetLocationsByGeography(double latitude, double longitude)
+        {
+            var location = _locationRepository.Get(x => x.Latitude == latitude && x.Longitude == longitude).FirstOrDefault();
+            return GetManagerResult<LocationViewModel>(ResponseCodes.OK,
+                                                                          Mapper.Map<Location, LocationViewModel>(location));
+        }
+
     }
 }

@@ -19,7 +19,7 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <returns>ModelManagerResult(IEnumerable(CategoriesViewModel))</returns>
         ModelManagerResult<IEnumerable<CategoriesViewModel>> GetCategories();
 
-         /// <summary>
+        /// <summary>
         /// Returns category details
         /// </summary>
         /// <param name="categoryId">CategoryId</param>
@@ -60,7 +60,7 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <param name="countryId">CountryId</param>
         /// <returns>ModelManagerResult(CountryViewModel)</returns>
         ModelManagerResult<CountryViewModel> GetCountry(int countryId);
-        
+
         /// <summary>
         /// Creates a country
         /// </summary>    
@@ -76,11 +76,39 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <returns>true or false</returns>
         ModelManagerResult<bool> UpdateCountry(int countryId, UpdateCountryCommandModel updateCountryCommandModel);
 
-          /// <summary>
+        /// <summary>
         /// Removes country
         /// </summary>
         /// <param name="countryId">Country Id</param>              
         /// <returns>ModelManagerResult(Boolean)</returns>
         ModelManagerResult<bool> DeleteCountry(int countryId);
+
+        /// <summary>
+        /// Returns list of  Cities
+        /// </summary>
+        /// <returns>ModelManagerResult(IEnumerable(CitiesViewModel))</returns>
+        ModelManagerResult<IEnumerable<CitiesViewModel>> GetCities();
+
+        /// <summary>
+        /// Returns list of  locations
+        /// </summary>
+        /// <returns>ModelManagerResult(IEnumerable(LocationsViewModel))</returns>
+        ModelManagerResult<IEnumerable<LocationsViewModel>> GetLocations();
+
+
+        /// <summary>
+        ///  Returns all Locations for a given city
+        /// </summary>
+        /// <param name="cityId">City Id</param>
+        /// <returns>ModelManagerResult(IEnumerable(LocationsViewModel))</returns>
+        ModelManagerResult<IEnumerable<LocationsViewModel>> GetLocationsByCity(int cityId);
+
+        /// <summary>
+        ///  Returns  Location for a given longitude,latitude
+        /// </summary>
+        /// <param name="latitude">Latitude</param>
+        /// <param name="longitude">Longitude</param>
+        /// <returns>ModelManagerResult(LocationViewModel)</returns>
+        ModelManagerResult<LocationViewModel> GetLocationsByGeography(double latitude, double longitude);
     }
 }

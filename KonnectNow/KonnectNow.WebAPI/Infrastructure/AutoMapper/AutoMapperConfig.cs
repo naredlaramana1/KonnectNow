@@ -31,7 +31,9 @@ namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
             Mapper.CreateMap<User, UserViewModel>();
             Mapper.CreateMap<SellerProfileCommandModel, Seller>();
             Mapper.CreateMap<Seller,SellerViewModel>();
-
+            Mapper.CreateMap<City, CitiesViewModel>();
+            Mapper.CreateMap<Location, LocationsViewModel>();
+            Mapper.CreateMap<Location, LocationViewModel>();
         }
     }
 }

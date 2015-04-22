@@ -594,7 +594,7 @@
             HTTP Status = 400 - {Code = 4005, Message = Country already exist}
             </returns>
         </member>
-        <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.UpdateCountryy(System.Int32,KonnectNow.WebAPI.Models.Lookup.UpdateCountryCommandModel)">
+        <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.UpdateCountry(System.Int32,KonnectNow.WebAPI.Models.Lookup.UpdateCountryCommandModel)">
             <summary>
             Updates the country
             </summary>
@@ -616,6 +616,36 @@
             HTTP Status = 404 - {Code = 4006, Message = Country not found}
             HTTP Status = 403 - {Code = 4007, Message = Country Dependency Exist.Cannot be deleted}
             </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.GetCities">
+            <summary>
+            Returns all cities
+            </summary>
+            <returns> HTTP Status = 200 {CitiesViewModel}</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.GetLocations">
+            <summary>
+            Returns all Locations
+            </summary>
+            <param name="cityId">City Id</param>
+            <returns> HTTP Status = 200 {LocationsViewModel}</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.GetLocationsByCity(System.Int32)">
+            <summary>
+            Returns all Locations for a given city
+            </summary>
+            <returns>
+            HTTP Status = 200 {LocationsViewModel}
+            HTTP Status = 404 - {Code = 4013, Message =  City not found}
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.LookUpsController.GetLocationsByGeography(System.Double,System.Double)">
+            <summary>
+            Returns  Location for a given latitude,longitude
+            </summary>
+            <param name="latitude">Latitude</param>
+            <param name="longitude">Longitude</param>
+            <returns> HTTP Status = 200 {LocationViewModel}</returns>
         </member>
         <member name="T:KonnectNow.WebAPI.Controllers.UsersController">
             <summary>
@@ -881,6 +911,11 @@
             User not avialable
             </summary>
         </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.CITY_NOT_FOUND">
+            <summary>
+            City not found
+            </summary>
+        </member>
         <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.INTERNAL_SEREVR_ERROR">
             <summary>
             An unexpected error occurred. Please contact administrator
@@ -1078,6 +1113,33 @@
             <param name="countryId">Country Id</param>              
             <returns>ModelManagerResult(Boolean)</returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.ILookUpManager.GetCities">
+            <summary>
+            Returns list of  Cities
+            </summary>
+            <returns>ModelManagerResult(IEnumerable(CitiesViewModel))</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.ILookUpManager.GetLocations">
+            <summary>
+            Returns list of  locations
+            </summary>
+            <returns>ModelManagerResult(IEnumerable(LocationsViewModel))</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.ILookUpManager.GetLocationsByCity(System.Int32)">
+            <summary>
+             Returns all Locations for a given city
+            </summary>
+            <param name="cityId">City Id</param>
+            <returns>ModelManagerResult(IEnumerable(LocationsViewModel))</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.ILookUpManager.GetLocationsByGeography(System.Double,System.Double)">
+            <summary>
+             Returns  Location for a given longitude,latitude
+            </summary>
+            <param name="latitude">Latitude</param>
+            <param name="longitude">Longitude</param>
+            <returns>ModelManagerResult(LocationViewModel)</returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IUserManager">
             <summary>
             This interface must be implemented by all user related business operations.
@@ -1245,6 +1307,33 @@
             <param name="countryId">Country Id</param>              
             <returns>ModelManagerResult(Boolean)</returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.GetCities">
+            <summary>
+            Returns list of  Cities
+            </summary>
+            <returns>ModelManagerResult(IEnumerable(CitiesViewModel))</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.GetLocations">
+            <summary>
+            Returns list of  locations
+            </summary>
+            <returns>ModelManagerResult(IEnumerable(LocationsViewModel))</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.GetLocationsByCity(System.Int32)">
+            <summary>
+             Returns all Locations for a given city
+            </summary>
+            <param name="cityId">City Id</param>
+            <returns>ModelManagerResult(IEnumerable(LocationsViewModel))</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.LookUpManager.GetLocationsByGeography(System.Double,System.Double)">
+            <summary>
+             Returns  Location for a given longitude,latitude
+            </summary>
+            <param name="latitude">Latitude</param>
+            <param name="longitude">Longitude</param>
+            <returns>ModelManagerResult(LocationViewModel)</returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.UserManager">
             <summary>
             Manages user account related operations
@@ -1364,6 +1453,51 @@
         <member name="P:KonnectNow.WebAPI.Models.Common.ModelManagerResult`1.Value">
             <summary>
             Result value
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Lookup.CitiesViewModel">
+            <summary>
+            Cities View Model
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CitiesViewModel.CityId">
+            <summary>
+            City Id
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.CitiesViewModel.CityName">
+            <summary>
+            City Name
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Lookup.LocationsViewModel">
+            <summary>
+            LocationsViewModel
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.LocationsViewModel.LocationId">
+            <summary>
+            Location Id
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.LocationsViewModel.LocationName">
+            <summary>
+            Location Name
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Lookup.LocationViewModel">
+            <summary>
+            LocationViewModel object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.LocationViewModel.LocationId">
+            <summary>
+            Location Id
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Lookup.LocationViewModel.LocationName">
+            <summary>
+            Location Name
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.User.CreateUserViewModel">

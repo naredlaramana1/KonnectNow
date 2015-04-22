@@ -27,6 +27,8 @@ namespace KonnectNow.Entity.Mappings
           this.Property(t => t.IsActive).HasColumnName("Is_Active");
           this.Property(t => t.CreatedOn).HasColumnName("Created_On");
           this.Property(t => t.ModifiedOn).HasColumnName("Modified_On");
+          this.Property(t => t.Longitude).HasColumnName("Longitude");
+          this.Property(t => t.Latitude).HasColumnName("Latitude");
           this.HasMany(e => e.Queries)
               .WithRequired(e => e.Location)
               .WillCascadeOnDelete(false);

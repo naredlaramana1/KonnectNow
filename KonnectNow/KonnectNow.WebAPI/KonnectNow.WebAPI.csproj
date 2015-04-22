@@ -231,6 +231,9 @@
     <Compile Include="Managers\ValidationManager.cs" />
     <Compile Include="Models\Common\KNErrorModel.cs" />
     <Compile Include="Models\Common\ModelManagerResult.cs" />
+    <Compile Include="Models\Lookup\CitiesViewModel.cs" />
+    <Compile Include="Models\Lookup\LocationsViewModel.cs" />
+    <Compile Include="Models\Lookup\LocationViewModel.cs" />
     <Compile Include="Models\User\CreateUserViewModel.cs" />
     <Compile Include="Models\Lookup\CategoryCommandModel.cs" />
     <Compile Include="Models\Lookup\CategoriesViewModel.cs" />
@@ -307,6 +310,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="DBScripts\dbscripts.sql" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Areas\HelpPage\Views\Web.config" />
