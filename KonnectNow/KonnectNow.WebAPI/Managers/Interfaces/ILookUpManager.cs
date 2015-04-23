@@ -110,5 +110,14 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <param name="longitude">Longitude</param>
         /// <returns>ModelManagerResult(LocationViewModel)</returns>
         ModelManagerResult<LocationViewModel> GetLocationsByGeography(double latitude, double longitude);
+
+
+        
+        /// <summary>
+        ///  Returns  Location latitude,longitude for given location
+        /// </summary>
+        /// <param name="locationId">Location Id</param>
+        /// <returns>ModelManagerResult(LocationGeographyViewModel)</returns>
+        ModelManagerResult<LocationGeographyViewModel> GetLocationsGeographyById(int locationId);
     }
 }

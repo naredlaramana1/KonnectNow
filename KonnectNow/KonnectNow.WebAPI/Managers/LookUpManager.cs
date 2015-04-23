@@ -278,5 +278,21 @@ namespace KonnectNow.WebAPI.Managers
                                                                           Mapper.Map<Location, LocationViewModel>(location));
         }
 
+
+        /// <summary>
+        ///  Returns  Location latitude,longitude for given location
+        /// </summary>
+        /// <param name="locationId">Location Id</param>
+        /// <returns>ModelManagerResult(LocationGeographyViewModel)</returns>
+        public ModelManagerResult<LocationGeographyViewModel> GetLocationsGeographyById(int locationId)
+        {
+            var location = _locationRepository.GetByID(locationId);
+            if (location == null)
+                return GetManagerResult<LocationGeographyViewModel>(ResponseCodes.LOCATION_NOT_FOUND);
+             
+            return GetManagerResult<LocationGeographyViewModel>(ResponseCodes.OK,
+                                                                          Mapper.Map<Location, LocationGeographyViewModel> (location));
+        }
+
     }
 }

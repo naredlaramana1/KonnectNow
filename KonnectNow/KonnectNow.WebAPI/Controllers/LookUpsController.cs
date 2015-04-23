@@ -343,5 +343,30 @@ namespace KonnectNow.WebAPI.Controllers
 
         }
 
+
+
+        /// <summary>
+        /// Returns  Location latitude,longitude for given location
+        /// </summary>
+        /// <param name="locationId">Location Id</param>
+        /// <returns> 
+        /// HTTP Status = 200 {LocationGeographyViewModel}
+        /// HTTP Status = 404 - {Code = 4014, Message =  location not found}
+        /// </returns>
+        [HttpGet]
+        [Route("LookUps/Locations/{locationId}/Geography")]
+        [ResponseType(typeof(LocationGeographyViewModel))]
+        public HttpResponseMessage GetLocationsGeographyById(int locationId)
+        {
+            var result = _lookUpManager.GetLocationsGeographyById(locationId);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
     }
 }

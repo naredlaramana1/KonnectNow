@@ -232,6 +232,7 @@
     <Compile Include="Models\Common\KNErrorModel.cs" />
     <Compile Include="Models\Common\ModelManagerResult.cs" />
     <Compile Include="Models\Lookup\CitiesViewModel.cs" />
+    <Compile Include="Models\Lookup\LocationGeographyViewModel.cs" />
     <Compile Include="Models\Lookup\LocationsViewModel.cs" />
     <Compile Include="Models\Lookup\LocationViewModel.cs" />
     <Compile Include="Models\User\CreateUserViewModel.cs" />

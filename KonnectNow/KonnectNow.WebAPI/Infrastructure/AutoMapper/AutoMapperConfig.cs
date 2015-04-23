@@ -34,6 +34,7 @@ namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
             Mapper.CreateMap<City, CitiesViewModel>();
             Mapper.CreateMap<Location, LocationsViewModel>();
             Mapper.CreateMap<Location, LocationViewModel>();
+            Mapper.CreateMap<Location, LocationGeographyViewModel>();
         }
     }
 }
