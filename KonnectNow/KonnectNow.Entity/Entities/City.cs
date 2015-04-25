@@ -29,6 +29,10 @@ namespace KonnectNow.Entity.Entities
 
         public bool IsActive { get; set; }
 
+        public double Longitude { get; set; }
+
+        public double Latitude { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? CreatedOn { get; set; }
 

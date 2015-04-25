@@ -74,7 +74,7 @@ namespace KonnectNow.WebAPI.Infrastructure.Utilities
         /// Category already exist
         /// </summary>
         [HttpStatus(HttpStatusCode.BadRequest)]
-        [Description("Country alredy exists")]
+        [Description("Country already exists")]
         COUNTRY_ALREADY_EXIST = 4005,
 
         /// <summary>
@@ -139,8 +139,23 @@ namespace KonnectNow.WebAPI.Infrastructure.Utilities
         /// location not found
         /// </summary>
         [HttpStatus(HttpStatusCode.NotFound)]
-        [Description("City not found")]
+        [Description("Location not found")]
         LOCATION_NOT_FOUND = 4014,
+
+
+        /// <summary>
+        /// Category already exist
+        /// </summary>
+        [HttpStatus(HttpStatusCode.BadRequest)]
+        [Description("City already exists")]
+        CITY_ALREADY_EXIST = 4015,
+
+        /// <summary>
+        /// Category already exist
+        /// </summary>
+        [HttpStatus(HttpStatusCode.BadRequest)]
+        [Description("Location already exists")]
+        LOCATION_ALREADY_EXIST = 4016,
 
         /// <summary>
         /// An unexpected error occurred. Please contact administrator

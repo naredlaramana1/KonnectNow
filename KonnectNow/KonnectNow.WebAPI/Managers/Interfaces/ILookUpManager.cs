@@ -84,10 +84,40 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         ModelManagerResult<bool> DeleteCountry(int countryId);
 
         /// <summary>
+        /// Creates a city
+        /// </summary>    
+        /// <param name="createCityCommandModel">CreateCityCommandModel object</param>
+        /// <returns>CityId</returns>     
+        ModelManagerResult<CreateCityViewModel> CreateCity(CreateCityCommandModel createCityCommandModel);
+
+        /// <summary>
+        /// Updates a city
+        /// </summary>
+        /// <param name="cityId">City Id</param>
+        /// <param name="updateCityCommandModel">UpdateCityCommandModel Object</param>
+        /// <returns>true or false</returns>
+        ModelManagerResult<bool> UpdateCity(int cityId, UpdateCityCommandModel updateCityCommandModel);
+
+        /// <summary>
         /// Returns list of  Cities
         /// </summary>
         /// <returns>ModelManagerResult(IEnumerable(CitiesViewModel))</returns>
         ModelManagerResult<IEnumerable<CitiesViewModel>> GetCities();
+
+        /// <summary>
+        ///  Returns  city for a given longitude,latitude
+        /// </summary>
+        /// <param name="latitude">Latitude</param>
+        /// <param name="longitude">Longitude</param>
+        /// <returns>ModelManagerResult(CityViewModel)</returns>
+        ModelManagerResult<CityViewModel> GetCityByGeography(double latitude, double longitude);
+
+        /// <summary>
+        ///  Returns  city latitude,longitude for given city
+        /// </summary>
+        /// <param name="cityId">City Id</param>
+        /// <returns>ModelManagerResult(CityGeographyViewModel)</returns>
+        ModelManagerResult<CityGeographyViewModel> GetCityGeographyById(int cityId);
 
         /// <summary>
         /// Returns list of  locations
@@ -112,12 +142,27 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         ModelManagerResult<LocationViewModel> GetLocationsByGeography(double latitude, double longitude);
 
 
-        
+
         /// <summary>
         ///  Returns  Location latitude,longitude for given location
         /// </summary>
         /// <param name="locationId">Location Id</param>
         /// <returns>ModelManagerResult(LocationGeographyViewModel)</returns>
         ModelManagerResult<LocationGeographyViewModel> GetLocationsGeographyById(int locationId);
+
+        /// <summary>
+        /// Creates a location
+        /// </summary>    
+        /// <param name="createLocationCommandModel">CreateLocationCommandModel object</param>
+        /// <returns>LocationId</returns>
+        ModelManagerResult<CreateLocationViewModel> CreateLocation(CreateLocationCommandModel createLocationCommandModel);
+
+              /// <summary>
+        /// Updates a location
+        /// </summary>
+        /// <param name="locationId">Location Id</param>
+        /// <param name="updateLocationCommandModel">UpdateLocationCommandModel Object</param>
+        /// <returns>true or false</returns>
+       ModelManagerResult<bool> UpdateLocation(int locationId, UpdateLocationCommandModel updateLocationCommandModel);
     }
 }

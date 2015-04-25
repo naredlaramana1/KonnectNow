@@ -75,6 +75,7 @@ namespace KonnectNow.WebAPI.Controllers
         /// <summary>
         /// Creates a category
         /// </summary>
+        /// <param name="categoryCommandModel">CategoryCommandModel Object</param>
         /// <returns> 
         /// HTTP Status = 201 - {CategoryId},
         /// HTTP Status = 400 - {Code = 4002, Message = Category already exist}
@@ -189,6 +190,7 @@ namespace KonnectNow.WebAPI.Controllers
         /// <summary>
         /// Creates a country
         /// </summary>
+        ///    <param name="createCountryCommandModel">CreateCountryCommandModel object</param>
         /// <returns> 
         /// HTTP Status = 201 - {CountryId},
         /// HTTP Status = 400 - {Code = 4005, Message = Country already exist}
@@ -207,6 +209,8 @@ namespace KonnectNow.WebAPI.Controllers
             return BuildErrorResponse(result.Status);
 
         }
+
+
 
         /// <summary>
         /// Updates the country
@@ -259,6 +263,54 @@ namespace KonnectNow.WebAPI.Controllers
 
 
         /// <summary>
+        /// Creates a city
+        /// </summary>
+        /// <param name="createCityCommandModel">CreateCityCommandModel object</param>
+        /// <returns> 
+        /// HTTP Status = 201 - {CityId},
+        /// HTTP Status = 400 - {Code = 4015, Message = City already exist}
+        /// </returns>
+        [HttpPost]
+        [Route("LookUps/Cities")]
+        [ResponseType(typeof(CreateCityViewModel))]
+        public HttpResponseMessage CreateCity(CreateCityCommandModel createCityCommandModel)
+        {
+            var result = _lookUpManager.CreateCity(createCityCommandModel);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
+        /// <summary>
+        /// Updates a city
+        /// </summary>
+        /// <param name="cityId">City Id</param>
+        /// <param name="updateCityCommandModel">UpdateCityCommandModel Object</param>
+        /// <returns>
+        /// HTTP Status = 204,
+        /// HTTP Status = 404 - {Code = 4013, Message = City not found}
+        /// HTTP Status = 400 - {Code = 4015, Message = City already exists}
+        /// </returns>
+        [HttpPut]
+        [Route("LookUps/Cities/{cityId}")]
+        [ResponseType(typeof(bool))]
+        public HttpResponseMessage UpdateCity(int cityId, UpdateCityCommandModel updateCityCommandModel)
+        {
+            var result = _lookUpManager.UpdateCity(cityId, updateCityCommandModel);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.NoContent);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
+        /// <summary>
         /// Returns all cities
         /// </summary>
         /// <returns> HTTP Status = 200 {CitiesViewModel}</returns>
@@ -278,11 +330,104 @@ namespace KonnectNow.WebAPI.Controllers
         }
 
 
+        /// <summary>
+        /// Returns  city for a given longitude,latitude.parameters will be query string parameters
+        /// </summary>
+        /// <param name="latitude">Latitude</param>
+        /// <param name="longitude">Longitude</param>
+        /// <returns> HTTP Status = 200 {CityViewModel}</returns>
+        [HttpGet]
+        [Route("LookUps/Cities/{latitude}/{longitude}")]
+        [ResponseType(typeof(CityViewModel))]
+        public HttpResponseMessage GetCityByGeography([FromUri]double latitude, [FromUri]double longitude)
+        {
+            var result = _lookUpManager.GetCityByGeography(latitude, longitude);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
+        /// <summary>
+        /// Returns  city latitude,longitude for given city
+        /// </summary>
+        /// <param name="cityId">City Id</param>
+        /// <returns> 
+        /// HTTP Status = 200 {cityGeographyViewModel}
+        /// HTTP Status = 404 - {Code = 4013, Message =  city not found}
+        /// </returns>
+        [HttpGet]
+        [Route("LookUps/Cities/{cityId}/Geography")]
+        [ResponseType(typeof(CityGeographyViewModel))]
+        public HttpResponseMessage GetCityGeographyById(int cityId)
+        {
+            var result = _lookUpManager.GetCityGeographyById(cityId);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
+        /// <summary>
+        /// Creates a location
+        /// </summary>
+        /// <param name="createLocationCommandModel">CreateLocationCommandModel object</param>
+        /// <returns> 
+        /// HTTP Status = 201 - {LocationId},
+        /// HTTP Status = 404 - {Code = 4013, Message = City not found}
+        /// HTTP Status = 400 - {Code = 4016, Message = Location already exists}
+        /// </returns>
+        [HttpPost]
+        [Route("LookUps/Locations")]
+        [ResponseType(typeof(CreateLocationCommandModel))]
+        public HttpResponseMessage CreateLocation(CreateLocationCommandModel createLocationCommandModel)
+        {
+            var result = _lookUpManager.CreateLocation(createLocationCommandModel);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
+
+        /// <summary>
+        /// Updates a city
+        /// </summary>
+        /// <param name="locationId">Location ID</param>
+        /// <param name="updateLocationCommandModel">UpdateLocationCommandModel Object</param>
+        /// <returns>
+        /// HTTP Status = 204,
+        /// HTTP Status = 404 - {Code = 4013, Message = City not found}
+        /// HTTP Status = 404 - {Code = 4014, Message = Location not found}
+        /// HTTP Status = 400 - {Code = 4016, Message = Location already exists}
+        /// </returns>
+        [HttpPut]
+        [Route("LookUps/Locations/{locationId}")]
+        [ResponseType(typeof(bool))]
+        public HttpResponseMessage UpdateLocation(int locationId, UpdateLocationCommandModel updateLocationCommandModel)
+        {
+            var result = _lookUpManager.UpdateLocation(locationId, updateLocationCommandModel);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.NoContent);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
 
         /// <summary>
         /// Returns all Locations
         /// </summary>
-        /// <param name="cityId">City Id</param>
         /// <returns> HTTP Status = 200 {LocationsViewModel}</returns>
         [HttpGet]
         [Route("LookUps/Locations")]
@@ -323,7 +468,8 @@ namespace KonnectNow.WebAPI.Controllers
 
 
         /// <summary>
-        /// Returns  Location for a given latitude,longitude
+        /// Returns  Location for a given latitude,longitude.
+        ///  URI is LookUps/Locations?latitude={latitude}&longitude={longitude}
         /// </summary>
         /// <param name="latitude">Latitude</param>
         /// <param name="longitude">Longitude</param>
@@ -331,7 +477,7 @@ namespace KonnectNow.WebAPI.Controllers
         [HttpGet]
         [Route("LookUps/Locations/{latitude}/{longitude}")]
         [ResponseType(typeof(LocationViewModel))]
-        public HttpResponseMessage GetLocationsByGeography(double latitude, double longitude)
+        public HttpResponseMessage GetLocationsByGeography([FromUri]double latitude, [FromUri]double longitude)
         {
             var result = _lookUpManager.GetLocationsByGeography(latitude, longitude);
 
@@ -343,10 +489,8 @@ namespace KonnectNow.WebAPI.Controllers
 
         }
 
-
-
         /// <summary>
-        /// Returns  Location latitude,longitude for given location
+        /// Returns  Location latitude,longitude for given location.parameters will be query string parameters
         /// </summary>
         /// <param name="locationId">Location Id</param>
         /// <returns> 

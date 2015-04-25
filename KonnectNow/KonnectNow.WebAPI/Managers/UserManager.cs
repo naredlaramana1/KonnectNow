@@ -32,6 +32,7 @@ namespace KonnectNow.WebAPI.Managers
         /// <param name="userRepository">IUserRepository object</param>
         /// <param name="validationManager">IValidationManager object</param>
         /// <param name="countryRepository">ICountryRepository object</param>
+        ///  <param name="sellerRepository">ISellerRepository object</param>
         public UserManager(IUserRepository userRepository,
                            IValidationManager validationManager, 
                            ICountryRepository countryRepository, 

@@ -131,7 +131,7 @@ namespace KonnectNow.WebAPI.Managers
             var category = _categoryRepository.Get(x => x.CatId == categoryId).FirstOrDefault();
             if (category == null)
                 return GetManagerResult<bool>(ResponseCodes.CATEGORY_NOT_FOUND);
-            var query = _queryRepository.Get(x => x.Cat_Id == categoryId).FirstOrDefault();
+            var query = _queryRepository.Get(x => x.CatId == categoryId).FirstOrDefault();
             if (query == null)
                 return GetManagerResult<bool>(ResponseCodes.QUERY_CATEGORY_CANNOT_BE_DELETED);
 
@@ -227,6 +227,52 @@ namespace KonnectNow.WebAPI.Managers
         }
 
 
+
+        /// <summary>
+        /// Creates a city
+        /// </summary>    
+        /// <param name="createCityCommandModel">CreateCityCommandModel object</param>
+        /// <returns>CityId</returns>
+        [UnitOfWork]
+        public ModelManagerResult<CreateCityViewModel> CreateCity(CreateCityCommandModel createCityCommandModel)
+        {
+            var item = _cityRepository.Get(x => x.CityName.ToLower() == createCityCommandModel.CityName.ToLower()).FirstOrDefault();
+            if (item != null)
+                return GetManagerResult<CreateCityViewModel>(ResponseCodes.CITY_ALREADY_EXIST);
+            //Build city object
+            var city = Mapper.Map<CreateCityCommandModel, City>(createCityCommandModel);
+            city.IsActive = true;
+            city.StateId = 1;
+            _cityRepository.Insert(city);
+            return GetManagerResult(ResponseCodes.OK, new CreateCityViewModel { CityId = Convert.ToInt32(city.CityId) });
+
+        }
+
+        /// <summary>
+        /// Updates the city
+        /// </summary>
+        /// <param name="cityId">City Id</param>
+        /// <param name="updateCityCommandModel">UpdateCityCommandModel Object</param>
+        /// <returns>true or false</returns>
+        [UnitOfWork]
+        public ModelManagerResult<bool> UpdateCity(int cityId, UpdateCityCommandModel updateCityCommandModel)
+        {
+            var item = _cityRepository.GetByID(cityId);
+            if (item == null)
+                return GetManagerResult<bool>(ResponseCodes.CITY_NOT_FOUND);
+            var country = _cityRepository.Get(x => x.CityName.ToLower() == updateCityCommandModel.CityName.ToLower()).FirstOrDefault();
+            if (country != null)
+                return GetManagerResult<bool>(ResponseCodes.CITY_ALREADY_EXIST);
+            item.CityName = updateCityCommandModel.CityName;
+            item.Latitude = updateCityCommandModel.Latitude;
+            item.Longitude = updateCityCommandModel.Longitude;
+            item.ModifiedOn = null;
+            _cityRepository.Update(item);
+            return GetManagerResult(ResponseCodes.OK, true);
+        }
+
+
+
         /// <summary>
         /// Returns list of  Cities
         /// </summary>
@@ -236,6 +282,36 @@ namespace KonnectNow.WebAPI.Managers
             var cities = _cityRepository.Get();
             return GetManagerResult<IEnumerable<CitiesViewModel>>(ResponseCodes.OK,
                                                                           Mapper.Map<IEnumerable<City>, IEnumerable<CitiesViewModel>>(cities));
+        }
+
+
+        /// <summary>
+        ///  Returns  city for a given longitude,latitude
+        /// </summary>
+        /// <param name="latitude">Latitude</param>
+        /// <param name="longitude">Longitude</param>
+        /// <returns>ModelManagerResult(CityViewModel)</returns>
+        public ModelManagerResult<CityViewModel> GetCityByGeography(double latitude, double longitude)
+        {
+            var city = _cityRepository.Get(x => x.Latitude == latitude && x.Longitude == longitude).FirstOrDefault();
+            return GetManagerResult<CityViewModel>(ResponseCodes.OK,
+                                                                          Mapper.Map<City, CityViewModel>(city));
+        }
+
+
+        /// <summary>
+        ///  Returns  city latitude,longitude for given city
+        /// </summary>
+        /// <param name="cityId">City Id</param>
+        /// <returns>ModelManagerResult(CityGeographyViewModel)</returns>
+        public ModelManagerResult<CityGeographyViewModel> GetCityGeographyById(int cityId)
+        {
+            var city = _cityRepository.GetByID(cityId);
+            if (city == null)
+                return GetManagerResult<CityGeographyViewModel>(ResponseCodes.CITY_NOT_FOUND);
+
+            return GetManagerResult<CityGeographyViewModel>(ResponseCodes.OK,
+                                                                          Mapper.Map<City, CityGeographyViewModel>(city));
         }
 
         /// <summary>
@@ -293,6 +369,63 @@ namespace KonnectNow.WebAPI.Managers
             return GetManagerResult<LocationGeographyViewModel>(ResponseCodes.OK,
                                                                           Mapper.Map<Location, LocationGeographyViewModel> (location));
         }
+
+
+
+
+        /// <summary>
+        /// Creates a location
+        /// </summary>    
+        /// <param name="createLocationCommandModel">CreateLocationCommandModel object</param>
+        /// <returns>LocationId</returns>
+        [UnitOfWork]
+        public ModelManagerResult<CreateLocationViewModel> CreateLocation(CreateLocationCommandModel createLocationCommandModel)
+        {
+            var item = _cityRepository.GetByID(createLocationCommandModel.CityId);
+            if (item == null)
+                return GetManagerResult<CreateLocationViewModel>(ResponseCodes.CITY_NOT_FOUND);
+            var location = _locationRepository.Get(x => x.LocationName.ToLower() == createLocationCommandModel.LocationName.ToLower()).FirstOrDefault();
+            if(location!=null)
+                return GetManagerResult<CreateLocationViewModel>(ResponseCodes.LOCATION_ALREADY_EXIST);
+            //Build loaction object
+            var locationItem = Mapper.Map<CreateLocationCommandModel, Location>(createLocationCommandModel);
+            locationItem.IsActive = true;
+            locationItem.CityId = createLocationCommandModel.CityId;
+            _locationRepository.Insert(locationItem);
+            return GetManagerResult(ResponseCodes.OK, new CreateLocationViewModel { LocationId = Convert.ToInt32(locationItem.LocationId) });
+
+        }
+
+        /// <summary>
+        /// Updates a location
+        /// </summary>
+        /// <param name="locationId">Location Id</param>
+        /// <param name="updateLocationCommandModel">UpdateLocationCommandModel Object</param>
+        /// <returns>true or false</returns>
+        [UnitOfWork]
+        public ModelManagerResult<bool> UpdateLocation(int locationId, UpdateLocationCommandModel updateLocationCommandModel)
+        {
+
+            var item = _cityRepository.GetByID(updateLocationCommandModel.CityId);
+            if (item == null)
+                return GetManagerResult<bool>(ResponseCodes.CITY_NOT_FOUND);
+            var location = _locationRepository.GetByID(locationId);
+            if (location == null)
+                return GetManagerResult<bool>(ResponseCodes.LOCATION_NOT_FOUND);
+
+            var locationItem = _locationRepository.Get(x => x.LocationName.ToLower() == updateLocationCommandModel.LocationName.ToLower()).FirstOrDefault();
+            if (locationItem != null)
+                return GetManagerResult<bool>(ResponseCodes.LOCATION_ALREADY_EXIST);
+
+            location.CityId = updateLocationCommandModel.CityId;
+            location.LocationName = updateLocationCommandModel.LocationName;
+            location.Latitude = updateLocationCommandModel.Latitude;
+            location.Longitude = updateLocationCommandModel.Longitude;
+            item.ModifiedOn = null;
+            _cityRepository.Update(item);
+            return GetManagerResult(ResponseCodes.OK, true);
+        }
+
 
     }
 }

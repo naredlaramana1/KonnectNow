@@ -34,6 +34,7 @@ namespace KonnectNow.Repository.EF
             modelBuilder.Configurations.Add(new ValidationMap());
             modelBuilder.Configurations.Add(new UserMap());
             modelBuilder.Configurations.Add(new SellerMap());
+            modelBuilder.Configurations.Add(new QueryMap());
             
             modelBuilder.Entity<Message>()
                 .Property(e => e.Message_Id)
@@ -51,26 +52,7 @@ namespace KonnectNow.Repository.EF
                 .Property(e => e.To_User_Id)
                 .HasPrecision(18, 0);
 
-            modelBuilder.Entity<Query>()
-                .Property(e => e.Query_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Query>()
-                .Property(e => e.User_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Query>()
-              .Property(e => e.Cat_Id)
-              .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Query>()
-                .Property(e => e.Location_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Query>()
-                .HasMany(e => e.Messages)
-                .WithRequired(e => e.Query)
-                .WillCascadeOnDelete(false);
+            
            
         }
     }

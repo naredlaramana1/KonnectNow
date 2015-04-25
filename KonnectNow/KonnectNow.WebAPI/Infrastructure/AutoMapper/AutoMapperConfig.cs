@@ -7,6 +7,7 @@ using System.Web;
 using KonnectNow.Entity.Entities;
 using KonnectNow.WebAPI.Models.Lookup;
 using KonnectNow.WebAPI.Models.User;
+using KonnectNow.WebAPI.Models.Query;
 
 namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
 {
@@ -35,6 +36,11 @@ namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
             Mapper.CreateMap<Location, LocationsViewModel>();
             Mapper.CreateMap<Location, LocationViewModel>();
             Mapper.CreateMap<Location, LocationGeographyViewModel>();
+            Mapper.CreateMap<City, CityViewModel>();
+            Mapper.CreateMap<City, CityGeographyViewModel>();
+            Mapper.CreateMap<CreateCityCommandModel, City>();
+            Mapper.CreateMap<CreateLocationCommandModel, Location>();
+            Mapper.CreateMap<CreateQueryCommandModel, Query>();
         }
     }
 }

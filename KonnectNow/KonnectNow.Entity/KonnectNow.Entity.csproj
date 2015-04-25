@@ -79,6 +79,7 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Validation.cs" />
     <Compile Include="Mappings\CategoryMap.cs" />
+    <Compile Include="Mappings\QueryMap.cs" />
     <Compile Include="Mappings\SellerMap.cs" />
     <Compile Include="Mappings\StateMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
