@@ -13,7 +13,7 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
     /// </summary>
     public interface IValidationManager
     {
-       /// <summary>
+        /// <summary>
         /// Gets verification code based on the passed Mobile No
         /// </summary>
         /// <param name="mobileNo">Mobile No</param>
@@ -43,5 +43,11 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <param name="mobileNo">Mobile No</param>      
         /// <returns>VerificationCode</returns>
         ModelManagerResult<string> ResendVerificationCode(string mobileNo);
+
+        /// <summary>
+        /// returns validation code
+        /// </summary>
+        /// <returns></returns>
+        string ValidationCode(string mobileNo);
     }
 }

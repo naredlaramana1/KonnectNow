@@ -27,12 +27,12 @@ namespace KonnectNow.Entity.Mappings
 
                      this.HasMany(e => e.Messages)
                 .WithRequired(e => e.User)
-                .HasForeignKey(e => e.To_User_Id)
+                .HasForeignKey(e => e.ToUserId)
                 .WillCascadeOnDelete(false);
 
             this.HasMany(e => e.Messages1)
                 .WithRequired(e => e.User1)
-                .HasForeignKey(e => e.From_User_Id)
+                .HasForeignKey(e => e.FromUserId)
                 .WillCascadeOnDelete(false);
 
             this.HasMany(e => e.Queries)

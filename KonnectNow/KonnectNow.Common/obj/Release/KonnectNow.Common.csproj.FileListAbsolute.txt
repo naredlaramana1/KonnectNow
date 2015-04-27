@@ -1,0 +1,7 @@
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Common\bin\Release\KonnectNow.Common.dll
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Common\bin\Release\KonnectNow.Common.pdb
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Common\bin\Release\log4net.dll
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Common\bin\Release\log4net.xml
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Common\obj\Release\KonnectNow.Common.csprojResolveAssemblyReference.cache
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Common\obj\Release\KonnectNow.Common.dll
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Common\obj\Release\KonnectNow.Common.pdb

@@ -738,6 +738,28 @@
             HTTP Status = 404 - {Code = 4012, Message =User not avialable}
             </returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.QueriesController.SearchQueries(System.Int64,KonnectNow.WebAPI.Models.Query.QuerySearchComamndModel)">
+            <summary>
+            returns query search list
+            </summary>      
+            <param name="userId">UserID</param>
+            <param name="querySearchComamndModel">QuerySearchComamndModel</param>
+            <returns>
+            HTTP Status = 200 - {search results},
+            HTTP Status = 404 - {Code = 4012, Message =User not avialable}
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.QueriesController.GetMessages(System.Int64)">
+            <summary>
+            returns message list for query
+            </summary>
+            <param name="queryId">QueryId</param>
+            <returns>
+            HTTP Status = 200 - {search results},
+            HTTP Status = 404 - {Code = 4017, Message=Query not exist}
+            </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:KonnectNow.WebAPI.Controllers.QueriesController.GetLogs(System.Int32,System.Int32)" -->
         <member name="T:KonnectNow.WebAPI.Controllers.UsersController">
             <summary>
             Manages  user retaled operations
@@ -822,6 +844,16 @@
             <returns> 
              HTTP Status = 200 {SellerViewModel}
             HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.UsersController.GetValidationByMobileNo(System.String)">
+            <summary>
+            Returns user validationcode for given mobile no.
+            </summary>
+            <param name="mobileNo">Mobile No</param>
+            <returns> 
+             HTTP Status = 200 {string}
+            HTTP Status = 404 - {Code = 4018, Message = Verification code not found"},
             </returns>
         </member>
         <member name="T:KonnectNow.WebAPI.Filters.HandleApiExceptionFilter">
@@ -1022,6 +1054,16 @@
             Category already exist
             </summary>
         </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.QUERY_NOT_EXIST">
+            <summary>
+            Query not exist
+            </summary>
+        </member>
+        <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.VERIFICATION_CODE_NOT_EXIST">
+            <summary>
+            Verification code not found
+            </summary>
+        </member>
         <member name="F:KonnectNow.WebAPI.Infrastructure.Utilities.ResponseCodes.INTERNAL_SEREVR_ERROR">
             <summary>
             An unexpected error occurred. Please contact administrator
@@ -1120,6 +1162,32 @@
         <member name="M:KonnectNow.WebAPI.IOC.UnityResolver.Dispose">
             <summary>
             Disposes container
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.KNReources.KonnectNow">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.KNReources.KonnectNow.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.KNReources.KonnectNow.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.KNReources.KonnectNow.Limit">
+            <summary>
+              Looks up a localized string similar to limit.
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.KNReources.KonnectNow.Offset">
+            <summary>
+              Looks up a localized string similar to offset.
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Managers.BaseModelManager">
@@ -1310,6 +1378,22 @@
              <param name="createQueryCommandModel">CreateQueryCommandModel object</param>
              <returns>QueryId</returns>     
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IQueryManager.SearchQueries(System.Int64,KonnectNow.WebAPI.Models.Query.QuerySearchComamndModel)">
+            <summary>
+            returns query list
+            </summary>
+            <param name="userId">UserId</param>
+            <param name="querySearchComamndModel">QuerySearchComamndModel</param>
+            <returns></returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IQueryManager.GetMessages(System.Int64)">
+            <summary>
+            returns messages list
+            </summary>
+            <param name="queryId">QueryId</param>       
+            <returns>ModelManagerResult(MessageSearchViewModel)</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:KonnectNow.WebAPI.Managers.Interfaces.IQueryManager.GetLogs(System.Int32,System.Int32)" -->
         <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IUserManager">
             <summary>
             This interface must be implemented by all user related business operations.
@@ -1354,6 +1438,13 @@
             <param name="userId">Usr Id</param>
             <returns></returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IUserManager.GetValidationByMobileNo(System.String)">
+            <summary>
+            Returns user profile based on mobile number
+            </summary>
+            <param name="mobileNo">Mobile No></param>
+            <returns></returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager">
             <summary>
             Provides account validation related operations
@@ -1389,6 +1480,12 @@
             </summary>
             <param name="mobileNo">Mobile No</param>      
             <returns>VerificationCode</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager.ValidationCode(System.String)">
+            <summary>
+            returns validation code
+            </summary>
+            <returns></returns>
         </member>
         <member name="T:KonnectNow.WebAPI.Managers.LookUpManager">
             <summary>
@@ -1561,7 +1658,7 @@
             Manages  Query operations
             </summary>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.QueryManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IUserRepository,KonnectNow.Repository.Repositories.Interfaces.IQueryRepository,KonnectNow.Repository.Repositories.Interfaces.ILocationRepository,KonnectNow.Repository.Repositories.Interfaces.ICategoryRepository)">
+        <member name="M:KonnectNow.WebAPI.Managers.QueryManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IUserRepository,KonnectNow.Repository.Repositories.Interfaces.IQueryRepository,KonnectNow.Repository.Repositories.Interfaces.ILocationRepository,KonnectNow.Repository.Repositories.Interfaces.ICategoryRepository,KonnectNow.Repository.Repositories.Interfaces.IMessageRepository,KonnectNow.Repository.Repositories.Interfaces.ILogsRepository)">
             <summary>
             Constructor for UserManager.
             </summary>
@@ -1569,6 +1666,7 @@
             <param name="queryRepository">IQueryRepository object</param>   
             <param name="locationRepository">ILocationRepository object</param> 
             <param name="categoryRepository">ICategoryRepository object</param>
+            /// <param name="messageRepository">IMessageRepository object</param>
         </member>
         <member name="M:KonnectNow.WebAPI.Managers.QueryManager.CreateQuery(KonnectNow.WebAPI.Models.Query.CreateQueryCommandModel)">
              <summary>
@@ -1577,6 +1675,22 @@
              <param name="createQueryCommandModel">CreateQueryCommandModel object</param>
              <returns>QueryId</returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.QueryManager.SearchQueries(System.Int64,KonnectNow.WebAPI.Models.Query.QuerySearchComamndModel)">
+            <summary>
+            returns query list
+            </summary>
+            <param name="userId">UserId</param>
+            <param name="querySearchComamndModel">QuerySearchComamndModel</param>
+            <returns></returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.QueryManager.GetMessages(System.Int64)">
+            <summary>
+            returns messages list
+            </summary>
+            <param name="queryId">QueryId</param>       
+            <returns>ModelManagerResult(MessageSearchViewModel)</returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:KonnectNow.WebAPI.Managers.QueryManager.GetLogs(System.Int32,System.Int32)" -->
         <member name="T:KonnectNow.WebAPI.Managers.UserManager">
             <summary>
             Manages user account related operations
@@ -1608,6 +1722,13 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:KonnectNow.WebAPI.Managers.UserManager.GetUserByMobileNo(System.String)" -->
+        <member name="M:KonnectNow.WebAPI.Managers.UserManager.GetValidationByMobileNo(System.String)">
+            <summary>
+            Returns user profile based on mobile number
+            </summary>
+            <param name="mobileNo">Mobile No></param>
+            <returns></returns>
+        </member>
         <member name="M:KonnectNow.WebAPI.Managers.UserManager.SendVerificationCode(System.String,System.String)">
             <summary>
             sends verification code to mobile
@@ -1673,6 +1794,12 @@
             <param name="mobileNo">Mobile No</param>      
             <returns>VerificationCode</returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.ValidationManager.ValidationCode(System.String)">
+            <summary>
+            returns validation code
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:KonnectNow.WebAPI.Models.Common.KNErrorModel.Code">
             <summary>
             service custom code
@@ -1698,6 +1825,59 @@
             <summary>
             Result value
             </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Common.SearchQueryModelBinder">
+            <summary>
+            Manages common  query building model binder operations
+            </summary>
+        </member>
+        <member name="F:KonnectNow.WebAPI.Models.Common.SearchQueryModelBinder.ErrorBuilder">
+            <summary>
+            Builds request errors string.
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Models.Common.SearchQueryModelBinder.GetValue(System.Web.Http.ModelBinding.ModelBindingContext,System.String,System.String)">
+            <summary>
+            Gets value based on key
+            </summary>
+            <param name="context">Model Binding Context</param>
+            <param name="prefix">Prefix</param>
+            <param name="key">Key</param>
+            <returns>String</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Models.Common.SearchQueryModelBinder.SetOffset(System.String)">
+            <summary>
+            Returns offset value
+            </summary>
+            <param name="inputString"></param>
+            <returns></returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Models.Common.SearchQueryModelBinder.SetLimit(System.String)">
+            <summary>
+            Returns Limit value
+            </summary>
+            <param name="inputString"></param>
+            <returns></returns>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Common.SearchViewModel">
+            <summary>
+            Search View Model
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Common.SearchViewModel.Offset">
+            <summary>
+            Page Number
+            </summary>      
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Common.SearchViewModel.Limit">
+            <summary>
+            Page Size
+            </summary>      
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Common.SearchViewModel.Total">
+            <summary>
+            Total
+            </summary>      
         </member>
         <member name="T:KonnectNow.WebAPI.Models.Lookup.CitiesViewModel">
             <summary>
@@ -1914,6 +2094,61 @@
             Location Latitude
             </summary>
         </member>
+        <member name="T:KonnectNow.WebAPI.Models.Messages.LogsSearchViewModel">
+            <summary>
+            LogsSearchViewModel object
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Models.Messages.LogsSearchViewModel.#ctor">
+             <summary>
+            LogsSearchViewModel Constructor
+             </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.LogsSearchViewModel.SearchResults">
+            <summary>
+            List of Messages
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Messages.MessageSearchViewModel">
+            <summary>
+            MesageSearchViewModel object
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Models.Messages.MessageSearchViewModel.#ctor">
+             <summary>
+            MesageSearchViewModel Constructor
+             </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.MessageSearchViewModel.SearchResults">
+            <summary>
+            List of Messages
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.MessageSearchInfo.MobileNo">
+            <summary>
+             Mobile No
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.MessageSearchInfo.UserName">
+            <summary>
+             User Id
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.MessageSearchInfo.MessageId">
+            <summary>
+             Message Id
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.MessageSearchInfo.Text">
+            <summary>
+             Message Id
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.MessageSearchInfo.SentOn">
+            <summary>
+            SentOn
+            </summary>
+        </member>
         <member name="T:KonnectNow.WebAPI.Models.Query.CreateQueryCommandModel">
             <summary>
             CreateQueryCommandModel Object
@@ -1958,6 +2193,64 @@
             <summary>
             Query Id
             </summary>       
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Query.QuerySearchComamndModel">
+            <summary>
+            QuerySearchComamndModel Object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Query.QuerySearchComamndModel.Offset">
+            <summary>
+            Number of records to skip.If not sent, defaults to 0.
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Query.QuerySearchComamndModel.Limit">
+            <summary>
+            Number of records to return.If not sent, defaults to 10.
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Query.QuerySearchInfo">
+            <summary>
+            QuerySearchInfo
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Query.QuerySearchInfo.QueryText">
+            <summary>
+            QueryText
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Query.QuerySearchModelBinder">
+            <summary>
+            Manages query building model binder operations  for querysearchmodel.  
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Models.Query.QuerySearchModelBinder.BindModel(System.Web.Http.Controllers.HttpActionContext,System.Web.Http.ModelBinding.ModelBindingContext)">
+            <summary>
+            Builds the  QueryearchQueryModel.
+            </summary>
+            <param name="actionContext">HttpActionContext Object</param>
+            <param name="bindingContext">ModelBindingContext Object</param>
+            <returns>Boolean</returns>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Query.QuerySearchViewModel">
+            <summary>
+            QuerySearchViewModel view Model
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Models.Query.QuerySearchViewModel.#ctor">
+             <summary>
+            QuerySearchViewModel Constructor
+             </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Query.QuerySearchViewModel.UserId">
+            <summary>
+             UserId
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Query.QuerySearchViewModel.SearchResults">
+            <summary>
+            List of queries
+            </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.User.CreateUserViewModel">
             <summary>

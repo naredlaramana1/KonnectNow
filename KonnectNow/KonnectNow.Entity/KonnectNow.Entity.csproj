@@ -69,6 +69,7 @@
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\Logs.cs" />
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Query.cs" />
     <Compile Include="Entities\Seller.cs" />
@@ -79,6 +80,8 @@
     <Compile Include="Entities\User.cs" />
     <Compile Include="Entities\Validation.cs" />
     <Compile Include="Mappings\CategoryMap.cs" />
+    <Compile Include="Mappings\LogsMap.cs" />
+    <Compile Include="Mappings\MessageMap.cs" />
     <Compile Include="Mappings\QueryMap.cs" />
     <Compile Include="Mappings\SellerMap.cs" />
     <Compile Include="Mappings\StateMap.cs" />

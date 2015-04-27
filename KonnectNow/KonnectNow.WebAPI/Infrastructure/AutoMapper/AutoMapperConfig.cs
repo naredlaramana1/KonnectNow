@@ -8,6 +8,7 @@ using KonnectNow.Entity.Entities;
 using KonnectNow.WebAPI.Models.Lookup;
 using KonnectNow.WebAPI.Models.User;
 using KonnectNow.WebAPI.Models.Query;
+using KonnectNow.WebAPI.Models.Messages;
 
 namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
 {
@@ -41,6 +42,10 @@ namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
             Mapper.CreateMap<CreateCityCommandModel, City>();
             Mapper.CreateMap<CreateLocationCommandModel, Location>();
             Mapper.CreateMap<CreateQueryCommandModel, Query>();
+            Mapper.CreateMap<Query, QuerySearchInfo>();
+            Mapper.CreateMap<Message, MessageSearchInfo>().ForMember(dest => dest.MobileNo, src => src.MapFrom(y => y.User.MobileNo))
+                                                          .ForMember(dest => dest.UserName, src => src.MapFrom(y => y.User.FirstName + "" + y.User.LastName));
+            Mapper.CreateMap<Logs, LogsInfo>();
         }
     }
 }

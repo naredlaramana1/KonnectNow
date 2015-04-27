@@ -223,6 +223,11 @@
     <Compile Include="Infrastructure\Utilities\ResponseCodes.cs" />
     <Compile Include="IOC\UnityConfig.cs" />
     <Compile Include="IOC\UnityResolver.cs" />
+    <Compile Include="KNReources\KonnectNow.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KonnectNow.resx</DependentUpon>
+    </Compile>
     <Compile Include="Managers\BaseModelManager.cs" />
     <Compile Include="Managers\Interfaces\ILookUpManager.cs" />
     <Compile Include="Managers\Interfaces\IQueryManager.cs" />
@@ -234,6 +239,8 @@
     <Compile Include="Managers\ValidationManager.cs" />
     <Compile Include="Models\Common\KNErrorModel.cs" />
     <Compile Include="Models\Common\ModelManagerResult.cs" />
+    <Compile Include="Models\Common\SearchQueryModelBinder.cs" />
+    <Compile Include="Models\Common\SearchViewModel.cs" />
     <Compile Include="Models\Lookup\CitiesViewModel.cs" />
     <Compile Include="Models\Lookup\CityGeographyViewModel.cs" />
     <Compile Include="Models\Lookup\CityViewModel.cs" />
@@ -247,8 +254,16 @@
     <Compile Include="Models\Lookup\LocationViewModel.cs" />
     <Compile Include="Models\Lookup\UpdateCityCommandModel.cs" />
     <Compile Include="Models\Lookup\UpdateLocationCommandModel.cs" />
+    <Compile Include="Models\Messages\LogsSearchViewModel.cs" />
+    <Compile Include="Models\Messages\LogsInfo.cs" />
+    <Compile Include="Models\Messages\MesageSearchViewModel.cs" />
+    <Compile Include="Models\Messages\MessageSearchInfo.cs" />
     <Compile Include="Models\Query\CreateQueryCommandModel.cs" />
     <Compile Include="Models\Query\CreateQueryViewModel.cs" />
+    <Compile Include="Models\Query\QuerySearchComamndModel.cs" />
+    <Compile Include="Models\Query\QuerySearchInfo.cs" />
+    <Compile Include="Models\Query\QuerySearchModelBinder.cs" />
+    <Compile Include="Models\Query\QuerySearchViewModel.cs" />
     <Compile Include="Models\User\CreateUserViewModel.cs" />
     <Compile Include="Models\Lookup\CategoryCommandModel.cs" />
     <Compile Include="Models\Lookup\CategoriesViewModel.cs" />
@@ -395,7 +410,12 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="unity.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="KNReources\KonnectNow.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>KonnectNow.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>

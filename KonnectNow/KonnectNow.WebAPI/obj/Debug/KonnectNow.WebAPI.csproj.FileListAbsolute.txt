@@ -273,3 +273,5 @@ D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\bin\zh-Hant\Sy
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\obj\Debug\KonnectNow.WebAPI.csprojResolveAssemblyReference.cache
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\obj\Debug\KonnectNow.WebAPI.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\obj\Debug\KonnectNow.WebAPI.pdb
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\obj\Debug\KonnectNow.WebAPI.KNReources.KonnectNow.resources
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.WebAPI\obj\Debug\KonnectNow.WebAPI.csproj.GenerateResource.Cache

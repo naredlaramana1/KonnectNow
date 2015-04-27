@@ -114,6 +114,21 @@ namespace KonnectNow.WebAPI.Managers
         }
 
         /// <summary>
+        /// Returns user profile based on mobile number
+        /// </summary>
+        /// <param name="mobileNo">Mobile No></param>
+        /// <returns></returns>
+        public ModelManagerResult<string> GetValidationByMobileNo(string mobileNo)
+        {
+            var validationCode = _validationManager.ValidationCode(mobileNo);
+            if (validationCode == string.Empty)
+                return GetManagerResult<string>(ResponseCodes.VERIFICATION_CODE_NOT_EXIST);
+            else
+                return GetManagerResult<string>(ResponseCodes.OK, validationCode);
+
+        }
+
+        /// <summary>
         /// sends verification code to mobile
         /// </summary>
         /// <param name="mobileNo">Mobile No</param>

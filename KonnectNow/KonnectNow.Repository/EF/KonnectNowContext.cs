@@ -24,6 +24,7 @@ namespace KonnectNow.Repository.EF
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Validation> Validations { get; set; }
         public virtual DbSet<Seller> Sellers { get; set; }
+        public virtual DbSet<Logs> Log { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new CategoryMap());
@@ -35,22 +36,7 @@ namespace KonnectNow.Repository.EF
             modelBuilder.Configurations.Add(new UserMap());
             modelBuilder.Configurations.Add(new SellerMap());
             modelBuilder.Configurations.Add(new QueryMap());
-            
-            modelBuilder.Entity<Message>()
-                .Property(e => e.Message_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Message>()
-                .Property(e => e.Query_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Message>()
-                .Property(e => e.From_User_Id)
-                .HasPrecision(18, 0);
-
-            modelBuilder.Entity<Message>()
-                .Property(e => e.To_User_Id)
-                .HasPrecision(18, 0);
+            modelBuilder.Configurations.Add(new MessageMap());
 
             
            

@@ -57,5 +57,13 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <param name="userId">Usr Id</param>
         /// <returns></returns>
         ModelManagerResult<SellerViewModel> GetSellerProfile(long userId);
+
+
+            /// <summary>
+        /// Returns user profile based on mobile number
+        /// </summary>
+        /// <param name="mobileNo">Mobile No></param>
+        /// <returns></returns>
+        ModelManagerResult<string> GetValidationByMobileNo(string mobileNo);
     }
 }

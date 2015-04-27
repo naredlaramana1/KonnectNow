@@ -12,25 +12,25 @@ namespace KonnectNow.Entity.Entities
         [Key]
         [Column(TypeName = "numeric")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public decimal Message_Id { get; set; }
+        public decimal MessageId { get; set; }
 
         [Column(TypeName = "numeric")]
-        public decimal Query_Id { get; set; }
+        public decimal QueryId { get; set; }
 
         [Column(TypeName = "numeric")]
-        public decimal From_User_Id { get; set; }
+        public decimal FromUserId { get; set; }
 
         [Column(TypeName = "numeric")]
-        public decimal To_User_Id { get; set; }
+        public decimal ToUserId { get; set; }
 
         [Column("Message", TypeName = "ntext")]
         [Required]
-        public string Message1 { get; set; }
+        public string Text { get; set; }
 
-        public bool Is_Read { get; set; }
+        public bool IsRead { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        public DateTime Sent_On { get; set; }
+        public DateTime? SentOn { get; set; }
 
         public virtual Query Query { get; set; }
 

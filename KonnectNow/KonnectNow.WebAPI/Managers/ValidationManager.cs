@@ -119,6 +119,20 @@ namespace KonnectNow.WebAPI.Managers
 
             return GetManagerResult<string>(ResponseCodes.OK, verificationCode);
         }
+
+        /// <summary>
+        /// returns validation code
+        /// </summary>
+        /// <returns></returns>
+        public string ValidationCode(string mobileNo)
+        {
+            var validation = _validationRepository.Get(e=>e.MobileNo == mobileNo &&
+                                                                 e.EndDate >= DateTime.Now).FirstOrDefault();
+            if (validation != null)
+                return validation.ValidationCode;
+            else
+                return string.Empty;
+        }
     }
 
 }

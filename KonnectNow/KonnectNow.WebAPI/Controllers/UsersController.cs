@@ -186,5 +186,29 @@ namespace KonnectNow.WebAPI.Controllers
             return BuildErrorResponse(result.Status);
 
         }
+
+
+        /// <summary>
+        /// Returns user validationcode for given mobile no.
+        /// </summary>
+        /// <param name="mobileNo">Mobile No</param>
+        /// <returns> 
+        ///  HTTP Status = 200 {string}
+        /// HTTP Status = 404 - {Code = 4018, Message = Verification code not found"},
+        /// </returns>
+        [HttpGet]
+        [Route("User/{mobileNo}/ValidationCode")]
+        [ResponseType(typeof(string))]
+        public HttpResponseMessage GetValidationByMobileNo(string mobileNo)
+        {
+            var result = _userManager.GetValidationByMobileNo(mobileNo);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
     }
 }

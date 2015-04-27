@@ -157,6 +157,21 @@ namespace KonnectNow.WebAPI.Infrastructure.Utilities
         [Description("Location already exists")]
         LOCATION_ALREADY_EXIST = 4016,
 
+
+        /// <summary>
+        /// Query not exist
+        /// </summary>
+        [HttpStatus(HttpStatusCode.NotFound)]
+        [Description("Query not exist")]
+       QUERY_NOT_EXIST = 4017,
+
+        /// <summary>
+        /// Verification code not found
+        /// </summary>
+        [HttpStatus(HttpStatusCode.NotFound)]
+        [Description("Verification code not found")]
+        VERIFICATION_CODE_NOT_EXIST = 4018,
+
         /// <summary>
         /// An unexpected error occurred. Please contact administrator
         /// </summary>
