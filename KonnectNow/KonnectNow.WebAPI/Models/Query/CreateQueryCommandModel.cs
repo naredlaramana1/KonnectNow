@@ -31,18 +31,19 @@ namespace KonnectNow.WebAPI.Models.Query
 
         /// <summary>
         /// User Location Id
-        /// </summary>
-        
+        /// </summary>       
         public decimal? LocationId { get; set; }
 
         /// <summary>
         /// User Location Longitude
         /// </summary>
+       [Required]
         public double Longitude { get; set; }
 
         /// <summary>
         /// User Loaction Latitude
         /// </summary>
+        [Required]
         public double Latitude { get; set; }
     }
 }
