@@ -137,8 +137,11 @@ namespace KonnectNow.WebAPI.Managers
         {
            string smsUrl=ConfigurationManager.AppSettings["SMSURL"].ToString();
            string url = string.Format(smsUrl, mobileNo, "Please use the code "+message+" to verify your account.");
+         
+           // Set the 'Timeout' property in Milliseconds.           
             var request = (HttpWebRequest)WebRequest.Create(url);
-             request.GetResponse();
+            request.Timeout = 30000;
+            WebResponse myWebResponse = request.GetResponse();
         }
 
 
