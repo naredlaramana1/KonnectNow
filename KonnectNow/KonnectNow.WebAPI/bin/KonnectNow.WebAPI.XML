@@ -2172,7 +2172,7 @@
         <member name="P:KonnectNow.WebAPI.Models.Query.CreateQueryCommandModel.LocationId">
             <summary>
             User Location Id
-            </summary>
+            </summary>       
         </member>
         <member name="P:KonnectNow.WebAPI.Models.Query.CreateQueryCommandModel.Longitude">
             <summary>
