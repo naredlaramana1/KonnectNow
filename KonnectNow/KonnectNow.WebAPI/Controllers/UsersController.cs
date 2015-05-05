@@ -197,7 +197,7 @@ namespace KonnectNow.WebAPI.Controllers
         /// HTTP Status = 404 - {Code = 4018, Message = Verification code not found"},
         /// </returns>
         [HttpGet]
-        [Route("User/{mobileNo}/ValidationCode")]
+        [Route("Users/{mobileNo}/ValidationCode")]
         [ResponseType(typeof(string))]
         public HttpResponseMessage GetValidationByMobileNo(string mobileNo)
         {
