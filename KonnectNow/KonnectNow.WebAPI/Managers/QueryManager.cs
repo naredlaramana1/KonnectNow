@@ -25,7 +25,7 @@ namespace KonnectNow.WebAPI.Managers
         private readonly ICategoryRepository _categoryRepository;
         private readonly IMessageRepository _messageRepository;
         private readonly ILogsRepository _logsRepository;
-            /// <summary>
+        /// <summary>
         /// Constructor for UserManager.
         /// </summary>
         /// <param name="userRepository">IUserRepository object</param>
@@ -33,13 +33,13 @@ namespace KonnectNow.WebAPI.Managers
         /// <param name="locationRepository">ILocationRepository object</param> 
         /// <param name="categoryRepository">ICategoryRepository object</param>
         /// /// <param name="messageRepository">IMessageRepository object</param>
-       public QueryManager(IUserRepository userRepository,
-                           IQueryRepository queryRepository,
-                           ILocationRepository locationRepository,
-                           ICategoryRepository categoryRepository,
-                           IMessageRepository messageRepository,
-                           ILogsRepository logsRepository
-                           )
+        public QueryManager(IUserRepository userRepository,
+                            IQueryRepository queryRepository,
+                            ILocationRepository locationRepository,
+                            ICategoryRepository categoryRepository,
+                            IMessageRepository messageRepository,
+                            ILogsRepository logsRepository
+                            )
         {
             _userRepository = userRepository;
             _queryRepository = queryRepository;
@@ -60,12 +60,12 @@ namespace KonnectNow.WebAPI.Managers
         {
             if (createQueryCommandModel.LocationId != null)
             {
-               if(_locationRepository.GetByID(createQueryCommandModel.LocationId)==null)
-                   return GetManagerResult<CreateQueryViewModel>(ResponseCodes.LOCATION_NOT_FOUND);
+                if (_locationRepository.GetByID(createQueryCommandModel.LocationId) == null)
+                    return GetManagerResult<CreateQueryViewModel>(ResponseCodes.LOCATION_NOT_FOUND);
             }
-            if(_categoryRepository.GetByID(createQueryCommandModel.CatId)==null)
+            if (_categoryRepository.GetByID(createQueryCommandModel.CatId) == null)
             {
-             return GetManagerResult<CreateQueryViewModel>(ResponseCodes.CATEGORY_NOT_FOUND);
+                return GetManagerResult<CreateQueryViewModel>(ResponseCodes.CATEGORY_NOT_FOUND);
             }
             if (_userRepository.GetByID(createQueryCommandModel.UserId) == null)
             {
@@ -94,13 +94,13 @@ namespace KonnectNow.WebAPI.Managers
                 Limit = querySearchComamndModel.Limit,
                 UserId = userId
             };
-            var queryList=_queryRepository.Get(x => x.UserId == userId).OrderByDescending(k => k.ModifiedOn).ToList();
+            var queryList = _queryRepository.Get(x => x.UserId == userId).OrderByDescending(k => k.ModifiedOn).ToList();
             querySearchCollection.Total = queryList.Count;
             var itemList = queryList.Skip(querySearchComamndModel.Offset)
                            .Take(querySearchComamndModel.Limit).ToList();
 
 
-            if (itemList != null && itemList.Count> 0)
+            if (itemList != null && itemList.Count > 0)
             {
 
                 foreach (var item in itemList)
@@ -119,13 +119,13 @@ namespace KonnectNow.WebAPI.Managers
         public ModelManagerResult<MessageSearchViewModel> GetMessages(long queryId)
         {
             if (_queryRepository.GetByID(queryId) == null)
-                 return GetManagerResult<MessageSearchViewModel>(ResponseCodes.QUERY_NOT_EXIST);
+                return GetManagerResult<MessageSearchViewModel>(ResponseCodes.QUERY_NOT_EXIST);
 
             var messageSearchCollection = new MessageSearchViewModel
             {
                 Offset = 0,
                 Limit = 10,
-                
+
             };
             var queryList = _messageRepository.Get(x => x.QueryId == queryId).OrderBy(k => k.SentOn).ToList();
             messageSearchCollection.Total = queryList.Count;
@@ -146,10 +146,30 @@ namespace KonnectNow.WebAPI.Managers
 
 
         /// <summary>
+        /// Creates message replay to query
+        /// </summary>
+        /// <param name="queryId">QueryId</param>    
+        /// <param name="createMessageCommandModel">CreateMessageCommandModel</param>
+        /// <returns>ModelManagerResult(CreateMessageViewModel)</returns>
+        [UnitOfWork]
+        public ModelManagerResult<CreateMessageViewModel> CreateMessages(long queryId, CreateMessageCommandModel createMessageCommandModel)
+        {
+            if (_queryRepository.GetByID(queryId) == null)
+                return GetManagerResult<CreateMessageViewModel>(ResponseCodes.QUERY_NOT_EXIST);
+            if (_userRepository.GetByID(createMessageCommandModel.FromUserId) == null || _userRepository.GetByID(createMessageCommandModel.ToUserId) == null)
+                return GetManagerResult<CreateMessageViewModel>(ResponseCodes.USER_NOT_FOUND);
+            var message = Mapper.Map<CreateMessageCommandModel, Message>(createMessageCommandModel);
+            message.QueryId = queryId;
+            _messageRepository.Insert(message);
+            return GetManagerResult(ResponseCodes.OK, new CreateMessageViewModel { MessageId = Convert.ToInt64(message.MessageId) });
+        }
+
+
+        /// <summary>
         /// returns logs list
         /// </summary          
         /// <returns>ModelManagerResult(LogsSearchViewModel)</returns>
-        public ModelManagerResult<LogsSearchViewModel> GetLogs(int limit,int offset)
+        public ModelManagerResult<LogsSearchViewModel> GetLogs(int limit, int offset)
         {
 
             var messageSearchCollection = new LogsSearchViewModel

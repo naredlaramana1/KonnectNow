@@ -258,6 +258,8 @@
     <Compile Include="Models\Messages\LogsInfo.cs" />
     <Compile Include="Models\Messages\MesageSearchViewModel.cs" />
     <Compile Include="Models\Messages\MessageSearchInfo.cs" />
+    <Compile Include="Models\Query\CreateMessageCommandModel.cs" />
+    <Compile Include="Models\Query\CreateMessageViewModel.cs" />
     <Compile Include="Models\Query\CreateQueryCommandModel.cs" />
     <Compile Include="Models\Query\CreateQueryViewModel.cs" />
     <Compile Include="Models\Query\QuerySearchComamndModel.cs" />

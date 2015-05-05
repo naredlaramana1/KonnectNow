@@ -42,10 +42,12 @@ namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
             Mapper.CreateMap<CreateCityCommandModel, City>();
             Mapper.CreateMap<CreateLocationCommandModel, Location>();
             Mapper.CreateMap<CreateQueryCommandModel, Query>();
+            Mapper.CreateMap<decimal, long>().ConvertUsing(Convert.ToInt64);
             Mapper.CreateMap<Query, QuerySearchInfo>();
             Mapper.CreateMap<Message, MessageSearchInfo>().ForMember(dest => dest.MobileNo, src => src.MapFrom(y => y.User.MobileNo))
                                                           .ForMember(dest => dest.UserName, src => src.MapFrom(y => y.User.FirstName + "" + y.User.LastName));
             Mapper.CreateMap<Logs, LogsInfo>();
+            Mapper.CreateMap<CreateMessageCommandModel, Message>().ForMember(dest => dest.Text, src => src.MapFrom(y => y.Message));
         }
     }
 }

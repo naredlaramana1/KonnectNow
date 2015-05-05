@@ -11,6 +11,11 @@ namespace KonnectNow.WebAPI.Models.Query
     public class QuerySearchInfo
     {
         /// <summary>
+        /// QueryId
+        /// </summary>
+        public long QueryId { get; set; }
+
+        /// <summary>
         /// QueryText
         /// </summary>
         public string QueryText { get; set; }

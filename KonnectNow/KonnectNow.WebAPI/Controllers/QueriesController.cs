@@ -101,6 +101,29 @@ namespace KonnectNow.WebAPI.Controllers
 
 
         /// <summary>
+        /// Creates message replay to query
+        /// </summary>
+        /// <param name="queryId">QueryId</param>
+        /// <param name="createMessageCommandModel">CreateMessageCommandModel</param>
+        /// <returns>
+        /// HTTP Status = 201 - {QueryId},
+        /// HTTP Status = 404 - {Code = 4017, Message=Query not exist}
+        /// HTTP Status = 404 - {Code = 4012, Message =User not avialable}
+        /// </returns>
+
+        [HttpPost]
+        [Route("Queries/{queryId}/Messages")]
+        [ResponseType(typeof(CreateMessageViewModel))]
+        public HttpResponseMessage CreateMessage(long queryId, CreateMessageCommandModel createMessageCommandModel)
+        {
+            var result = _queryManager.CreateMessages(queryId, createMessageCommandModel);
+            if (result.Status == ResponseCodes.OK)
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+
+            return BuildErrorResponse(result.Status);
+        }
+
+        /// <summary>
         /// returns Current Logs
         /// </summary>      
         /// <returns>

@@ -41,5 +41,13 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// </summary          
         /// <returns>ModelManagerResult(LogsSearchViewModel)</returns>
         ModelManagerResult<LogsSearchViewModel> GetLogs(int limit, int offset);
+
+        /// <summary>
+        /// Creates message replay to query
+        /// </summary>
+        /// <param name="queryId">QueryId</param>    
+        /// <param name="createMessageCommandModel">CreateMessageCommandModel</param>
+        /// <returns>ModelManagerResult(CreateMessageViewModel)</returns>
+        ModelManagerResult<CreateMessageViewModel> CreateMessages(long queryId, CreateMessageCommandModel createMessageCommandModel);
     }
 }

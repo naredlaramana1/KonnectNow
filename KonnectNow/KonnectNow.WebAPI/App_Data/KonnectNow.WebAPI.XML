@@ -759,6 +759,18 @@
             HTTP Status = 404 - {Code = 4017, Message=Query not exist}
             </returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.QueriesController.CreateMessage(System.Int64,KonnectNow.WebAPI.Models.Query.CreateMessageCommandModel)">
+            <summary>
+            Creates message replay to query
+            </summary>
+            <param name="queryId">QueryId</param>
+            <param name="createMessageCommandModel">CreateMessageCommandModel</param>
+            <returns>
+            HTTP Status = 201 - {QueryId},
+            HTTP Status = 404 - {Code = 4017, Message=Query not exist}
+            HTTP Status = 404 - {Code = 4012, Message =User not avialable}
+            </returns>
+        </member>
         <!-- Badly formed XML comment ignored for member "M:KonnectNow.WebAPI.Controllers.QueriesController.GetLogs(System.Int32,System.Int32)" -->
         <member name="T:KonnectNow.WebAPI.Controllers.UsersController">
             <summary>
@@ -1394,6 +1406,14 @@
             <returns>ModelManagerResult(MessageSearchViewModel)</returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:KonnectNow.WebAPI.Managers.Interfaces.IQueryManager.GetLogs(System.Int32,System.Int32)" -->
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IQueryManager.CreateMessages(System.Int64,KonnectNow.WebAPI.Models.Query.CreateMessageCommandModel)">
+            <summary>
+            Creates message replay to query
+            </summary>
+            <param name="queryId">QueryId</param>    
+            <param name="createMessageCommandModel">CreateMessageCommandModel</param>
+            <returns>ModelManagerResult(CreateMessageViewModel)</returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IUserManager">
             <summary>
             This interface must be implemented by all user related business operations.
@@ -1689,6 +1709,14 @@
             </summary>
             <param name="queryId">QueryId</param>       
             <returns>ModelManagerResult(MessageSearchViewModel)</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.QueryManager.CreateMessages(System.Int64,KonnectNow.WebAPI.Models.Query.CreateMessageCommandModel)">
+            <summary>
+            Creates message replay to query
+            </summary>
+            <param name="queryId">QueryId</param>    
+            <param name="createMessageCommandModel">CreateMessageCommandModel</param>
+            <returns>ModelManagerResult(CreateMessageViewModel)</returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:KonnectNow.WebAPI.Managers.QueryManager.GetLogs(System.Int32,System.Int32)" -->
         <member name="T:KonnectNow.WebAPI.Managers.UserManager">
@@ -2149,6 +2177,36 @@
             SentOn
             </summary>
         </member>
+        <member name="T:KonnectNow.WebAPI.Models.Query.CreateMessageCommandModel">
+            <summary>
+            CreateMessageCommandModel object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Query.CreateMessageCommandModel.FromUserId">
+            <summary>
+            From UserId
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Query.CreateMessageCommandModel.ToUserId">
+            <summary>
+            To UserId
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Query.CreateMessageCommandModel.Message">
+            <summary>
+            Message
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Query.CreateMessageViewModel">
+            <summary>
+            CreateMessageViewModel object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Query.CreateMessageViewModel.MessageId">
+            <summary>
+            Message Id
+            </summary>
+        </member>
         <member name="T:KonnectNow.WebAPI.Models.Query.CreateQueryCommandModel">
             <summary>
             CreateQueryCommandModel Object
@@ -2212,6 +2270,11 @@
         <member name="T:KonnectNow.WebAPI.Models.Query.QuerySearchInfo">
             <summary>
             QuerySearchInfo
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Query.QuerySearchInfo.QueryId">
+            <summary>
+            QueryId
             </summary>
         </member>
         <member name="P:KonnectNow.WebAPI.Models.Query.QuerySearchInfo.QueryText">
