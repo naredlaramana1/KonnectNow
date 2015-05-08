@@ -47,6 +47,8 @@ namespace KonnectNow.Entity.Entities
 
         public byte[] ProfilePic { get; set; }
 
+        public bool IsVerified { get; set; }
+
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? CreatedOn { get; set; }
 

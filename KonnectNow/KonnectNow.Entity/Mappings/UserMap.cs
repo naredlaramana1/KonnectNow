@@ -49,6 +49,7 @@ namespace KonnectNow.Entity.Mappings
             this.Property(t => t.ModifiedOn).HasColumnName("Modified_On");
             this.Property(t => t.Longitude).HasColumnName("Longitude");
             this.Property(t => t.Latitude).HasColumnName("Latitude");
+            this.Property(t => t.IsVerified).HasColumnName("IS_REGISTERED");
 
         }
     }

@@ -43,6 +43,8 @@ namespace KonnectNow.Entity.Entities
 
         public double Latitude { get; set; }
 
+        public bool IsNotified { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Message> Messages { get; set; }
 

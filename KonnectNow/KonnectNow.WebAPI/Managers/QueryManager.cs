@@ -73,7 +73,7 @@ namespace KonnectNow.WebAPI.Managers
             }
             //Build query object
             var query = Mapper.Map<CreateQueryCommandModel, Query>(createQueryCommandModel);
-
+            query.IsNotified = false;
             _queryRepository.Insert(query);
             return GetManagerResult(ResponseCodes.OK, new CreateQueryViewModel { QueryId = Convert.ToInt64(query.QueryId) });
 

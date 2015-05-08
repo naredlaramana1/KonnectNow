@@ -81,7 +81,8 @@ namespace KonnectNow.WebAPI.Managers
                 return GetManagerResult<CreateUserViewModel>(ResponseCodes.MOBILE_ALREADY_REGISTERED);
             if(_countryRepository.GetByID(userCommandModel.CountryId)==null)
                 return GetManagerResult<CreateUserViewModel>(ResponseCodes.COUNTRY_NOT_FOUND);
-            var user = Mapper.Map<UserCommandModel, User>(userCommandModel);           
+            var user = Mapper.Map<UserCommandModel, User>(userCommandModel);
+            user.IsVerified = false;
             var a = _userRepository.Insert(user);
 
             if (a.UserId > 0)
