@@ -19,12 +19,7 @@ namespace KonnectNow.WebAPI.Models.Query
             SearchResults = new List<QuerySearchInfo>();
         }
 
-        /// <summary>
-        ///  UserId
-        /// </summary>
-        public long UserId { get; set; }
-
-        /// <summary>
+         /// <summary>
         /// List of queries
         /// </summary>
         public List<QuerySearchInfo> SearchResults { get; set; }

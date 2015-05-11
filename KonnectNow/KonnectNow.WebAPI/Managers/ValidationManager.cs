@@ -65,7 +65,18 @@ namespace KonnectNow.WebAPI.Managers
         [UnitOfWork]
         public ModelManagerResult<bool> VerifyVerificationCode(string mobileNo, string verificationCode)
         {
-            return CheckVerificationCode(mobileNo, verificationCode);
+            var result=CheckVerificationCode(mobileNo, verificationCode);
+            if (result.Status == ResponseCodes.OK)
+            {
+                var user = _userRepository.Get(x => x.MobileNo == mobileNo).FirstOrDefault();
+                if (user != null)
+                {
+                    user.IsVerified = true;
+                    user.ModifiedOn = null;
+                    _userRepository.Update(user);
+                }
+            }
+            return result;
         }
 
         /// <summary>

@@ -14,53 +14,48 @@ namespace KonnectNow.WebAPI.Models.User
         /// <summary>
         /// Name of the company
         /// </summary>
-        [Required]
-        [StringLength(100)]
         public string CompanyName { get; set; }
 
         /// <summary>
         /// Phone number of the company
         /// </summary>
-        [Required]
-        [StringLength(20)]
         public string PhoneNumber { get; set; }
 
         /// <summary>
         /// EmailId of the company
         /// </summary>
-        [Required]
-        [StringLength(250)]
-        [EmailAddress]
         public string EmailId { get; set; }
 
         /// <summary>
         /// Company Website URL 
         /// </summary>
-        [StringLength(50)]
         public string WebsiteUrl { get; set; }
 
+
         /// <summary>
-        /// Location point of the company
+        /// Longitude of the seller
         /// </summary>
-        [StringLength(150)]
-        public string LocationPoint { get; set; }
+        public double Longitude { get; set; }
+
+        /// <summary>
+        /// Latitude of the seller
+        /// </summary>
+
+        public double Latitude { get; set; }
 
         /// <summary>
         ///Company  Pancard Number
         /// </summary>
-        [StringLength(15)]
         public string PanCardNo { get; set; }
 
         /// <summary>
         ///Company Description
-        /// </summary>
-        [StringLength(250)]
+        /// </summary>      
         public string Description { get; set; }
 
         /// <summary>
         /// Auro Response
         /// </summary>
-        [StringLength(250)]
         public string AutoReponse { get; set; }
 
         /// <summary>
@@ -71,10 +66,9 @@ namespace KonnectNow.WebAPI.Models.User
         /// <summary>
         /// Keywords
         /// </summary>
-        [StringLength(500)]
         public string KeyWords { get; set; }
 
-    
+
 
     }
 }

@@ -41,10 +41,17 @@ namespace KonnectNow.WebAPI.Models.User
         public string WebsiteUrl { get; set; }
 
         /// <summary>
-        /// Location point of the company
+        /// Longitude of the seller
         /// </summary>
-        [StringLength(150)]
-        public string LocationPoint { get; set; }
+        [Required]
+        public double Longitude { get; set; }
+
+        /// <summary>
+        /// Latitude of the seller
+        /// </summary>
+        
+        [Required]
+        public double Latitude { get; set; }
 
         /// <summary>
         ///Company  Pancard Number

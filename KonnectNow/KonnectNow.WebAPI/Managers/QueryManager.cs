@@ -92,7 +92,7 @@ namespace KonnectNow.WebAPI.Managers
             {
                 Offset = querySearchComamndModel.Offset,
                 Limit = querySearchComamndModel.Limit,
-                UserId = userId
+               
             };
             var queryList = _queryRepository.Get(x => x.UserId == userId).OrderByDescending(k => k.ModifiedOn).ToList();
             querySearchCollection.Total = queryList.Count;

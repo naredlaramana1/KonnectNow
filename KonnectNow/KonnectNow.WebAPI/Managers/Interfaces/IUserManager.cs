@@ -36,14 +36,14 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <returns></returns>
         ModelManagerResult<bool> UpdateUser(int userId, UpdateUserCommandModel updateUserCommandModel);
 
-           /// <summary>
+        /// <summary>
         /// Returns user profile based on mobile number
         /// </summary>
         /// <param name="mobileNo"Mobile No></param>
         /// <returns></returns>
         ModelManagerResult<UserViewModel> GetUserByMobileNo(string mobileNo);
 
-         /// <summary>
+        /// <summary>
         /// Modifies the seller profile 
         /// </summary>
         /// <param name="userId">User Id</param>
@@ -51,19 +51,25 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <returns></returns>        
         ModelManagerResult<bool> SellerProfile(long userId, SellerProfileCommandModel sellerProfileCommandModel);
 
-                /// <summary>
+        /// <summary>
         /// Returns seller profile details for given userId
         /// </summary>
         /// <param name="userId">Usr Id</param>
         /// <returns></returns>
         ModelManagerResult<SellerViewModel> GetSellerProfile(long userId);
 
-
-            /// <summary>
+        /// <summary>
         /// Returns user profile based on mobile number
         /// </summary>
         /// <param name="mobileNo">Mobile No></param>
         /// <returns></returns>
         ModelManagerResult<string> GetValidationByMobileNo(string mobileNo);
+
+        /// <summary>
+        /// Returns user profile based on mobile number
+        /// </summary>
+        /// <param name="userId">UserId</param>
+        /// <returns></returns>
+        ModelManagerResult<UserEditViewModel> GetUserById(long userId);
     }
 }

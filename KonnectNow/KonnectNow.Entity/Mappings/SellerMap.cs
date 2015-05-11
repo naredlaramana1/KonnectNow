@@ -27,7 +27,8 @@ namespace KonnectNow.Entity.Mappings
             this.Property(t => t.PhoneNumber).HasColumnName("Phone_Number");
             this.Property(t => t.EmailId).HasColumnName("Email_Id");
             this.Property(t => t.WebsiteUrl).HasColumnName("Website_Url");
-            this.Property(t => t.LocationPoint).HasColumnName("Location_Point");
+            this.Property(t => t.Latitude).HasColumnName("Latitude");
+            this.Property(t => t.Longitude).HasColumnName("Longitude");
             this.Property(t => t.PanCardNo).HasColumnName("PanCard_No");
             this.Property(t => t.Description).HasColumnName("Description");
             this.Property(t => t.AutoReponse).HasColumnName("Auto_Reponse");

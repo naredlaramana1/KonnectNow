@@ -49,7 +49,7 @@ namespace KonnectNow.WebAPI.Controllers
             if (result.Status == ResponseCodes.OK)
             {
                 _userManager.SendVerificationCode(userCommandModel.MobileNo, validationCode);
-                return BuildSuccessResponse(HttpStatusCode.Created);
+                return BuildSuccessResponse(HttpStatusCode.Created,result.Value);
             }
             return BuildErrorResponse(result.Status);
 
@@ -62,7 +62,7 @@ namespace KonnectNow.WebAPI.Controllers
         /// <param name="updateUserCommandModel">UpdateUserCommandModel Object</param>
         /// <returns>
         /// HTTP Status = 204,
-        /// HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
+        /// HTTP Status = 404 - {Code = 4012, Message = User not avialable},
         /// </returns>
         [HttpPut]
         [Route("Users/{userId}/Register")]
@@ -85,7 +85,7 @@ namespace KonnectNow.WebAPI.Controllers
         /// HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
         /// </returns>
         [HttpGet]
-        [Route("User/Register/{mobileNo}/Profile")]
+        [Route("Users/Register/{mobileNo}/Profile")]
         [ResponseType(typeof(UserViewModel))]
         public HttpResponseMessage GetUserByMobileNo(string mobileNo)
         {
@@ -98,6 +98,30 @@ namespace KonnectNow.WebAPI.Controllers
             return BuildErrorResponse(result.Status);
 
         }
+
+        /// <summary>
+        /// Returns user profile details for given UserId.
+        /// </summary>
+        /// <param name="userId">UserId</param>
+        /// <returns> 
+        ///  HTTP Status = 200 {UserEditViewModel}
+        /// HTTP Status = 404 - {Code = 4012, Message = User not avialable},
+        /// </returns>
+        [HttpGet]
+        [Route("Users/{userId}")]
+        [ResponseType(typeof(UserEditViewModel))]
+        public HttpResponseMessage GetUserById(long userId)
+        {
+            var result = _userManager.GetUserById(userId);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
 
         /// <summary>
         /// Verifies the verification code for user

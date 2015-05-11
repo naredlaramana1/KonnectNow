@@ -48,6 +48,7 @@ namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
                                                           .ForMember(dest => dest.UserName, src => src.MapFrom(y => y.User.FirstName + "" + y.User.LastName));
             Mapper.CreateMap<Logs, LogsInfo>();
             Mapper.CreateMap<CreateMessageCommandModel, Message>().ForMember(dest => dest.Text, src => src.MapFrom(y => y.Message));
+            Mapper.CreateMap<User, UserEditViewModel>();
         }
     }
 }

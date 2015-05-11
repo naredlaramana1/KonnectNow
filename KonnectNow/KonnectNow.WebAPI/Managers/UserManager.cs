@@ -56,7 +56,7 @@ namespace KonnectNow.WebAPI.Managers
         {
             var user=_userRepository.GetByID(userId);
             if(user==null)
-                return GetManagerResult<bool>(ResponseCodes.MOBILENO_NOT_FOUND);
+                return GetManagerResult<bool>(ResponseCodes.USER_NOT_FOUND);
 
             user.FirstName = updateUserCommandModel.FirstName;
             user.LastName = updateUserCommandModel.LastName;
@@ -113,6 +113,22 @@ namespace KonnectNow.WebAPI.Managers
                  return GetManagerResult<UserViewModel>(ResponseCodes.OK, Mapper.Map<User, UserViewModel>(useMobile));
 
         }
+
+        /// <summary>
+        /// Returns user profile based on mobile number
+        /// </summary>
+        /// <param name="userId">UserId</param>
+        /// <returns></returns>
+        public ModelManagerResult<UserEditViewModel> GetUserById(long userId)
+        {
+            var user= _userRepository.GetByID(userId);
+            if (user == null)
+                return GetManagerResult<UserEditViewModel>(ResponseCodes.USER_NOT_FOUND);
+             else
+                return GetManagerResult<UserEditViewModel>(ResponseCodes.OK, Mapper.Map<User, UserEditViewModel>(user));
+
+        }
+        
 
         /// <summary>
         /// Returns user profile based on mobile number
@@ -174,7 +190,8 @@ namespace KonnectNow.WebAPI.Managers
                 seller.EmailId = sellerProfileCommandModel.EmailId;
                 seller.UserId = userId;
                 seller.KeyWords = sellerProfileCommandModel.KeyWords;
-                seller.LocationPoint = sellerProfileCommandModel.LocationPoint;
+                seller.Latitude = sellerProfileCommandModel.Latitude;
+                seller.Longitude = sellerProfileCommandModel.Longitude;
                 seller.PanCardNo = sellerProfileCommandModel.PanCardNo;
                 seller.PhoneNumber = sellerProfileCommandModel.PhoneNumber;
                 seller.ResponseStatus = sellerProfileCommandModel.ResponseStatus;

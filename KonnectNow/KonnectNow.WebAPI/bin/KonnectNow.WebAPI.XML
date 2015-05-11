@@ -804,7 +804,7 @@
             <param name="updateUserCommandModel">UpdateUserCommandModel Object</param>
             <returns>
             HTTP Status = 204,
-            HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
+            HTTP Status = 404 - {Code = 4012, Message = User not avialable},
             </returns>
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.UsersController.GetUserByMobileNo(System.String)">
@@ -815,6 +815,16 @@
             <returns> 
              HTTP Status = 200 {UserViewModel}
             HTTP Status = 404 - {Code = 4011, Message = Mobile Not registered},
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.UsersController.GetUserById(System.Int64)">
+            <summary>
+            Returns user profile details for given UserId.
+            </summary>
+            <param name="userId">UserId</param>
+            <returns> 
+             HTTP Status = 200 {UserEditViewModel}
+            HTTP Status = 404 - {Code = 4012, Message = User not avialable},
             </returns>
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.UsersController.Validate(KonnectNow.WebAPI.Models.User.VerificationCommandModel)">
@@ -1465,6 +1475,13 @@
             <param name="mobileNo">Mobile No></param>
             <returns></returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IUserManager.GetUserById(System.Int64)">
+            <summary>
+            Returns user profile based on mobile number
+            </summary>
+            <param name="userId">UserId</param>
+            <returns></returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IValidationManager">
             <summary>
             Provides account validation related operations
@@ -1750,6 +1767,13 @@
             <returns></returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:KonnectNow.WebAPI.Managers.UserManager.GetUserByMobileNo(System.String)" -->
+        <member name="M:KonnectNow.WebAPI.Managers.UserManager.GetUserById(System.Int64)">
+            <summary>
+            Returns user profile based on mobile number
+            </summary>
+            <param name="userId">UserId</param>
+            <returns></returns>
+        </member>
         <member name="M:KonnectNow.WebAPI.Managers.UserManager.GetValidationByMobileNo(System.String)">
             <summary>
             Returns user profile based on mobile number
@@ -2305,11 +2329,6 @@
             QuerySearchViewModel Constructor
              </summary>
         </member>
-        <member name="P:KonnectNow.WebAPI.Models.Query.QuerySearchViewModel.UserId">
-            <summary>
-             UserId
-            </summary>
-        </member>
         <member name="P:KonnectNow.WebAPI.Models.Query.QuerySearchViewModel.SearchResults">
             <summary>
             List of queries
@@ -2490,9 +2509,14 @@
             Company Website URL 
             </summary>
         </member>
-        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.LocationPoint">
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.Longitude">
             <summary>
-            Location point of the company
+            Longitude of the seller
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.Latitude">
+            <summary>
+            Latitude of the seller
             </summary>
         </member>
         <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.PanCardNo">
@@ -2545,9 +2569,14 @@
             Company Website URL 
             </summary>
         </member>
-        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.LocationPoint">
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.Longitude">
             <summary>
-            Location point of the company
+            Longitude of the seller
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.Latitude">
+            <summary>
+            Latitude of the seller
             </summary>
         </member>
         <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.PanCardNo">
@@ -2558,7 +2587,7 @@
         <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.Description">
              <summary>
             Company Description
-             </summary>
+             </summary>      
         </member>
         <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.AutoReponse">
             <summary>
@@ -2623,6 +2652,26 @@
         <member name="P:KonnectNow.WebAPI.Models.User.UserCommandModel.DeviceId">
             <summary>
             Device ID
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.User.UserEditViewModel">
+            <summary>
+            UserEditViewModel Object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UserEditViewModel.FirstName">
+            <summary>
+            First Name
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UserEditViewModel.LastName">
+            <summary>
+            LastName
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UserEditViewModel.ProfilePic">
+            <summary>
+            Profile Pic
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.User.UserViewModel">

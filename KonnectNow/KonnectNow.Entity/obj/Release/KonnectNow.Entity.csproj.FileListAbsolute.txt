@@ -17,3 +17,4 @@ D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Entity\bin\Release\Mi
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Entity\bin\Release\Microsoft.Practices.Unity.RegistrationByConvention.xml
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Entity\obj\Release\KonnectNow.Entity.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Entity\obj\Release\KonnectNow.Entity.pdb
+D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Entity\obj\Release\KonnectNow.Entity.csprojResolveAssemblyReference.cache

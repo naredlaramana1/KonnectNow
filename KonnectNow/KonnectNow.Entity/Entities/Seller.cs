@@ -32,8 +32,10 @@ namespace KonnectNow.Entity.Entities
             [StringLength(50)]
             public string WebsiteUrl { get; set; }
 
-            [StringLength(150)]
-            public string LocationPoint { get; set; }
+
+            public double Longitude { get; set; }
+
+            public double Latitude { get; set; }
 
             [StringLength(15)]
             public string PanCardNo { get; set; }
