@@ -715,6 +715,29 @@
             HTTP Status = 404 - {Code = 4014, Message =  location not found}
             </returns>
         </member>
+        <member name="T:KonnectNow.WebAPI.Controllers.MessagesController">
+            <summary>
+            Manages chating,notification related operations
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.MessagesController.#ctor(KonnectNow.WebAPI.Managers.Interfaces.IMessageManager)">
+            <summary>
+            Constructor for MessagesController.
+            </summary>
+            <param name="messageManager">IMessageManager object</param>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.MessagesController.CreateChatMessage(System.Int64,KonnectNow.WebAPI.Models.Messages.ChatCreateCommandModel)">
+            <summary>
+            Creates chating communication between two users
+            </summary>
+            <param name="userId">UserId</param>
+            <param name="chatCreateCommandModel">ChatCreateCommandModel</param>
+            <returns>
+            HTTP Status = 201 - {MesageId},
+            HTTP Status = 404 - {Code = 4017, Message=Query not exist}
+            HTTP Status = 404 - {Code = 4012, Message =User not avialable}
+            </returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Controllers.QueriesController">
             <summary>
             Manages  query retaled operations
@@ -1388,6 +1411,19 @@
             <param name="updateLocationCommandModel">UpdateLocationCommandModel Object</param>
             <returns>true or false</returns>
         </member>
+        <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IMessageManager">
+            <summary>
+            Manages chating,notification related operations
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IMessageManager.CreateChatMessages(System.Int64,KonnectNow.WebAPI.Models.Messages.ChatCreateCommandModel)">
+             <summary>
+            Creates chating communication between two users
+             </summary>
+             <param name="userId">UserId</param>
+             <param name="chatCreateCommandModel">ChatCreateCommandModel</param>
+             <returns>ModelManagerResult(CreateMessageViewModel)</returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IQueryManager">
             <summary>
             Provides Query related operations
@@ -1689,6 +1725,27 @@
             <param name="locationId">Location Id</param>
             <param name="updateLocationCommandModel">UpdateLocationCommandModel Object</param>
             <returns>true or false</returns>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Managers.MessageManager">
+            <summary>
+            Manages chating,notification related operations
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IUserRepository,KonnectNow.Repository.Repositories.Interfaces.IQueryRepository,KonnectNow.Repository.Repositories.Interfaces.IMessageRepository)">
+            <summary>
+            Constructor for MessageManager.
+            </summary>
+            <param name="userRepository">IUserRepository object</param>
+            <param name="queryRepository">IQueryRepository object</param>         
+            <param name="messageRepository">IMessageRepository object</param>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.CreateChatMessages(System.Int64,KonnectNow.WebAPI.Models.Messages.ChatCreateCommandModel)">
+             <summary>
+            Creates chating communication between two users
+             </summary>
+             <param name="userId">UserId</param>
+             <param name="chatCreateCommandModel">ChatCreateCommandModel</param>
+             <returns>ModelManagerResult(CreateMessageViewModel)</returns>
         </member>
         <member name="T:KonnectNow.WebAPI.Managers.QueryManager">
             <summary>
@@ -2144,6 +2201,26 @@
         <member name="P:KonnectNow.WebAPI.Models.Lookup.UpdateLocationCommandModel.Latitude">
             <summary>
             Location Latitude
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Messages.ChatCreateCommandModel">
+            <summary>
+            ChatCreateCommandModel object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.ChatCreateCommandModel.ToUserId">
+            <summary>
+            To UserId
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.ChatCreateCommandModel.Message">
+            <summary>
+            Message
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.ChatCreateCommandModel.QueryId">
+            <summary>
+            To UserId
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.Messages.LogsSearchViewModel">
