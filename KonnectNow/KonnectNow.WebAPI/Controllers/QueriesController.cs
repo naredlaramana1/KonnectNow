@@ -124,7 +124,7 @@ namespace KonnectNow.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Removes a category
+        /// Removes a Query
         /// </summary>
         /// <param name="queryId">Query Id</param>
         /// <returns>
@@ -150,15 +150,15 @@ namespace KonnectNow.WebAPI.Controllers
         /// returns Current Logs
         /// </summary>      
         /// <returns>
-       //LogsSearchViewModel
+        ///LogsSearchViewModel
         /// </returns>
 
         [HttpGet]
         [Route("Logs/{limit}/{offset}")]
         [ResponseType(typeof(LogsSearchViewModel))]
-        public HttpResponseMessage GetLogs([FromUri]int limit,[FromUri]int offset)
+        public HttpResponseMessage GetLogs([FromUri]int limit, [FromUri]int offset)
         {
-            var result = _queryManager.GetLogs(limit,offset);
+            var result = _queryManager.GetLogs(limit, offset);
             if (result.Status == ResponseCodes.OK)
                 return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
 

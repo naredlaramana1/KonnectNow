@@ -78,7 +78,8 @@ namespace KonnectNow.WebAPI.Managers
             validationCode = string.Empty;
             var useMobile = _userRepository.Get(x => x.MobileNo == userCommandModel.MobileNo).FirstOrDefault();
             if (useMobile!=null)
-                return GetManagerResult<CreateUserViewModel>(ResponseCodes.MOBILE_ALREADY_REGISTERED);
+                return GetManagerResult(ResponseCodes.OK, new CreateUserViewModel { UserId = Convert.ToInt64(useMobile.UserId) });
+            //return GetManagerResult<CreateUserViewModel>(ResponseCodes.MOBILE_ALREADY_REGISTERED);
             if(_countryRepository.GetByID(userCommandModel.CountryId)==null)
                 return GetManagerResult<CreateUserViewModel>(ResponseCodes.COUNTRY_NOT_FOUND);
             var user = Mapper.Map<UserCommandModel, User>(userCommandModel);

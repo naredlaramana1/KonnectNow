@@ -796,7 +796,7 @@
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.QueriesController.DeleteQuery(System.Int64)">
             <summary>
-            Removes a category
+            Removes a Query
             </summary>
             <param name="queryId">Query Id</param>
             <returns>
@@ -804,7 +804,14 @@
             HTTP Status = 404 - {Code = 4017, Message = Query not exist}
             </returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:KonnectNow.WebAPI.Controllers.QueriesController.GetLogs(System.Int32,System.Int32)" -->
+        <member name="M:KonnectNow.WebAPI.Controllers.QueriesController.GetLogs(System.Int32,System.Int32)">
+             <summary>
+             returns Current Logs
+             </summary>      
+             <returns>
+            LogsSearchViewModel
+             </returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Controllers.UsersController">
             <summary>
             Manages  user retaled operations
@@ -2763,6 +2770,16 @@
         <member name="P:KonnectNow.WebAPI.Models.User.UserCommandModel.DeviceId">
             <summary>
             Device ID
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UserCommandModel.Longitude">
+            <summary>
+            City Longitude
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UserCommandModel.Latitude">
+            <summary>
+            City Latitude
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.User.UserEditViewModel">

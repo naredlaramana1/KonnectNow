@@ -45,5 +45,17 @@ namespace KonnectNow.WebAPI.Models.User
          [Required]
          [StringLength(500)]
         public string DeviceId { get; set; }
+
+         /// <summary>
+         /// City Longitude
+         /// </summary>
+         [Required]
+         public double Longitude { get; set; }
+
+         /// <summary>
+         /// City Latitude
+         /// </summary>
+         [Required]
+         public double Latitude { get; set; }
     }
 }
