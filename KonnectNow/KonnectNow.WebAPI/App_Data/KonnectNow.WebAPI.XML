@@ -794,6 +794,16 @@
             HTTP Status = 404 - {Code = 4012, Message =User not avialable}
             </returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.QueriesController.DeleteQuery(System.Int64)">
+            <summary>
+            Removes a category
+            </summary>
+            <param name="queryId">Query Id</param>
+            <returns>
+            HTTP Status = 204,
+            HTTP Status = 404 - {Code = 4017, Message = Query not exist}
+            </returns>
+        </member>
         <!-- Badly formed XML comment ignored for member "M:KonnectNow.WebAPI.Controllers.QueriesController.GetLogs(System.Int32,System.Int32)" -->
         <member name="T:KonnectNow.WebAPI.Controllers.UsersController">
             <summary>
@@ -1460,6 +1470,13 @@
             <param name="createMessageCommandModel">CreateMessageCommandModel</param>
             <returns>ModelManagerResult(CreateMessageViewModel)</returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IQueryManager.DeleteQuery(System.Int64)">
+            <summary>
+            Deletes Query
+            </summary>
+            <param name="queryId">Query Id</param>              
+            <returns>ModelManagerResult(Boolean)</returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IUserManager">
             <summary>
             This interface must be implemented by all user related business operations.
@@ -1793,6 +1810,13 @@
             <returns>ModelManagerResult(CreateMessageViewModel)</returns>
         </member>
         <!-- Badly formed XML comment ignored for member "M:KonnectNow.WebAPI.Managers.QueryManager.GetLogs(System.Int32,System.Int32)" -->
+        <member name="M:KonnectNow.WebAPI.Managers.QueryManager.DeleteQuery(System.Int64)">
+            <summary>
+            Deletes Query
+            </summary>
+            <param name="queryId">Query Id</param>              
+            <returns>ModelManagerResult(Boolean)</returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.UserManager">
             <summary>
             Manages user account related operations

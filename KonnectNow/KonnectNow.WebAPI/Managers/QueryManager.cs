@@ -74,6 +74,7 @@ namespace KonnectNow.WebAPI.Managers
             //Build query object
             var query = Mapper.Map<CreateQueryCommandModel, Query>(createQueryCommandModel);
             query.IsNotified = false;
+            query.IsDeleted = false;
             _queryRepository.Insert(query);
             return GetManagerResult(ResponseCodes.OK, new CreateQueryViewModel { QueryId = Convert.ToInt64(query.QueryId) });
 
@@ -94,7 +95,7 @@ namespace KonnectNow.WebAPI.Managers
                 Limit = querySearchComamndModel.Limit,
                
             };
-            var queryList = _queryRepository.Get(x => x.UserId == userId).OrderByDescending(k => k.ModifiedOn).ToList();
+            var queryList = _queryRepository.Get(x => x.UserId == userId && x.IsDeleted==false).OrderByDescending(k => k.ModifiedOn).ToList();
             querySearchCollection.Total = queryList.Count;
             var itemList = queryList.Skip(querySearchComamndModel.Offset)
                            .Take(querySearchComamndModel.Limit).ToList();
@@ -193,6 +194,24 @@ namespace KonnectNow.WebAPI.Managers
                 }
             }
             return GetManagerResult(ResponseCodes.OK, messageSearchCollection);
+        }
+
+        /// <summary>
+        /// Deletes Query
+        /// </summary>
+        /// <param name="queryId">Query Id</param>              
+        /// <returns>ModelManagerResult(Boolean)</returns>
+        [UnitOfWork]
+        public ModelManagerResult<bool> DeleteQuery(long queryId)
+        {
+            var query = _queryRepository.Get(x => x.QueryId == queryId).FirstOrDefault();
+            if (query == null)
+                return GetManagerResult<bool>(ResponseCodes.QUERY_NOT_EXIST);
+            query.IsDeleted = true;
+            //Delete query from queryrable
+            _queryRepository.Update(query);
+
+            return GetManagerResult(ResponseCodes.OK, true);
         }
     }
 }

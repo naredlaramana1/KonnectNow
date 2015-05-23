@@ -38,6 +38,7 @@ namespace KonnectNow.Entity.Mappings
             this.Property(t => t.CreatedOn).HasColumnName("Created_On");
             this.Property(t => t.ModifiedOn).HasColumnName("Modified_On");
             this.Property(t => t.IsNotified).HasColumnName("IS_NOTIFIED");
+            this.Property(t => t.IsDeleted).HasColumnName("is_delete");
         }
     }
 }

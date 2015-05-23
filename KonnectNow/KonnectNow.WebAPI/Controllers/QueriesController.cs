@@ -124,6 +124,29 @@ namespace KonnectNow.WebAPI.Controllers
         }
 
         /// <summary>
+        /// Removes a category
+        /// </summary>
+        /// <param name="queryId">Query Id</param>
+        /// <returns>
+        /// HTTP Status = 204,
+        /// HTTP Status = 404 - {Code = 4017, Message = Query not exist}
+        /// </returns>
+        [HttpDelete]
+        [Route("Queries/{queryId}")]
+        [ResponseType(typeof(bool))]
+        public HttpResponseMessage DeleteQuery(long queryId)
+        {
+            var result = _queryManager.DeleteQuery(queryId);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.NoContent);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
+        /// <summary>
         /// returns Current Logs
         /// </summary>      
         /// <returns>

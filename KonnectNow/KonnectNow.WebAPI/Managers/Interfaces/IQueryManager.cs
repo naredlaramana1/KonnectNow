@@ -49,5 +49,13 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <param name="createMessageCommandModel">CreateMessageCommandModel</param>
         /// <returns>ModelManagerResult(CreateMessageViewModel)</returns>
         ModelManagerResult<CreateMessageViewModel> CreateMessages(long queryId, CreateMessageCommandModel createMessageCommandModel);
+
+        
+        /// <summary>
+        /// Deletes Query
+        /// </summary>
+        /// <param name="queryId">Query Id</param>              
+        /// <returns>ModelManagerResult(Boolean)</returns>
+        ModelManagerResult<bool> DeleteQuery(long queryId);
     }
 }
