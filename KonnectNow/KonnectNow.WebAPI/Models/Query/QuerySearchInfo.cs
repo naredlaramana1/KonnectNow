@@ -19,5 +19,12 @@ namespace KonnectNow.WebAPI.Models.Query
         /// QueryText
         /// </summary>
         public string QueryText { get; set; }
+
+
+
+        /// <summary>
+        /// Created On
+        /// </summary>
+        public DateTime CreatedOn { get; set; }
     }
 }

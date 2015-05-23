@@ -43,7 +43,7 @@ namespace KonnectNow.WebAPI.Models.User
         /// Device ID
         /// </summary>
          [Required]
-         [StringLength(50)]
+         [StringLength(500)]
         public string DeviceId { get; set; }
     }
 }

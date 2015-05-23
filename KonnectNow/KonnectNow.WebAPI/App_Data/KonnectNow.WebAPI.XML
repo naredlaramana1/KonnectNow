@@ -2260,6 +2260,11 @@
         </member>
         <member name="P:KonnectNow.WebAPI.Models.Messages.MessageSearchInfo.UserName">
             <summary>
+             User Name
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.MessageSearchInfo.UserId">
+            <summary>
              User Id
             </summary>
         </member>
@@ -2381,6 +2386,11 @@
         <member name="P:KonnectNow.WebAPI.Models.Query.QuerySearchInfo.QueryText">
             <summary>
             QueryText
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Query.QuerySearchInfo.CreatedOn">
+            <summary>
+            Created On
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.Query.QuerySearchModelBinder">

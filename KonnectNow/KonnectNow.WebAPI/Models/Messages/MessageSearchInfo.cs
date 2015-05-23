@@ -13,9 +13,15 @@ namespace KonnectNow.WebAPI.Models.Messages
         public string MobileNo { get; set; }
 
         /// <summary>
-        ///  User Id
+        ///  User Name
         /// </summary>
         public string UserName { get; set; }
+
+
+        /// <summary>
+        ///  User Id
+        /// </summary>
+        public long UserId { get; set; }
 
         /// <summary>
         ///  Message Id

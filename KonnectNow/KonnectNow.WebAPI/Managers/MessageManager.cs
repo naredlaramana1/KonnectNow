@@ -59,7 +59,8 @@ namespace KonnectNow.WebAPI.Managers
             if (_userRepository.GetByID(userId) == null || user == null)
                 return GetManagerResult<CreateMessageViewModel>(ResponseCodes.USER_NOT_FOUND);
             SendNotification(user.DeviceId,chatCreateCommandModel.Message);
-            var message = Mapper.Map<ChatCreateCommandModel, Message>(chatCreateCommandModel);        
+            var message = Mapper.Map<ChatCreateCommandModel, Message>(chatCreateCommandModel);
+            message.FromUserId = userId;
             _messageRepository.Insert(message);
             return GetManagerResult(ResponseCodes.OK, new CreateMessageViewModel { MessageId = Convert.ToInt64(message.MessageId) });
         }
@@ -67,7 +68,7 @@ namespace KonnectNow.WebAPI.Managers
 
        private string SendNotification(string deviceId, string message)
     {
-        string GoogleAppID = ConfigurationManager.AppSettings["GoogleAppID"].ToString();        
+        string GoogleAppID = ConfigurationManager.AppSettings["GoogleAppID"].ToString();;
         var SENDER_ID = "9999999999";
         var value = message;
         WebRequest tRequest;
@@ -78,7 +79,7 @@ namespace KonnectNow.WebAPI.Managers
 
         tRequest.Headers.Add(string.Format("Sender: id={0}", SENDER_ID));
 
-        string postData = string.Format(ConfigurationManager.AppSettings["GCMMessage"].ToString(), message, System.DateTime.Now.ToString(), message);
+        string postData = string.Format(ConfigurationManager.AppSettings["GCMMessage"].ToString(), message, System.DateTime.Now.ToString(), deviceId);
         Console.WriteLine(postData);
         Byte[] byteArray = Encoding.UTF8.GetBytes(postData);
         tRequest.ContentLength = byteArray.Length;

@@ -35,7 +35,7 @@ namespace KonnectNow.Entity.Entities
         public string MobileNo { get; set; }
 
         [Required]
-        [StringLength(100)]
+        [StringLength(500)]
         public string DeviceId { get; set; }
 
         [Column(TypeName = "numeric")]
