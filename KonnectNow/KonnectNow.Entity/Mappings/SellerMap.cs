@@ -18,6 +18,9 @@ namespace KonnectNow.Entity.Mappings
             this.Property(e => e.UserId)
                 .HasPrecision(18, 0);
 
+            this.Property(e => e.CatId)
+               .HasPrecision(18, 0);
+
             this.Property(e => e.PanCardNo)
                 .IsUnicode(false);
 
@@ -36,7 +39,7 @@ namespace KonnectNow.Entity.Mappings
             this.Property(t => t.KeyWords).HasColumnName("Key_Words");
             this.Property(t => t.CreatedOn).HasColumnName("Created_On");
             this.Property(t => t.ModifiedOn).HasColumnName("Modified_On");
-            
+            this.Property(t => t.CatId).HasColumnName("CAT_ID");
         }
 
     }

@@ -184,12 +184,13 @@ namespace KonnectNow.WebAPI.Managers
             var seller = _sellerRepository.Get(x => x.UserId == userId).FirstOrDefault();
             if (seller != null)
             {
-                seller = Mapper.Map<SellerProfileCommandModel, Seller>(sellerProfileCommandModel);
-                seller.EmailId= sellerProfileCommandModel.AutoReponse;
-                seller.AutoReponse=sellerProfileCommandModel.CompanyName;
+               
+                seller.AutoReponse= sellerProfileCommandModel.AutoReponse;
+                seller.CompanyName=sellerProfileCommandModel.CompanyName;
                 seller.Description=sellerProfileCommandModel.Description;
                 seller.EmailId = sellerProfileCommandModel.EmailId;
                 seller.UserId = userId;
+                seller.CatId = sellerProfileCommandModel.CatId;
                 seller.KeyWords = sellerProfileCommandModel.KeyWords;
                 seller.Latitude = sellerProfileCommandModel.Latitude;
                 seller.Longitude = sellerProfileCommandModel.Longitude;

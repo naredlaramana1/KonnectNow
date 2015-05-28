@@ -21,6 +21,9 @@ namespace KonnectNow.Entity.Entities
             [Column(TypeName = "numeric")]
             public decimal UserId { get; set; }
 
+            [Column(TypeName = "numeric")]
+            public decimal CatId { get; set; }
+
             [Required]
             [StringLength(20)]
             public string PhoneNumber { get; set; }
@@ -36,6 +39,8 @@ namespace KonnectNow.Entity.Entities
             public double Longitude { get; set; }
 
             public double Latitude { get; set; }
+
+            
 
             [StringLength(15)]
             public string PanCardNo { get; set; }
@@ -58,6 +63,7 @@ namespace KonnectNow.Entity.Entities
             public DateTime? ModifiedOn { get; set; }
 
             public virtual User User { get; set; }
+            public virtual Category Category { get; set; }
         }
  
 }

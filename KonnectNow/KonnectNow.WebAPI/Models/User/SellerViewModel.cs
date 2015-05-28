@@ -68,7 +68,10 @@ namespace KonnectNow.WebAPI.Models.User
         /// </summary>
         public string KeyWords { get; set; }
 
-
+        /// <summary>
+        /// seller category id
+        /// </summary>
+       public long CatId { get; set; }
 
     }
 }

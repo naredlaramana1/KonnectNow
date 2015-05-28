@@ -796,7 +796,7 @@
         </member>
         <member name="M:KonnectNow.WebAPI.Controllers.QueriesController.DeleteQuery(System.Int64)">
             <summary>
-            Removes a category
+            Removes a Query
             </summary>
             <param name="queryId">Query Id</param>
             <returns>
@@ -804,7 +804,14 @@
             HTTP Status = 404 - {Code = 4017, Message = Query not exist}
             </returns>
         </member>
-        <!-- Badly formed XML comment ignored for member "M:KonnectNow.WebAPI.Controllers.QueriesController.GetLogs(System.Int32,System.Int32)" -->
+        <member name="M:KonnectNow.WebAPI.Controllers.QueriesController.GetLogs(System.Int32,System.Int32)">
+             <summary>
+             returns Current Logs
+             </summary>      
+             <returns>
+            LogsSearchViewModel
+             </returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Controllers.UsersController">
             <summary>
             Manages  user retaled operations
@@ -1764,6 +1771,15 @@
              <param name="chatCreateCommandModel">ChatCreateCommandModel</param>
              <returns>ModelManagerResult(CreateMessageViewModel)</returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.SendGCMNotification(System.String,System.String,System.String,System.String)">
+            <summary>
+            Send a Google Cloud Message. Uses the GCM service and your provided api key.
+            </summary>
+            <param name="apiKey"></param>
+            <param name="postData"></param>
+            <param name="postDataContentType"></param>
+            <returns>The response string from the google servers</returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.QueryManager">
             <summary>
             Manages  Query operations
@@ -2655,6 +2671,11 @@
             Keywords
             </summary>
         </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.CatId">
+            <summary>
+            seller category id
+            </summary>
+        </member>
         <member name="T:KonnectNow.WebAPI.Models.User.SellerViewModel">
             <summary>
             SellerViewModel Obejct 
@@ -2715,6 +2736,11 @@
             Keywords
             </summary>
         </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.CatId">
+            <summary>
+            seller category id
+            </summary>
+        </member>
         <member name="T:KonnectNow.WebAPI.Models.User.UpdateUserCommandModel">
             <summary>
             UpdateUserCommandModel Object
@@ -2763,6 +2789,16 @@
         <member name="P:KonnectNow.WebAPI.Models.User.UserCommandModel.DeviceId">
             <summary>
             Device ID
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UserCommandModel.Longitude">
+            <summary>
+            City Longitude
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.UserCommandModel.Latitude">
+            <summary>
+            City Latitude
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.User.UserEditViewModel">

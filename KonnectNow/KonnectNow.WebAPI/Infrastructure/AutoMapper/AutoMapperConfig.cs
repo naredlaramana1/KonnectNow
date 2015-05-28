@@ -47,6 +47,8 @@ namespace KonnectNow.WebAPI.Infrastructure.AutoMapper
             Mapper.CreateMap<Message, MessageSearchInfo>().ForMember(dest => dest.MobileNo, src => src.MapFrom(y => y.User1.MobileNo))
                                                           .ForMember(dest => dest.UserName, src => src.MapFrom(y => y.User1.FirstName + "" + y.User1.LastName))
                                                           .ForMember(dest => dest.UserId, src => src.MapFrom(y => y.FromUserId));
+                                                         
+
             Mapper.CreateMap<Logs, LogsInfo>();
             Mapper.CreateMap<CreateMessageCommandModel, Message>().ForMember(dest => dest.Text, src => src.MapFrom(y => y.Message));
             Mapper.CreateMap<User, UserEditViewModel>();

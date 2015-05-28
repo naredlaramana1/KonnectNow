@@ -17,6 +17,10 @@ namespace KonnectNow.Entity.Mappings
             this.HasMany(e => e.Queries)
                .WithRequired(e => e.Category)
                .WillCascadeOnDelete(false);
+
+            this.HasMany(e => e.Sellers)
+               .WithRequired(e => e.Category)
+               .WillCascadeOnDelete(false);
             this.Property(t => t.CatId).HasColumnName("Cat_Id");
             this.Property(t => t.CatName).HasColumnName("Cat_Name");
             this.Property(t => t.IsActive).HasColumnName("Is_Active");

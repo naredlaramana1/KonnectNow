@@ -38,5 +38,7 @@ namespace KonnectNow.WebAPI.Models.Messages
         /// </summary>
         public string SentOn { get; set; }
 
+       
+
     }
 }

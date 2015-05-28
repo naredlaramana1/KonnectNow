@@ -1771,6 +1771,15 @@
              <param name="chatCreateCommandModel">ChatCreateCommandModel</param>
              <returns>ModelManagerResult(CreateMessageViewModel)</returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.SendGCMNotification(System.String,System.String,System.String,System.String)">
+            <summary>
+            Send a Google Cloud Message. Uses the GCM service and your provided api key.
+            </summary>
+            <param name="apiKey"></param>
+            <param name="postData"></param>
+            <param name="postDataContentType"></param>
+            <returns>The response string from the google servers</returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.QueryManager">
             <summary>
             Manages  Query operations
@@ -2662,6 +2671,11 @@
             Keywords
             </summary>
         </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.CatId">
+            <summary>
+            seller category id
+            </summary>
+        </member>
         <member name="T:KonnectNow.WebAPI.Models.User.SellerViewModel">
             <summary>
             SellerViewModel Obejct 
@@ -2720,6 +2734,11 @@
         <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.KeyWords">
             <summary>
             Keywords
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.CatId">
+            <summary>
+            seller category id
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.User.UpdateUserCommandModel">

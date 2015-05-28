@@ -34,9 +34,9 @@ namespace KonnectNow.WebAPI.Models.User
         [EmailAddress]
         public string EmailId { get; set; }
 
-       /// <summary>
-       /// Company Website URL 
-       /// </summary>
+        /// <summary>
+        /// Company Website URL 
+        /// </summary>
         [StringLength(50)]
         public string WebsiteUrl { get; set; }
 
@@ -49,8 +49,6 @@ namespace KonnectNow.WebAPI.Models.User
         /// <summary>
         /// Latitude of the seller
         /// </summary>
-        
-        [Required]
         public double Latitude { get; set; }
 
         /// <summary>
@@ -71,9 +69,9 @@ namespace KonnectNow.WebAPI.Models.User
         [StringLength(250)]
         public string AutoReponse { get; set; }
 
-       /// <summary>
-       /// Response Status
-       /// </summary>
+        /// <summary>
+        /// Response Status
+        /// </summary>
         public bool ResponseStatus { get; set; }
 
         /// <summary>
@@ -82,8 +80,12 @@ namespace KonnectNow.WebAPI.Models.User
         [StringLength(500)]
         public string KeyWords { get; set; }
 
-    
+        /// <summary>
+        /// seller category id
+        /// </summary>
+        [Required]
+        public long CatId { get; set; }
 
-        
+
     }
 }
