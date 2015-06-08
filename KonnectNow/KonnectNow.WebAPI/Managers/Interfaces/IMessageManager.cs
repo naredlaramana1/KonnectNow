@@ -21,5 +21,40 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <param name="chatCreateCommandModel">ChatCreateCommandModel</param>
         /// <returns>ModelManagerResult(CreateMessageViewModel)</returns>
         ModelManagerResult<CreateMessageViewModel> CreateChatMessages(long userId, ChatCreateCommandModel chatCreateCommandModel);
+
+        /// <summary>
+        /// Returns chat messages between two users for given query
+        /// </summary>
+        /// <param name="queryId">QueryId</param>   
+        /// <param name="fromuserId">FromUserId</param> 
+        /// <param name="toUserId">ToUserId</param> 
+        /// <returns>ModelManagerResult(MessageSearchViewModel)</returns>
+        ModelManagerResult<MessageSearchViewModel> GetChatMessages(long queryId, long fromuserId, long toUserId);
+
+
+        /// <summary>
+        /// returns responded seller message details
+        /// </summary>
+        /// <param name="queryId">QueryId</param>   
+        /// <param name="userId">UserId</param> 
+        /// <returns>ModelManagerResult(SellerRespondMessageViewModel)</returns>
+        ModelManagerResult<SellerRespondMessageViewModel> GetSellerRespondMessages(long queryId, long userId);
+
+
+        /// <summary>
+        /// returns responded  messages to seller  details
+        /// </summary>    
+        /// <param name="userId">UserId</param> 
+        /// <returns>ModelManagerResult(UserRespondMessageViewModel)</returns>
+        ModelManagerResult<UserRespondMessageViewModel> GetUserRespondMessages(long userId);
+
+        
+       /// <summary>
+       /// Deletes Conversion messages
+       /// </summary>
+       /// <param name="fromUserId">FromUserId</param>      
+       ///  <param name="toUserId">ToUserId</param>    
+       /// <returns>ModelManagerResult(Boolean)</returns>
+        ModelManagerResult<bool> DeleteConversion(long fromUserId, long toUserId);
     }
 }

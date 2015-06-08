@@ -52,5 +52,103 @@ namespace KonnectNow.WebAPI.Controllers
 
             return BuildErrorResponse(result.Status);
         }
+
+
+        /// <summary>
+        /// returns message list for between users based on query
+        /// </summary>
+        /// <param name="queryId">QueryId</param>
+        /// <param name="fromUserId">FromUserId</param>
+        /// <param name="toUserId">ToUserId</param>
+        /// <returns>
+        /// HTTP Status = 200 - {search results},
+        /// HTTP Status = 404 - {Code = 4017, Message=Query not exist}
+        /// HTTP Status = 404 - {Code = 4012, Message=User not avialable}
+        /// </returns>
+
+        [HttpGet]
+        [Route("Queries/{queryId}/ChatMessages")]
+        [ResponseType(typeof(MessageSearchViewModel))]
+        public HttpResponseMessage GetChatMessages(long queryId, [FromUri]long fromUserId, [FromUri] long toUserId)
+        {
+            var result = _messageManager.GetChatMessages(queryId, fromUserId, toUserId);
+            if (result.Status == ResponseCodes.OK)
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+
+            return BuildErrorResponse(result.Status);
+        }
+
+        
+
+        /// <summary>
+        /// returns seller respond messages  for query
+        /// </summary>
+        /// <param name="queryId">QueryId</param>
+        /// <param name="userId">UserId</param>
+        /// <returns>
+        /// HTTP Status = 200 - {search results},
+        /// HTTP Status = 404 - {Code = 4017, Message=Query not exist}
+        /// HTTP Status = 404 - {Code = 4012, Message=User not avialable}
+        /// </returns>
+
+        [HttpGet]
+        [Route("Queries/{queryId}/SellerRespondMessages")]
+        [ResponseType(typeof(SellerRespondMessageViewModel))]
+        public HttpResponseMessage GetSellerRespondMessages(long queryId, [FromUri]long userId)
+        {
+            var result = _messageManager.GetSellerRespondMessages(queryId, userId);
+            if (result.Status == ResponseCodes.OK)
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+
+            return BuildErrorResponse(result.Status);
+        }
+
+        /// <summary>
+        /// returns user respond messages 
+        /// </summary>
+        /// <param name="userId">UserId</param>
+        /// <returns>
+        /// HTTP Status = 200 - {search results},
+        /// HTTP Status = 404 - {Code = 4012, Message=User not avialable}
+        /// </returns>
+
+        [HttpGet]
+        [Route("UserRespondMessages/{userId}")]
+        [ResponseType(typeof(UserRespondMessageViewModel))]
+        public HttpResponseMessage GetUserRespondMessages(long userId)
+        {
+            var result = _messageManager.GetUserRespondMessages(userId);
+            if (result.Status == ResponseCodes.OK)
+                return BuildSuccessResponse(HttpStatusCode.OK, result.Value);
+
+            return BuildErrorResponse(result.Status);
+        }
+
+
+
+        /// <summary>
+        /// Removes a conversion between users
+        /// </summary>
+        /// <param name="fromUserId">FromUserId</param>
+        /// <param name="toUserId">ToUserId</param>
+        /// <returns>
+        /// HTTP Status = 204,
+        /// HTTP Status = 404 - {Code = 4012, Message=User not avialable}
+        /// </returns>
+        [HttpPost]
+        [Route("Messages/{fromUserId}")]
+        [ResponseType(typeof(bool))]
+        public HttpResponseMessage DeleteConversion(long fromUserId, [FromUri]long toUserId)
+        {
+            var result = _messageManager.DeleteConversion(fromUserId, toUserId);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.NoContent);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
     }
 }

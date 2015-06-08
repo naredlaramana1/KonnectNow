@@ -28,6 +28,7 @@ namespace KonnectNow.Entity.Entities
         public string Text { get; set; }
 
         public bool IsRead { get; set; }
+        public bool IsDeleted { get; set; }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime? SentOn { get; set; }

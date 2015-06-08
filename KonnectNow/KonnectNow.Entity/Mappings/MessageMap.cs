@@ -30,6 +30,7 @@ namespace KonnectNow.Entity.Mappings
             this.Property(t => t.Text).HasColumnName("Message");
             this.Property(t => t.IsRead).HasColumnName("Is_Read");
             this.Property(t => t.SentOn).HasColumnName("Sent_On");
+            this.Property(t => t.IsDeleted).HasColumnName("is_delete");
             
         }
     }

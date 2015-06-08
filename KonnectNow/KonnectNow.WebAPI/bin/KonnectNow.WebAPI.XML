@@ -738,6 +738,52 @@
             HTTP Status = 404 - {Code = 4012, Message =User not avialable}
             </returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.MessagesController.GetChatMessages(System.Int64,System.Int64,System.Int64)">
+            <summary>
+            returns message list for between users based on query
+            </summary>
+            <param name="queryId">QueryId</param>
+            <param name="fromUserId">FromUserId</param>
+            <param name="toUserId">ToUserId</param>
+            <returns>
+            HTTP Status = 200 - {search results},
+            HTTP Status = 404 - {Code = 4017, Message=Query not exist}
+            HTTP Status = 404 - {Code = 4012, Message=User not avialable}
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.MessagesController.GetSellerRespondMessages(System.Int64,System.Int64)">
+            <summary>
+            returns seller respond messages  for query
+            </summary>
+            <param name="queryId">QueryId</param>
+            <param name="userId">UserId</param>
+            <returns>
+            HTTP Status = 200 - {search results},
+            HTTP Status = 404 - {Code = 4017, Message=Query not exist}
+            HTTP Status = 404 - {Code = 4012, Message=User not avialable}
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.MessagesController.GetUserRespondMessages(System.Int64)">
+            <summary>
+            returns user respond messages 
+            </summary>
+            <param name="userId">UserId</param>
+            <returns>
+            HTTP Status = 200 - {search results},
+            HTTP Status = 404 - {Code = 4012, Message=User not avialable}
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.MessagesController.DeleteConversion(System.Int64,System.Int64)">
+            <summary>
+            Removes a conversion between users
+            </summary>
+            <param name="fromUserId">FromUserId</param>
+            <param name="toUserId">ToUserId</param>
+            <returns>
+            HTTP Status = 204,
+            HTTP Status = 404 - {Code = 4012, Message=User not avialable}
+            </returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Controllers.QueriesController">
             <summary>
             Manages  query retaled operations
@@ -1441,6 +1487,38 @@
              <param name="chatCreateCommandModel">ChatCreateCommandModel</param>
              <returns>ModelManagerResult(CreateMessageViewModel)</returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IMessageManager.GetChatMessages(System.Int64,System.Int64,System.Int64)">
+            <summary>
+            Returns chat messages between two users for given query
+            </summary>
+            <param name="queryId">QueryId</param>   
+            <param name="fromuserId">FromUserId</param> 
+            <param name="toUserId">ToUserId</param> 
+            <returns>ModelManagerResult(MessageSearchViewModel)</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IMessageManager.GetSellerRespondMessages(System.Int64,System.Int64)">
+            <summary>
+            returns responded seller message details
+            </summary>
+            <param name="queryId">QueryId</param>   
+            <param name="userId">UserId</param> 
+            <returns>ModelManagerResult(SellerRespondMessageViewModel)</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IMessageManager.GetUserRespondMessages(System.Int64)">
+            <summary>
+            returns responded  messages to seller  details
+            </summary>    
+            <param name="userId">UserId</param> 
+            <returns>ModelManagerResult(UserRespondMessageViewModel)</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IMessageManager.DeleteConversion(System.Int64,System.Int64)">
+            <summary>
+            Deletes Conversion messages
+            </summary>
+            <param name="fromUserId">FromUserId</param>      
+             <param name="toUserId">ToUserId</param>    
+            <returns>ModelManagerResult(Boolean)</returns>
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IQueryManager">
             <summary>
             Provides Query related operations
@@ -1775,10 +1853,53 @@
             <summary>
             Send a Google Cloud Message. Uses the GCM service and your provided api key.
             </summary>
-            <param name="apiKey"></param>
-            <param name="postData"></param>
-            <param name="postDataContentType"></param>
+            <param name="deviceId"></param>
+            <param name="message"></param>
+            <param name="queryId"></param>
+            <param name="userId"></param>
             <returns>The response string from the google servers</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.ValidateServerCertificate(System.Object,System.Security.Cryptography.X509Certificates.X509Certificate,System.Security.Cryptography.X509Certificates.X509Chain,System.Net.Security.SslPolicyErrors)">
+            <summary>
+            validate certificate
+            </summary>
+            <param name="sender"></param>
+            <param name="certificate"></param>
+            <param name="chain"></param>
+            <param name="sslPolicyErrors"></param>
+            <returns></returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.GetChatMessages(System.Int64,System.Int64,System.Int64)">
+            <summary>
+            returns chat messages between two users for given query
+            </summary>
+            <param name="queryId">QueryId</param>   
+            <param name="fromuserId">FromUserId</param> 
+            <param name="toUserId">ToUserId</param> 
+            <returns>ModelManagerResult(MessageSearchViewModel)</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.GetSellerRespondMessages(System.Int64,System.Int64)">
+            <summary>
+            returns responded seller message details
+            </summary>
+            <param name="queryId">QueryId</param>   
+            <param name="userId">UserId</param> 
+            <returns>ModelManagerResult(SellerRespondMessageViewModel)</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.GetUserRespondMessages(System.Int64)">
+            <summary>
+            returns responded  messages to seller  details
+            </summary>    
+            <param name="userId">UserId</param> 
+            <returns>ModelManagerResult(UserRespondMessageViewModel)</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.DeleteConversion(System.Int64,System.Int64)">
+            <summary>
+            Deletes Conversion messages
+            </summary>
+            <param name="fromUserId">FromUserId</param>      
+             <param name="toUserId">ToUserId</param>    
+            <returns>ModelManagerResult(Boolean)</returns>
         </member>
         <member name="T:KonnectNow.WebAPI.Managers.QueryManager">
             <summary>
@@ -2321,6 +2442,91 @@
         <member name="P:KonnectNow.WebAPI.Models.Messages.MessageSearchInfo.SentOn">
             <summary>
             SentOn
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Messages.SellerRespondMessageInfo">
+            <summary>
+            SellerRespondMessageInfo object
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.SellerRespondMessageInfo.UserId">
+            <summary>
+            Seller User Id
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.SellerRespondMessageInfo.UserName">
+            <summary>
+            Seller Name
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.SellerRespondMessageInfo.Message">
+             <summary>
+            Last Message
+             </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.SellerRespondMessageInfo.MessageCount">
+            <summary>
+            Message Count
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Messages.SellerRespondMessageViewModel">
+            <summary>
+            SellerRespondMessageViewModel object
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Models.Messages.SellerRespondMessageViewModel.#ctor">
+             <summary>
+            SellerRespondMessageViewModel Constructor
+             </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.SellerRespondMessageViewModel.SearchResults">
+            <summary>
+            List of Messages
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Messages.UserRespondMessageInfo">
+            <summary>
+            UserRespondMessageInfo
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.UserRespondMessageInfo.UserId">
+            <summary>
+            Seller User Id
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.UserRespondMessageInfo.QueryId">
+            <summary>
+            Query Id
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.UserRespondMessageInfo.UserName">
+            <summary>
+            Seller Name
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.UserRespondMessageInfo.Message">
+             <summary>
+            Last Message
+             </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.UserRespondMessageInfo.MessageCount">
+            <summary>
+            Message Count
+            </summary>
+        </member>
+        <member name="T:KonnectNow.WebAPI.Models.Messages.UserRespondMessageViewModel">
+            <summary>
+            UserRespondMessageViewModel
+            </summary>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Models.Messages.UserRespondMessageViewModel.#ctor">
+             <summary>
+            UserRespondMessageViewModel Constructor
+             </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.UserRespondMessageViewModel.SearchResults">
+            <summary>
+            List of Messages
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.Query.CreateMessageCommandModel">

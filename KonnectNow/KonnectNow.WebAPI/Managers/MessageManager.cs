@@ -111,9 +111,10 @@ namespace KonnectNow.WebAPI.Managers
        /// <summary>
        /// Send a Google Cloud Message. Uses the GCM service and your provided api key.
        /// </summary>
-       /// <param name="apiKey"></param>
-       /// <param name="postData"></param>
-       /// <param name="postDataContentType"></param>
+       /// <param name="deviceId"></param>
+       /// <param name="message"></param>
+       /// <param name="queryId"></param>
+       /// <param name="userId"></param>
        /// <returns>The response string from the google servers</returns>
        private string SendGCMNotification(string deviceId, string message,string queryId,string userId)
        {
@@ -172,6 +173,14 @@ namespace KonnectNow.WebAPI.Managers
            return "error";
        }
 
+        /// <summary>
+        /// validate certificate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="certificate"></param>
+        /// <param name="chain"></param>
+        /// <param name="sslPolicyErrors"></param>
+        /// <returns></returns>
        public static bool ValidateServerCertificate(
                                            object sender,
                                            X509Certificate certificate,
@@ -180,5 +189,143 @@ namespace KonnectNow.WebAPI.Managers
        {
            return true;
        }
+
+
+       /// <summary>
+       /// returns chat messages between two users for given query
+       /// </summary>
+       /// <param name="queryId">QueryId</param>   
+       /// <param name="fromuserId">FromUserId</param> 
+       /// <param name="toUserId">ToUserId</param> 
+       /// <returns>ModelManagerResult(MessageSearchViewModel)</returns>
+       public ModelManagerResult<MessageSearchViewModel> GetChatMessages(long queryId,long fromuserId,long toUserId)
+       {
+           if (_queryRepository.GetByID(queryId) == null)
+               return GetManagerResult<MessageSearchViewModel>(ResponseCodes.QUERY_NOT_EXIST);
+           if (_userRepository.GetByID(fromuserId) == null || _userRepository.GetByID(toUserId)==null)
+               return GetManagerResult<MessageSearchViewModel>(ResponseCodes.USER_NOT_FOUND);
+
+           var messageSearchCollection = new MessageSearchViewModel
+           {
+               Offset = 0,
+               Limit = 10,
+
+           };
+           var queryList = _messageRepository.Get(x => x.QueryId == queryId && x.IsDeleted == false && (x.User.UserId == fromuserId || x.User1.UserId == fromuserId) && (x.User1.UserId == toUserId || x.User.UserId == toUserId)).OrderBy(k => k.SentOn).ToList();
+           messageSearchCollection.Total = queryList.Count;
+           var itemList = queryList.Skip(0)
+                          .Take(10).ToList();
+
+
+           if (itemList != null && itemList.Count > 0)
+           {
+
+               foreach (var item in itemList)
+               {
+                   messageSearchCollection.SearchResults.Add(Mapper.Map<Message, MessageSearchInfo>(item));
+               }
+           }
+           return GetManagerResult(ResponseCodes.OK, messageSearchCollection);
+       }
+
+       /// <summary>
+       /// returns responded seller message details
+       /// </summary>
+       /// <param name="queryId">QueryId</param>   
+       /// <param name="userId">UserId</param> 
+       /// <returns>ModelManagerResult(SellerRespondMessageViewModel)</returns>
+       public ModelManagerResult<SellerRespondMessageViewModel> GetSellerRespondMessages(long queryId, long userId)
+       {
+           if (_queryRepository.GetByID(queryId) == null)
+               return GetManagerResult<SellerRespondMessageViewModel>(ResponseCodes.QUERY_NOT_EXIST);
+           if (_userRepository.GetByID(userId) == null)
+               return GetManagerResult<SellerRespondMessageViewModel>(ResponseCodes.USER_NOT_FOUND);
+
+           var sellerRespondMessageSearchCollection = new SellerRespondMessageViewModel
+           {
+               Offset = 0,
+               Limit = 10,
+
+           };
+           var messageList = _messageRepository.Get(x => x.QueryId == queryId && x.IsDeleted == false).OrderByDescending(x => x.MessageId).ToList();
+
+           var distinctMessageList = messageList.Where((x=>x.FromUserId!=userId)).Select(x => x.FromUserId).Distinct().Skip(0)
+                          .Take(10).ToList();
+
+           foreach (var item in distinctMessageList)
+           {
+              var messages=messageList.Where(x=>((x.User.UserId == item || x.User1.UserId == item) && (x.User1.UserId == userId|| x.User.UserId == userId))).OrderByDescending(x=>x.MessageId).ToList();
+                var message=messages.First();
+                sellerRespondMessageSearchCollection.SearchResults.Add(new SellerRespondMessageInfo { Message = message.Text, MessageCount = messages.Count, UserId = Convert.ToInt64(message.FromUserId), UserName = message.User1.FirstName + " " + message.User1.LastName});
+               
+               
+           }
+           sellerRespondMessageSearchCollection.Total = sellerRespondMessageSearchCollection.SearchResults.Count;
+           return GetManagerResult(ResponseCodes.OK, sellerRespondMessageSearchCollection);
+       }
+
+
+        /// <summary>
+       /// returns responded  messages to seller  details
+       /// </summary>    
+       /// <param name="userId">UserId</param> 
+       /// <returns>ModelManagerResult(UserRespondMessageViewModel)</returns>
+       public ModelManagerResult<UserRespondMessageViewModel> GetUserRespondMessages(long userId)
+       {
+   
+           if (_userRepository.GetByID(userId) == null)
+               return GetManagerResult<UserRespondMessageViewModel>(ResponseCodes.USER_NOT_FOUND);
+
+           var userRespondMessageSearchCollection = new UserRespondMessageViewModel
+           {
+               Offset = 0,
+               Limit = 10,
+
+           };
+           var messageList = _messageRepository.Get(x => (x.User.UserId == userId) && x.IsDeleted == false).OrderByDescending(x => x.MessageId).ToList();
+
+           var distinctMessageList = messageList.Where((x => x.FromUserId != userId)).Select(x => x.FromUserId).Distinct().Skip(0)
+                          .Take(10).ToList();
+
+           foreach (var item in distinctMessageList)
+           {
+              var messages=messageList.Where(x=> x.IsDeleted==false&&((x.User.UserId == item || x.User1.UserId == item) && (x.User1.UserId == userId|| x.User.UserId == userId))).OrderByDescending(x=>x.MessageId).ToList();
+                var message=messages.First();
+                userRespondMessageSearchCollection.SearchResults.Add(new UserRespondMessageInfo { Message = message.Text, MessageCount = messages.Count, UserId = Convert.ToInt64(message.FromUserId), UserName = message.User1.FirstName + " " + message.User1.LastName,QueryId=Convert.ToInt64(message.QueryId)});
+               
+               
+           }
+           userRespondMessageSearchCollection.Total = userRespondMessageSearchCollection.SearchResults.Count;
+           return GetManagerResult(ResponseCodes.OK, userRespondMessageSearchCollection);
+       }
+
+
+
+       /// <summary>
+       /// Deletes Conversion messages
+       /// </summary>
+       /// <param name="fromUserId">FromUserId</param>      
+       ///  <param name="toUserId">ToUserId</param>    
+       /// <returns>ModelManagerResult(Boolean)</returns>
+       [UnitOfWork]
+       public ModelManagerResult<bool> DeleteConversion(long fromUserId,long toUserId)
+       {
+           if (_userRepository.GetByID(fromUserId) == null || _userRepository.GetByID(toUserId)==null)
+               return GetManagerResult<bool>(ResponseCodes.USER_NOT_FOUND);
+
+           var message = _messageRepository.Get(x => ((x.User.UserId == fromUserId || x.User1.UserId == fromUserId) && (x.User1.UserId == toUserId || x.User.UserId == toUserId)));
+
+           foreach (var item in message)
+           {
+               item.IsDeleted = true;
+               //Delete query from queryrable
+               _messageRepository.Update(item);
+           }
+
+           return GetManagerResult(ResponseCodes.OK, true);
+       }
+
+    
+
     }
 }

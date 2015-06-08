@@ -262,6 +262,10 @@
     <Compile Include="Models\Messages\LogsInfo.cs" />
     <Compile Include="Models\Messages\MesageSearchViewModel.cs" />
     <Compile Include="Models\Messages\MessageSearchInfo.cs" />
+    <Compile Include="Models\Messages\SellerRespondMessageInfo.cs" />
+    <Compile Include="Models\Messages\SellerRespondMessageViewModel.cs" />
+    <Compile Include="Models\Messages\UserRespondMessageInfo.cs" />
+    <Compile Include="Models\Messages\UserRespondMessageViewModel.cs" />
     <Compile Include="Models\Query\CreateMessageCommandModel.cs" />
     <Compile Include="Models\Query\CreateMessageViewModel.cs" />
     <Compile Include="Models\Query\CreateQueryCommandModel.cs" />

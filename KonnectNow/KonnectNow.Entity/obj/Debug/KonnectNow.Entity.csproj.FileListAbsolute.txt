@@ -34,6 +34,5 @@ D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Entity\bin\Debug\Micr
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Entity\bin\Debug\Microsoft.Practices.Unity.Interception.xml
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Entity\bin\Debug\Microsoft.Practices.Unity.Interception.Configuration.xml
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Entity\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
-D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Entity\obj\Debug\KonnectNow.Entity.csprojResolveAssemblyReference.cache
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Entity\obj\Debug\KonnectNow.Entity.dll
 D:\Application\GitHubRepo\KonnectNow\KonnectNow\KonnectNow.Entity\obj\Debug\KonnectNow.Entity.pdb
