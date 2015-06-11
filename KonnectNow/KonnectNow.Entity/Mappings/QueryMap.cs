@@ -28,6 +28,10 @@ namespace KonnectNow.Entity.Mappings
                 .WithRequired(e => e.Query)
                 .WillCascadeOnDelete(false);
 
+            this.HasMany(e => e.ChatStatusInfo)
+              .WithRequired(e => e.Query)
+              .WillCascadeOnDelete(false);
+
             this.Property(t => t.QueryId).HasColumnName("Query_Id");
             this.Property(t => t.UserId).HasColumnName("User_Id");
             this.Property(t => t.CatId).HasColumnName("Cat_Id");

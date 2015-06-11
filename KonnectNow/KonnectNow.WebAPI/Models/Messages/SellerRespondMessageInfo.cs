@@ -31,5 +31,10 @@ namespace KonnectNow.WebAPI.Models.Messages
         /// </summary>
         public int MessageCount { get; set; }
 
+        /// <summary>
+        /// Is Connected
+        /// </summary>
+        public bool IsConnected { get; set; }
+
     }
 }

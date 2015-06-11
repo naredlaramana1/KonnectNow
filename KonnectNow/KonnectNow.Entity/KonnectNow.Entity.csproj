@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\ChatStatus.cs" />
     <Compile Include="Entities\City.cs" />
     <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\Location.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Entities\Message.cs" />
     <Compile Include="Entities\Query.cs" />
     <Compile Include="Entities\Seller.cs" />
+    <Compile Include="Mappings\ChatStatusMap.cs" />
     <Compile Include="Mappings\CityMap.cs" />
     <Compile Include="Mappings\CountryMap.cs" />
     <Compile Include="Mappings\LocationMap.cs" />

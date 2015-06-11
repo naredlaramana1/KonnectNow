@@ -22,6 +22,11 @@ namespace KonnectNow.WebAPI.Models.Messages
         public long QueryId { get; set; }
 
         /// <summary>
+        /// Query Text
+        /// </summary>
+        public string QueryText { get; set; }
+
+        /// <summary>
         /// Seller Name
         /// </summary>
         public string UserName { get; set; }
@@ -35,5 +40,10 @@ namespace KonnectNow.WebAPI.Models.Messages
         /// Message Count
         /// </summary>
         public int MessageCount { get; set; }
+
+        /// <summary>
+        /// Is Connected
+        /// </summary>
+        public bool IsConnected { get; set; }
     }
 }

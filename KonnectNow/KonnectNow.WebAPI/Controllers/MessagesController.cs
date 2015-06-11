@@ -129,18 +129,20 @@ namespace KonnectNow.WebAPI.Controllers
         /// <summary>
         /// Removes a conversion between users
         /// </summary>
+        /// <param name="queryId">QueryId</param> 
         /// <param name="fromUserId">FromUserId</param>
         /// <param name="toUserId">ToUserId</param>
         /// <returns>
         /// HTTP Status = 204,
+        /// HTTP Status = 404 - {Code = 4017, Message=Query not exist}
         /// HTTP Status = 404 - {Code = 4012, Message=User not avialable}
         /// </returns>
         [HttpPost]
-        [Route("Messages/{fromUserId}")]
+        [Route("Queries/{queryId}/Messages/{fromUserId}")]
         [ResponseType(typeof(bool))]
-        public HttpResponseMessage DeleteConversion(long fromUserId, [FromUri]long toUserId)
+        public HttpResponseMessage DeleteConversion(long queryId, long fromUserId, [FromUri]long toUserId)
         {
-            var result = _messageManager.DeleteConversion(fromUserId, toUserId);
+            var result = _messageManager.DeleteConversion(queryId, fromUserId, toUserId);
 
             if (result.Status == ResponseCodes.OK)
             {
@@ -150,5 +152,31 @@ namespace KonnectNow.WebAPI.Controllers
 
         }
 
+
+        /// <summary>
+        /// Connects two users
+        /// </summary>
+        /// <param name="queryId">QueryId</param> 
+        /// <param name="fromUserId">FromUserId</param>
+        /// <param name="toUserId">ToUserId</param>
+        /// <returns>
+        /// HTTP Status = 204,
+        /// HTTP Status = 404 - {Code = 4017, Message=Query not exist}
+        /// HTTP Status = 404 - {Code = 4012, Message=User not avialable}
+        /// </returns>
+        [HttpPost]
+        [Route("Queries/{queryId}/ConnectUser/{fromUserId}")]
+        [ResponseType(typeof(bool))]
+        public HttpResponseMessage ConnectUser(long queryId, long fromUserId, [FromUri]long toUserId)
+        {
+            var result = _messageManager.ConnectUser(queryId, fromUserId, toUserId);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.Created);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
     }
 }

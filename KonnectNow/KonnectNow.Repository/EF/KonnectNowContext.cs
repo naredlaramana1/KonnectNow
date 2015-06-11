@@ -25,6 +25,7 @@ namespace KonnectNow.Repository.EF
         public virtual DbSet<Validation> Validations { get; set; }
         public virtual DbSet<Seller> Sellers { get; set; }
         public virtual DbSet<Logs> Log { get; set; }
+        public virtual DbSet<ChatStatus> ChatStatusInfo { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new CategoryMap());
@@ -37,7 +38,7 @@ namespace KonnectNow.Repository.EF
             modelBuilder.Configurations.Add(new SellerMap());
             modelBuilder.Configurations.Add(new QueryMap());
             modelBuilder.Configurations.Add(new MessageMap());
-
+            modelBuilder.Configurations.Add(new ChatStatusMap());
             
            
         }

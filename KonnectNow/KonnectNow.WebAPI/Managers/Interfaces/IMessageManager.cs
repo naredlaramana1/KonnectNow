@@ -48,13 +48,22 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         /// <returns>ModelManagerResult(UserRespondMessageViewModel)</returns>
         ModelManagerResult<UserRespondMessageViewModel> GetUserRespondMessages(long userId);
 
-        
-       /// <summary>
-       /// Deletes Conversion messages
-       /// </summary>
-       /// <param name="fromUserId">FromUserId</param>      
-       ///  <param name="toUserId">ToUserId</param>    
-       /// <returns>ModelManagerResult(Boolean)</returns>
-        ModelManagerResult<bool> DeleteConversion(long fromUserId, long toUserId);
+        /// <summary>
+        /// Deletes Conversion messages
+        /// </summary>
+        /// <param name="queryId">QueryId</param> 
+        /// <param name="fromUserId">FromUserId</param>      
+        ///  <param name="toUserId">ToUserId</param>    
+        /// <returns>ModelManagerResult(Boolean)</returns>
+        ModelManagerResult<bool> DeleteConversion(long queryId, long fromUserId, long toUserId);
+
+        /// <summary>
+        ///Connects two users
+        /// </summary>
+        /// <param name="queryId">QueryId</param> 
+        /// <param name="fromUserId">FromUserId</param>      
+        ///  <param name="toUserId">ToUserId</param>    
+        /// <returns>ModelManagerResult(Boolean)</returns>
+        ModelManagerResult<bool> ConnectUser(long queryId, long fromUserId, long toUserId);
     }
 }

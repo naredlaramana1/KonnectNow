@@ -773,14 +773,29 @@
             HTTP Status = 404 - {Code = 4012, Message=User not avialable}
             </returns>
         </member>
-        <member name="M:KonnectNow.WebAPI.Controllers.MessagesController.DeleteConversion(System.Int64,System.Int64)">
+        <member name="M:KonnectNow.WebAPI.Controllers.MessagesController.DeleteConversion(System.Int64,System.Int64,System.Int64)">
             <summary>
             Removes a conversion between users
             </summary>
+            <param name="queryId">QueryId</param> 
             <param name="fromUserId">FromUserId</param>
             <param name="toUserId">ToUserId</param>
             <returns>
             HTTP Status = 204,
+            HTTP Status = 404 - {Code = 4017, Message=Query not exist}
+            HTTP Status = 404 - {Code = 4012, Message=User not avialable}
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.MessagesController.ConnectUser(System.Int64,System.Int64,System.Int64)">
+            <summary>
+            Connects two users
+            </summary>
+            <param name="queryId">QueryId</param> 
+            <param name="fromUserId">FromUserId</param>
+            <param name="toUserId">ToUserId</param>
+            <returns>
+            HTTP Status = 204,
+            HTTP Status = 404 - {Code = 4017, Message=Query not exist}
             HTTP Status = 404 - {Code = 4012, Message=User not avialable}
             </returns>
         </member>
@@ -1511,13 +1526,23 @@
             <param name="userId">UserId</param> 
             <returns>ModelManagerResult(UserRespondMessageViewModel)</returns>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IMessageManager.DeleteConversion(System.Int64,System.Int64)">
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IMessageManager.DeleteConversion(System.Int64,System.Int64,System.Int64)">
             <summary>
             Deletes Conversion messages
             </summary>
+            <param name="queryId">QueryId</param> 
             <param name="fromUserId">FromUserId</param>      
              <param name="toUserId">ToUserId</param>    
             <returns>ModelManagerResult(Boolean)</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IMessageManager.ConnectUser(System.Int64,System.Int64,System.Int64)">
+             <summary>
+            Connects two users
+             </summary>
+             <param name="queryId">QueryId</param> 
+             <param name="fromUserId">FromUserId</param>      
+              <param name="toUserId">ToUserId</param>    
+             <returns>ModelManagerResult(Boolean)</returns>
         </member>
         <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IQueryManager">
             <summary>
@@ -1833,13 +1858,14 @@
             Manages chating,notification related operations
             </summary>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IUserRepository,KonnectNow.Repository.Repositories.Interfaces.IQueryRepository,KonnectNow.Repository.Repositories.Interfaces.IMessageRepository)">
+        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.#ctor(KonnectNow.Repository.Repositories.Interfaces.IUserRepository,KonnectNow.Repository.Repositories.Interfaces.IQueryRepository,KonnectNow.Repository.Repositories.Interfaces.IMessageRepository,KonnectNow.Repository.Repositories.Interfaces.IChatStatusRepository)">
             <summary>
             Constructor for MessageManager.
             </summary>
             <param name="userRepository">IUserRepository object</param>
             <param name="queryRepository">IQueryRepository object</param>         
             <param name="messageRepository">IMessageRepository object</param>
+            <param name="chatStatusRepository">IChatStatusRepository object</param>
         </member>
         <member name="M:KonnectNow.WebAPI.Managers.MessageManager.CreateChatMessages(System.Int64,KonnectNow.WebAPI.Models.Messages.ChatCreateCommandModel)">
              <summary>
@@ -1893,13 +1919,23 @@
             <param name="userId">UserId</param> 
             <returns>ModelManagerResult(UserRespondMessageViewModel)</returns>
         </member>
-        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.DeleteConversion(System.Int64,System.Int64)">
+        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.DeleteConversion(System.Int64,System.Int64,System.Int64)">
             <summary>
             Deletes Conversion messages
             </summary>
+            <param name="queryId">QueryId</param> 
             <param name="fromUserId">FromUserId</param>      
              <param name="toUserId">ToUserId</param>    
             <returns>ModelManagerResult(Boolean)</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.ConnectUser(System.Int64,System.Int64,System.Int64)">
+             <summary>
+            Connects two users
+             </summary>
+             <param name="queryId">QueryId</param> 
+             <param name="fromUserId">FromUserId</param>      
+              <param name="toUserId">ToUserId</param>    
+             <returns>ModelManagerResult(Boolean)</returns>
         </member>
         <member name="T:KonnectNow.WebAPI.Managers.QueryManager">
             <summary>
@@ -2469,6 +2505,11 @@
             Message Count
             </summary>
         </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.SellerRespondMessageInfo.IsConnected">
+            <summary>
+            Is Connected
+            </summary>
+        </member>
         <member name="T:KonnectNow.WebAPI.Models.Messages.SellerRespondMessageViewModel">
             <summary>
             SellerRespondMessageViewModel object
@@ -2499,6 +2540,11 @@
             Query Id
             </summary>
         </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.UserRespondMessageInfo.QueryText">
+            <summary>
+            Query Text
+            </summary>
+        </member>
         <member name="P:KonnectNow.WebAPI.Models.Messages.UserRespondMessageInfo.UserName">
             <summary>
             Seller Name
@@ -2512,6 +2558,11 @@
         <member name="P:KonnectNow.WebAPI.Models.Messages.UserRespondMessageInfo.MessageCount">
             <summary>
             Message Count
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.Messages.UserRespondMessageInfo.IsConnected">
+            <summary>
+            Is Connected
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.Messages.UserRespondMessageViewModel">
