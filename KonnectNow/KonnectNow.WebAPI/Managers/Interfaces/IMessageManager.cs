@@ -65,5 +65,14 @@ namespace KonnectNow.WebAPI.Managers.Interfaces
         ///  <param name="toUserId">ToUserId</param>    
         /// <returns>ModelManagerResult(Boolean)</returns>
         ModelManagerResult<bool> ConnectUser(long queryId, long fromUserId, long toUserId);
+
+         /// <summary>
+        ///Shares the User profile
+        /// </summary>
+        /// <param name="queryId">QueryId</param> 
+        /// <param name="fromUserId">FromUserId</param>      
+        ///  <param name="toUserId">ToUserId</param>    
+        /// <returns>ModelManagerResult(Boolean)</returns>    
+        ModelManagerResult<bool> ShareProfile(long queryId, long fromUserId, long toUserId);
     }
 }

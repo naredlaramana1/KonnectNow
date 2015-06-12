@@ -64,6 +64,7 @@ namespace KonnectNow.Entity.Entities
 
             public virtual User User { get; set; }
             public virtual Category Category { get; set; }
+            public byte[] ProfilePic { get; set; }
         }
  
 }

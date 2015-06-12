@@ -794,7 +794,20 @@
             <param name="fromUserId">FromUserId</param>
             <param name="toUserId">ToUserId</param>
             <returns>
-            HTTP Status = 204,
+            HTTP Status = 201,
+            HTTP Status = 404 - {Code = 4017, Message=Query not exist}
+            HTTP Status = 404 - {Code = 4012, Message=User not avialable}
+            </returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Controllers.MessagesController.ShareProfile(System.Int64,System.Int64,System.Int64)">
+            <summary>
+            Connects two users
+            </summary>
+            <param name="queryId">QueryId</param> 
+            <param name="fromUserId">FromUserId</param>
+            <param name="toUserId">ToUserId</param>
+            <returns>
+            HTTP Status = 201,
             HTTP Status = 404 - {Code = 4017, Message=Query not exist}
             HTTP Status = 404 - {Code = 4012, Message=User not avialable}
             </returns>
@@ -1544,6 +1557,15 @@
               <param name="toUserId">ToUserId</param>    
              <returns>ModelManagerResult(Boolean)</returns>
         </member>
+        <member name="M:KonnectNow.WebAPI.Managers.Interfaces.IMessageManager.ShareProfile(System.Int64,System.Int64,System.Int64)">
+             <summary>
+            Shares the User profile
+             </summary>
+             <param name="queryId">QueryId</param> 
+             <param name="fromUserId">FromUserId</param>      
+              <param name="toUserId">ToUserId</param>    
+             <returns>ModelManagerResult(Boolean)</returns>    
+        </member>
         <member name="T:KonnectNow.WebAPI.Managers.Interfaces.IQueryManager">
             <summary>
             Provides Query related operations
@@ -1931,6 +1953,15 @@
         <member name="M:KonnectNow.WebAPI.Managers.MessageManager.ConnectUser(System.Int64,System.Int64,System.Int64)">
              <summary>
             Connects two users
+             </summary>
+             <param name="queryId">QueryId</param> 
+             <param name="fromUserId">FromUserId</param>      
+              <param name="toUserId">ToUserId</param>    
+             <returns>ModelManagerResult(Boolean)</returns>
+        </member>
+        <member name="M:KonnectNow.WebAPI.Managers.MessageManager.ShareProfile(System.Int64,System.Int64,System.Int64)">
+             <summary>
+            Shares the User profile
              </summary>
              <param name="queryId">QueryId</param> 
              <param name="fromUserId">FromUserId</param>      
@@ -2933,6 +2964,11 @@
             seller category id
             </summary>
         </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerProfileCommandModel.ProfilePic">
+            <summary>
+            Profile Pic
+            </summary>
+        </member>
         <member name="T:KonnectNow.WebAPI.Models.User.SellerViewModel">
             <summary>
             SellerViewModel Obejct 
@@ -2996,6 +3032,11 @@
         <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.CatId">
             <summary>
             seller category id
+            </summary>
+        </member>
+        <member name="P:KonnectNow.WebAPI.Models.User.SellerViewModel.ProfilePic">
+            <summary>
+            Profile pic
             </summary>
         </member>
         <member name="T:KonnectNow.WebAPI.Models.User.UpdateUserCommandModel">

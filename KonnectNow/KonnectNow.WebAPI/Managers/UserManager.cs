@@ -199,6 +199,7 @@ namespace KonnectNow.WebAPI.Managers
                 seller.ResponseStatus = sellerProfileCommandModel.ResponseStatus;
                 seller.WebsiteUrl = sellerProfileCommandModel.WebsiteUrl;
                 seller.ModifiedOn = null;
+                seller.ProfilePic = sellerProfileCommandModel.ProfilePic;
                 _sellerRepository.Update(seller);
             }
             else

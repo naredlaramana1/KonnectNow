@@ -37,6 +37,7 @@ namespace KonnectNow.Entity.Mappings
             this.Property(t => t.AutoReponse).HasColumnName("Auto_Reponse");
             this.Property(t => t.ResponseStatus).HasColumnName("Response_Status");
             this.Property(t => t.KeyWords).HasColumnName("Key_Words");
+            this.Property(t => t.ProfilePic).HasColumnName("Profile_Pic");
             this.Property(t => t.CreatedOn).HasColumnName("Created_On");
             this.Property(t => t.ModifiedOn).HasColumnName("Modified_On");
             this.Property(t => t.CatId).HasColumnName("CAT_ID");

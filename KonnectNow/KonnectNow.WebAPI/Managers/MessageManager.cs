@@ -208,7 +208,7 @@ namespace KonnectNow.WebAPI.Managers
                 return GetManagerResult<MessageSearchViewModel>(ResponseCodes.QUERY_NOT_EXIST);
             if (_userRepository.GetByID(fromuserId) == null || _userRepository.GetByID(toUserId) == null)
                 return GetManagerResult<MessageSearchViewModel>(ResponseCodes.USER_NOT_FOUND);
-
+                Connect(queryId, fromuserId, toUserId);
             var messageSearchCollection = new MessageSearchViewModel
             {
                 Offset = 0,
@@ -336,6 +336,22 @@ namespace KonnectNow.WebAPI.Managers
             return GetManagerResult(ResponseCodes.OK, true);
         }
 
+        [UnitOfWork]
+        private void Connect(long queryId, long fromUserId, long toUserId)
+        {
+            var chatstatus = _chatStatusRepository.Get(x => x.QueryId == queryId && x.FromUserId == fromUserId && x.ToUserId == toUserId).SingleOrDefault();
+            if (chatstatus == null)
+            {
+                var connectStatus = new ChatStatus { FromUserId = Convert.ToDecimal(fromUserId), ToUserId = Convert.ToDecimal(toUserId), QueryId = Convert.ToDecimal(queryId) };
+                _chatStatusRepository.Insert(connectStatus);
+
+            }
+            else
+            {
+                chatstatus.CreatedOn = null;
+                _chatStatusRepository.Update(chatstatus);
+            }
+        }
         /// <summary>
         ///Connects two users
         /// </summary>
@@ -356,7 +372,7 @@ namespace KonnectNow.WebAPI.Managers
             {
                 var connectStatus = new ChatStatus { FromUserId = Convert.ToDecimal(fromUserId), ToUserId = Convert.ToDecimal(toUserId), QueryId =Convert.ToDecimal(queryId) };
                 _chatStatusRepository.Insert(connectStatus);
-                return GetManagerResult(ResponseCodes.OK, true);
+               
             }
             else
             {
@@ -365,6 +381,47 @@ namespace KonnectNow.WebAPI.Managers
             }
 
             return GetManagerResult(ResponseCodes.OK, true);
+
+        }
+
+
+
+        /// <summary>
+        ///Shares the User profile
+        /// </summary>
+        /// <param name="queryId">QueryId</param> 
+        /// <param name="fromUserId">FromUserId</param>      
+        ///  <param name="toUserId">ToUserId</param>    
+        /// <returns>ModelManagerResult(Boolean)</returns>
+        [UnitOfWork]
+        public ModelManagerResult<bool> ShareProfile(long queryId, long fromUserId, long toUserId)
+        {
+            if (_queryRepository.GetByID(queryId) == null)
+                return GetManagerResult<bool>(ResponseCodes.QUERY_NOT_EXIST);
+            var user = _userRepository.GetByID(toUserId);
+            var fUser = _userRepository.GetByID(fromUserId);
+            if (fUser == null || user == null)
+                return GetManagerResult<bool>(ResponseCodes.USER_NOT_FOUND);
+            string messageText="Name:"+fUser.FirstName+" "+fUser.LastName;
+            SendGCMNotification(user.DeviceId, messageText, Convert.ToString(queryId), Convert.ToString(fromUserId));
+            var message = new Message { FromUserId = Convert.ToDecimal(fromUserId), ToUserId = Convert.ToDecimal(toUserId), QueryId = Convert.ToDecimal(queryId), Text = messageText };
+            _messageRepository.Insert(message);
+            var chatstatus = _chatStatusRepository.Get(x => x.QueryId == queryId && x.FromUserId == fromUserId && x.ToUserId == toUserId).SingleOrDefault();
+            if (chatstatus == null)
+            {
+                var connectStatus = new ChatStatus { FromUserId = Convert.ToDecimal(fromUserId), ToUserId = Convert.ToDecimal(toUserId), QueryId = Convert.ToDecimal(queryId),IsShared=true };
+                _chatStatusRepository.Insert(connectStatus);
+               
+            }
+            else
+            {
+                chatstatus.IsShared = true;
+                chatstatus.CreatedOn = null;
+                _chatStatusRepository.Update(chatstatus);
+             
+            }
+            return GetManagerResult(ResponseCodes.OK, true);
+           
 
         }
 

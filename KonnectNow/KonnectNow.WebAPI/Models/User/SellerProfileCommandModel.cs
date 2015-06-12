@@ -86,6 +86,9 @@ namespace KonnectNow.WebAPI.Models.User
         [Required]
         public long CatId { get; set; }
 
-
+        /// <summary>
+        /// Profile Pic
+        /// </summary>
+        public byte[] ProfilePic { get; set; }
     }
 }

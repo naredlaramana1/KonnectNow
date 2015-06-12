@@ -160,7 +160,7 @@ namespace KonnectNow.WebAPI.Controllers
         /// <param name="fromUserId">FromUserId</param>
         /// <param name="toUserId">ToUserId</param>
         /// <returns>
-        /// HTTP Status = 204,
+        /// HTTP Status = 201,
         /// HTTP Status = 404 - {Code = 4017, Message=Query not exist}
         /// HTTP Status = 404 - {Code = 4012, Message=User not avialable}
         /// </returns>
@@ -170,6 +170,32 @@ namespace KonnectNow.WebAPI.Controllers
         public HttpResponseMessage ConnectUser(long queryId, long fromUserId, [FromUri]long toUserId)
         {
             var result = _messageManager.ConnectUser(queryId, fromUserId, toUserId);
+
+            if (result.Status == ResponseCodes.OK)
+            {
+                return BuildSuccessResponse(HttpStatusCode.Created);
+            }
+            return BuildErrorResponse(result.Status);
+
+        }
+
+        /// <summary>
+        /// Connects two users
+        /// </summary>
+        /// <param name="queryId">QueryId</param> 
+        /// <param name="fromUserId">FromUserId</param>
+        /// <param name="toUserId">ToUserId</param>
+        /// <returns>
+        /// HTTP Status = 201,
+        /// HTTP Status = 404 - {Code = 4017, Message=Query not exist}
+        /// HTTP Status = 404 - {Code = 4012, Message=User not avialable}
+        /// </returns>
+        [HttpPost]
+        [Route("Queries/{queryId}/ShareProfile/{fromUserId}")]
+        [ResponseType(typeof(bool))]
+        public HttpResponseMessage ShareProfile(long queryId, long fromUserId, [FromUri]long toUserId)
+        {
+            var result = _messageManager.ShareProfile(queryId, fromUserId, toUserId);
 
             if (result.Status == ResponseCodes.OK)
             {
